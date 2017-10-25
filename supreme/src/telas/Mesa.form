@@ -161,15 +161,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="numeroMesa" pref="59" max="32767" attributes="0"/>
+                  <Component id="numeroMesa" pref="60" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                  <Component id="tituloResumo" pref="37" max="32767" attributes="0"/>
+                  <Component id="tituloResumo" pref="40" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="novoPedido" pref="97" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="fecharConta" pref="96" max="32767" attributes="0"/>
+                          <Component id="fecharConta" pref="97" max="32767" attributes="0"/>
                       </Group>
                       <Component id="mostraResumo" max="32767" attributes="0"/>
                   </Group>
@@ -305,7 +305,7 @@
                       <Component id="btCP1" alignment="3" min="-2" pref="99" max="-2" attributes="0"/>
                       <Component id="btCP2" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btCP3" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
                       <Component id="btCP4" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>

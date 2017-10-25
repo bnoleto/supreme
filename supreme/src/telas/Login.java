@@ -11,7 +11,7 @@ import codigo.Menus;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Window.Type;
-public class Login {
+public class Login extends javax.swing.JFrame {
 	
 	private JFrame tela_login;
 	private JTextField campo_usuario;
@@ -89,7 +89,7 @@ public class Login {
 		tela_login = new JFrame();
 		tela_login.setResizable(false);
 		tela_login.setType(Type.POPUP);
-		tela_login.setTitle("SUPREME v0.0.1 alpha");
+		tela_login.setTitle("SUPREME v0.1-alpha");
 		tela_login.setBounds((largura-tamanhoX)/2,(altura-tamanhoY)/2 , tamanhoX, tamanhoY);
 		tela_login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
