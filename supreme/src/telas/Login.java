@@ -224,6 +224,8 @@ public class Login extends javax.swing.JFrame {
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
         this.dispose();
+        TelaInicial tela_inicio = new TelaInicial();
+        tela_inicio.setVisible(true);
     }//GEN-LAST:event_bt_cancelarActionPerformed
 
     /**
