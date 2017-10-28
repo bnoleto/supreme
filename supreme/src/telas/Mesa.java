@@ -135,15 +135,15 @@ public class Mesa extends javax.swing.JFrame {
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(numeroMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(numeroMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
-                .addComponent(tituloResumo, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(tituloResumo, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                         .addGap(35, 35, 35)
-                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
                     .addComponent(mostraResumo))
                 .addGap(50, 50, 50))
         );
@@ -502,7 +502,6 @@ public class Mesa extends javax.swing.JFrame {
         });
 
         mostraCPF.setEditable(false);
-        mostraCPF.setBackground(new java.awt.Color(255, 255, 255));
         mostraCPF.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
 
         javax.swing.GroupLayout CPFLayout = new javax.swing.GroupLayout(CPF);

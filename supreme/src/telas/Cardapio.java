@@ -387,7 +387,7 @@ public class Cardapio extends javax.swing.JFrame {
         
     private void CPVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPVoltarActionPerformed
         dispose();
-        Mesa.Cardapios.setVisible(true);
+        //Mesa.Cardapios.setVisible(true);
     }//GEN-LAST:event_CPVoltarActionPerformed
 
     private void CPConcluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPConcluiActionPerformed

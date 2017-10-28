@@ -10,16 +10,16 @@ public class Conexao {
 	private Connection conn = null;
 	private String status = "";
 	public boolean conectado = false;
-	public int conectar(String usuario, String senha) {
+	public int conectar(String usuario, char[] senha) {
 		try {
-			this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/?user="+usuario+"&password="+senha+"&useSSL=false");
-			conectado = true;
-			this.status = "-- Conexão estabelecida como "+usuario+"! --";
-			return 1;
+                    this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/?user="+usuario+"&password="+String.valueOf(senha)+"&useSSL=false");
+                    conectado = true;
+                    this.status = "Conexão estabelecida como "+usuario+"!";
+                    return 1;
 		} catch(SQLException e) {
-			this.status = e.getMessage();
+                    this.status = "Erro na autenticação!";
 		} catch(Exception e) {
-			this.status = e.getMessage();
+                    this.status = e.getMessage();
 		}
 		return 0;
 	}
