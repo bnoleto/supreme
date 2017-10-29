@@ -147,6 +147,7 @@ public class Login extends javax.swing.JFrame {
 
         bt_login.setBackground(new java.awt.Color(244, 244, 255));
         bt_login.setText("Realizar Login");
+        bt_login.setEnabled(false);
         bt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_loginActionPerformed(evt);

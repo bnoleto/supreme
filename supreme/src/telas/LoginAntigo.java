@@ -11,6 +11,7 @@ import codigo.Menus;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Window.Type;
+import java.util.ArrayList;
 public class LoginAntigo extends javax.swing.JFrame {
 	
 	private JFrame tela_login;
@@ -54,6 +55,7 @@ public class LoginAntigo extends javax.swing.JFrame {
 				System.out.println("  3 - Cadastrar produto");
 				System.out.println("  8 - Trocar de usuário");
 				System.out.println("  9 - Sair");
+                                System.out.println("  70 - teste retorno tabela");
 				System.out.print("> ");
 				opcao = entrada.nextInt();
 				switch(opcao) {
@@ -71,6 +73,16 @@ public class LoginAntigo extends javax.swing.JFrame {
 						LoginAntigo autenticacao = new LoginAntigo();
 						autenticacao.tela_login.setVisible(true);
 						return 1;
+                                        case(70):
+                                            ArrayList<ArrayList<String>> tabela = conn.retornar_query("SELECT * FROM t_pedido_itens;");
+                                            System.out.println("### TESTE DA TABELA ARMAZENADA ###");
+                                            for(int i = 0; i<tabela.size(); i++){
+                                                for(int j = 0; j< tabela.get(i).size(); j++){
+                                                    System.out.print(tabela.get(i).get(j) + ", ");
+                                                }
+                                                System.out.println("");
+                                            }
+                                            System.out.print("### FIM DO TESTE ###");
 				}
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 			} while(opcao != 9);

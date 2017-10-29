@@ -1,5 +1,7 @@
 package codigo;
 
+import java.util.ArrayList;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -41,7 +43,9 @@ public class Conexao {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+        
+        
+        
 	public String retornar_valor(int cod, String coluna, String coluna_cod, String tabela) {
 		try {
 			Statement stm = (Statement) conn.createStatement();
@@ -66,6 +70,39 @@ public class Conexao {
 			return rs.getString(1);
 	}
 	
+        // retornará uma matriz organizada da query str inserida
+        public ArrayList<ArrayList<String>> retornar_query(String str) {
+            ArrayList<ArrayList<String>> tabela = new ArrayList();
+		try {
+                    Statement stm = (Statement) conn.createStatement();
+                    try {
+                        int i = 1;
+                        ResultSetInternalMethods rs = (ResultSetInternalMethods) stm.executeQuery(str);
+                        while(rs.next()) {
+                                try {
+                                    while(rs.getString(i) != null) {
+                                        i++;
+                                    }
+                                } catch(SQLException e){
+
+                                }
+                                ArrayList<String> registro = new ArrayList();
+                                for(int j = 1; j<i; j++) {
+                                    registro.add(rs.getString(j));
+                                    System.out.print(rs.getString(j)+" | ");
+                                }
+                                tabela.add(registro);
+                                System.out.println("");
+                        }
+                    } catch(SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+		} catch (SQLException e) {
+                    System.out.println(e.getMessage());
+		}
+            return tabela;
+	}
+        
 	public void mostrar_sql(String str) {
 		try {
 			Statement stm = (Statement) conn.createStatement();

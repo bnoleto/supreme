@@ -77,6 +77,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(244, 244, 255));
         jButton1.setText("Ainda não tenho cadastro");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setEnabled(false);
 
         jButton2.setBackground(new java.awt.Color(0, 0, 76));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -198,6 +199,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jTextField1.setText("12345678910");
+        jTextField1.setMaximumSize(new java.awt.Dimension(155, 44));
+        jTextField1.setMinimumSize(new java.awt.Dimension(155, 44));
+        jTextField1.setName(""); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -239,6 +243,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jButton4.setText("Confirmar");
+        jButton4.setEnabled(false);
 
         javax.swing.GroupLayout panel_comCadastroLayout = new javax.swing.GroupLayout(panel_comCadastro);
         panel_comCadastro.setLayout(panel_comCadastroLayout);
@@ -247,14 +252,16 @@ public class TelaInicial extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
             .addGroup(panel_comCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 605, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_comCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_comCadastroLayout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 605, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_comCadastroLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_comCadastroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_comCadastroLayout.setVerticalGroup(
             panel_comCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
