@@ -52,7 +52,7 @@ public class Cardapio2 extends javax.swing.JFrame {
 
         ArrayList<ArrayList<String>> tabela = new ArrayList();
         tabela = conn.retornar_query(
-            "SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor FROM bdsupreme2.t_itens WHERE itm_disponivel = 1;"
+            "SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor FROM bdsupreme2.t_itens;"
         );
 
         Object[][] t2 = new Object[tabela.size()][5];

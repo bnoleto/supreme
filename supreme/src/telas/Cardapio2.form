@@ -90,7 +90,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;ArrayList&lt;String&gt;&gt; tabela = new ArrayList();&#xa;tabela = conn.retornar_query(&#xa;&quot;SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor FROM bdsupreme2.t_itens WHERE itm_disponivel = 1;&quot;&#xa;);&#xa;&#xa;Object[][] t2 = new Object[tabela.size()][5];&#xa;&#xa;for(int i = 0; i&lt;tabela.size(); i++){&#xa;    for(int j = 0; j &lt; tabela.get(i).size(); j++){&#xa;        t2[i][j] = tabela.get(i).get(j);&#xa;    }&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;ArrayList&lt;String&gt;&gt; tabela = new ArrayList();&#xa;tabela = conn.retornar_query(&#xa;&quot;SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor FROM bdsupreme2.t_itens;&quot;&#xa;);&#xa;&#xa;Object[][] t2 = new Object[tabela.size()][5];&#xa;&#xa;for(int i = 0; i&lt;tabela.size(); i++){&#xa;    for(int j = 0; j &lt; tabela.get(i).size(); j++){&#xa;        t2[i][j] = tabela.get(i).get(j);&#xa;    }&#xa;}"/>
           </AuxValues>
         </Component>
       </SubComponents>
