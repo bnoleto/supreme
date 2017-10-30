@@ -71,10 +71,11 @@ public class Login extends javax.swing.JFrame {
         bt_login = new javax.swing.JButton();
         bt_cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Acesso Restrito");
+        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 0, 153));
         setBounds((largura-tamanhoX)/2,(altura-tamanhoY)/2 , tamanhoX, tamanhoY);
-        setPreferredSize(new java.awt.Dimension(311, 235));
         setResizable(false);
         setSize(new java.awt.Dimension(311, 235));
         setType(java.awt.Window.Type.POPUP);
@@ -168,11 +169,11 @@ public class Login extends javax.swing.JFrame {
             panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(campos_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                .addContainerGap(163, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
                         .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(163, Short.MAX_VALUE))
+                        .addContainerGap(85, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
                         .addComponent(bt_cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
