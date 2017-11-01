@@ -1,0 +1,21 @@
+itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor,itm_status
+1,"Água Mineral 500ml","Descrição do Item 0",BEBIDAS,3.5,1
+2,"Frango Grelhado","Descrição do Item 1",REFEIÇÕES,23.9,1
+3,X-Salada,"Descrição do Item 2",LANCHES,7.9,0
+4,"Pudim (Fatia 300g)","Descrição do Item 3",SOBREMESAS,3.9,1
+5,"Mousse de Uva","Descrição do Item 4",SOBREMESAS,3.9,0
+6,Feijoada,"Descrição do Item 5",REFEIÇÕES,29.9,1
+7,"Suco de Laranja (Copo 300ml)","Descrição do Item 6",BEBIDAS,3.9,0
+8,"Coca-Cola 2L","Descrição do Item 7",BEBIDAS,7.9,1
+9,"Lasanha de Frango","Descrição do Item 8",REFEIÇÕES,27.9,1
+10,X-Picanha,"Descrição do Item 9",LANCHES,10.9,1
+11,"Mousse de Morango","Descrição do Item 10",SOBREMESAS,3.9,1
+12,"Peixe Assado","Descrição do Item 11",REFEIÇÕES,42.9,1
+13,"Risoto de Camarão","Descrição do Item 12",REFEIÇÕES,49.9,0
+14,"Fanta Laranja 600ml","Descrição do Item 13",BEBIDAS,3.7,1
+15,X-Tudo,"Descrição do Item 14",LANCHES,14.9,0
+16,"Bolo de Chocolate (Fatia 300g)","Descrição do Item 15",SOBREMESAS,3,1
+17,Picanha,"Descrição do Item 16",REFEIÇÕES,39.9,1
+18,"Prato da Casa","Descrição do Item 17",REFEIÇÕES,21.9,1
+19,X-Bacon,"Descrição do Item 18",LANCHES,10.9,0
+20,"Suco de Laranja (Jarra 600ml)","Descrição do Item 19",BEBIDAS,5.9,1
