@@ -1,11 +1,16 @@
 package telas;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author Rafael
  */
 public class Caixa extends javax.swing.JFrame {
-
+    private String data, hora;
+    
     public Caixa() {
         initComponents();
     }
@@ -180,6 +185,14 @@ public class Caixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
+        //Adquire data e hora do sistema
+        Date d = Calendar.getInstance().getTime();
+        SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm:ss");
+        data = sdfD.format(d);
+        hora = sdfH.format(d);
+        //Fim data e hora
+        
         //Recebe o indice selecionado;
         listaContas.getSelectedIndex();
         //libera os campos à direita
