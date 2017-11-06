@@ -23,7 +23,8 @@ public class CardapioProvavel extends javax.swing.JFrame {
      * Creates new form TelaInicial
      */
     public CardapioProvavel() {
-		conn.conectar("bnoleto", "041995".toCharArray());
+	//conn.conectar("test", "12345".toCharArray());
+        conn.conectar("bnoleto", "041995".toCharArray());
         conn.comando_sql("USE bdsupreme2;");
 		
         tabela = conn.retornar_query(
