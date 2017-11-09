@@ -1,10 +1,11 @@
 package telas;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -13,9 +14,11 @@ import javax.swing.table.TableRowSorter;
  * @author Rafael
  */
 public class Caixa extends javax.swing.JFrame {
-    private String data, hora;
+    private String codigo, mesa, data, hora, valor;
     private codigo.Conexao conn = new codigo.Conexao();
+    private ArrayList<String> itens = new ArrayList();
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList();
+    private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     
     public Caixa() {
         initComponents();
@@ -26,15 +29,15 @@ public class Caixa extends javax.swing.JFrame {
         conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
         conn.comando_sql("USE bdsupreme2;");	
         tabelaContas = conn.retornar_query(
-            "SELECT conta_codigo, conta_valor, conta_mesa, conta_data, conta_hora FROM t_contas WHERE conta_status LIKE 'FECHADO';"
+            "SELECT conta_codigo, conta_mesa, conta_valor, conta_data, conta_hora, conta_cpf "
+            + "FROM t_contas WHERE conta_status LIKE 'FECHADO';"
         );
         
         DefaultTableModel model = (DefaultTableModel) tableContas.getModel();
         tableContas.setRowSorter(new TableRowSorter(model));
         
         for(ArrayList<String> ars: tabelaContas){ 
-            model.addRow(new Object[]{ ars.get(0), ars.get(2), Double.parseDouble(ars.get(1)) });
-            System.out.println(ars);
+            model.addRow(new Object[]{ ars.get(0), ars.get(1), nf.format(Double.parseDouble(ars.get(2))) });
         }
     }
     
@@ -84,6 +87,11 @@ public class Caixa extends javax.swing.JFrame {
         tableContas.setSelectionBackground(new java.awt.Color(0, 153, 0));
         tableContas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableContas.getTableHeader().setReorderingAllowed(false);
+        tableContas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableContasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tableContas);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -183,9 +191,9 @@ public class Caixa extends javax.swing.JFrame {
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
@@ -228,6 +236,36 @@ public class Caixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
+        //libera e preenche os campos à direita
+        valorConta.setText(valor);
+        valorRecebido.setEnabled(true);
+        valorRecebido.setEditable(true);
+        troco.setEnabled(true);
+        finaliza.setEnabled(true);
+    }//GEN-LAST:event_fechaContaActionPerformed
+
+    private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
+        tableContas.remove(tableContas.getSelectedRow());
+    }//GEN-LAST:event_finalizaActionPerformed
+
+    private void tableContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContasMouseClicked
+        setContaInfo(); //Inicializa variáveis
+        mostraConta.setText("Data: "+data+"\nHora: "+hora+"\nMesa: "+mesa+"\n"
+                            +"Valor Total: "+valor);
+    }//GEN-LAST:event_tableContasMouseClicked
+    
+    private void setContaInfo(){
+        int indice = tableContas.getSelectedRow();
+        double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
+        
+        codigo = tabelaContas.get(indice).get(0);
+        mesa = tabelaContas.get(indice).get(1);
+        valor = nf.format(vAux);
+        data = tabelaContas.get(indice).get(3);
+        hora = tabelaContas.get(indice).get(4);
+    }
+    
+    private void getDataEHora(){
         //Adquire data e hora do sistema
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy");
@@ -235,22 +273,8 @@ public class Caixa extends javax.swing.JFrame {
         data = sdfD.format(d);
         hora = sdfH.format(d);
         //Fim data e hora
-        
-        //Recebe o indice selecionado;
-        tableContas.getSelectedRow();
-        System.out.println(tableContas.getSelectedRow());
-        //libera os campos à direita
-        valorConta.setEditable(true);
-        valorRecebido.setEditable(true);
-        troco.setEditable(true);
-        finaliza.setEnabled(true);
-    }//GEN-LAST:event_fechaContaActionPerformed
-
-    private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
-        tableContas.remove(tableContas.getSelectedRow());
-        
-    }//GEN-LAST:event_finalizaActionPerformed
-
+    }
+    
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
