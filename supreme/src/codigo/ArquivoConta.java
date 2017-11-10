@@ -28,8 +28,8 @@ public class ArquivoConta {
     }
     
     public static void CriaArquivo(){
-        FormataConta.setContafinal(); //Formata a conta para a ficha final
-        conta = FormataConta.getContafinal(); //Pega a conta formatada
+//        FormataConta.setContafinal(); //Formata a conta para a ficha final
+//        conta = FormataConta.getContafinal(); //Pega a conta formatada
         try{
             File arq = new File("BDContas/"+nomearquivo+".txt"); //Cria arquivo, se já existir, será sobreescrito
             FileWriter fw = new FileWriter(arq); 

@@ -392,31 +392,31 @@ public class Cardapio extends javax.swing.JFrame {
 
     private void CPConcluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPConcluiActionPerformed
         //Verifica os itens selecionados e adiciona os mesmos na conta
-        if(btItem1.isSelected()) {
-            Mesa.conta.setTxtconta(Item1.getText()+"   "+valorItem1.getText()+"   "+qtdeItem1.getValue());
-            //Descomentar a linha abaixo quando os valores dos itens existirem
-            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem1.getText()));
-        }
-        if(btItem2.isSelected()) {
-            Mesa.conta.setTxtconta(Item2.getText()+"   "+valorItem2.getText()+"   "+qtdeItem2.getValue());
-            //Descomentar a linha abaixo quando os valores dos itens existirem
-            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem2.getText()));
-        }
-        if(btItem3.isSelected()) {
-            Mesa.conta.setTxtconta(Item3.getText()+"   "+valorItem3.getText()+"   "+qtdeItem3.getValue());
-            //Descomentar a linha abaixo quando os valores dos itens existirem
-            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem3.getText())); 
-        }
-        if(btItem4.isSelected()) {
-            Mesa.conta.setTxtconta(Item4.getText()+"   "+valorItem4.getText()+"   "+qtdeItem4.getValue());
-            //Descomentar a linha abaixo quando os valores dos itens existirem
-            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem4.getText()));
-        }
-        if(btItem5.isSelected()) {
-            Mesa.conta.setTxtconta(Item5.getText()+"   "+valorItem5.getText()+"   "+qtdeItem5.getValue());
-            //Descomentar a linha abaixo quando os valores dos itens existirem
-            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem5.getText()));
-        }
+//        if(btItem1.isSelected()) {
+//            Mesa.conta.setTxtconta(Item1.getText()+"   "+valorItem1.getText()+"   "+qtdeItem1.getValue());
+//            //Descomentar a linha abaixo quando os valores dos itens existirem
+//            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem1.getText()));
+//        }
+//        if(btItem2.isSelected()) {
+//            Mesa.conta.setTxtconta(Item2.getText()+"   "+valorItem2.getText()+"   "+qtdeItem2.getValue());
+//            //Descomentar a linha abaixo quando os valores dos itens existirem
+//            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem2.getText()));
+//        }
+//        if(btItem3.isSelected()) {
+//            Mesa.conta.setTxtconta(Item3.getText()+"   "+valorItem3.getText()+"   "+qtdeItem3.getValue());
+//            //Descomentar a linha abaixo quando os valores dos itens existirem
+//            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem3.getText())); 
+//        }
+//        if(btItem4.isSelected()) {
+//            Mesa.conta.setTxtconta(Item4.getText()+"   "+valorItem4.getText()+"   "+qtdeItem4.getValue());
+//            //Descomentar a linha abaixo quando os valores dos itens existirem
+//            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem4.getText()));
+//        }
+//        if(btItem5.isSelected()) {
+//            Mesa.conta.setTxtconta(Item5.getText()+"   "+valorItem5.getText()+"   "+qtdeItem5.getValue());
+//            //Descomentar a linha abaixo quando os valores dos itens existirem
+//            //Mesa.conta.setTotalConta(Integer.parseInt(valorItem5.getText()));
+//        }
         
         CP.setVisible(false);
         confirmaPedido.setVisible(true);
@@ -425,8 +425,8 @@ public class Cardapio extends javax.swing.JFrame {
     private void btConfirmaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmaPedidoActionPerformed
         confirmaPedido.setVisible(false);
         //Printa o resumo modificado na tela inicial
-        Mesa.resumo.setText(Mesa.conta.getTxtconta());
-        Mesa.resumo.setText(Mesa.resumo.getText()+"\nValor Total: R$"+Mesa.conta.getTotalConta());
+//        Mesa.resumo.setText(Mesa.conta.getTxtconta());
+//        Mesa.resumo.setText(Mesa.resumo.getText()+"\nValor Total: R$"+Mesa.conta.getTotalConta());
         Mesa.Home.setVisible(true);
         dispose();
     }//GEN-LAST:event_btConfirmaPedidoActionPerformed

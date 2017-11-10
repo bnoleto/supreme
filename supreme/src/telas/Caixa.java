@@ -1,6 +1,5 @@
 package telas;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,9 +13,10 @@ import javax.swing.table.TableRowSorter;
  * @author Rafael
  */
 public class Caixa extends javax.swing.JFrame {
-    private String codigo, mesa, data, hora, valor;
+    private String codigo, mesa, data, hora, valor, cpf;
     private codigo.Conexao conn = new codigo.Conexao();
-    private ArrayList<String> itens = new ArrayList();
+    private ArrayList<ArrayList<String>> infoItens = new ArrayList();
+    private String stringItens;
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList();
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     
@@ -26,16 +26,20 @@ public class Caixa extends javax.swing.JFrame {
     }
 
     public void fillTable(){
+        //Loga no banco
         conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
+        //Comandos SQL para pegar as contas 
         conn.comando_sql("USE bdsupreme2;");	
         tabelaContas = conn.retornar_query(
             "SELECT conta_codigo, conta_mesa, conta_valor, conta_data, conta_hora, conta_cpf "
             + "FROM t_contas WHERE conta_status LIKE 'FECHADO';"
         );
-        
+        //model e rowsorter da tabela
         DefaultTableModel model = (DefaultTableModel) tableContas.getModel();
         tableContas.setRowSorter(new TableRowSorter(model));
         
+        //Adiciona os dados à tabela, criando uma linha para cada conta
+        //com seus respectivos dados em suas respectivas linhas
         for(ArrayList<String> ars: tabelaContas){ 
             model.addRow(new Object[]{ ars.get(0), ars.get(1), nf.format(Double.parseDouble(ars.get(2))) });
         }
@@ -72,7 +76,7 @@ public class Caixa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Mesa", "Valor"
+                "Código", "Mesa", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -99,6 +103,11 @@ public class Caixa extends javax.swing.JFrame {
 
         valorRecebido.setEditable(false);
         valorRecebido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        valorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                valorRecebidoFocusLost(evt);
+            }
+        });
 
         troco.setEditable(false);
         troco.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -135,12 +144,15 @@ public class Caixa extends javax.swing.JFrame {
         jLabel4.setText("Contas Finalizadas:");
 
         mostraConta.setEditable(false);
+        mostraConta.setBackground(new java.awt.Color(255, 253, 219));
         mostraConta.setColumns(20);
+        mostraConta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mostraConta.setRows(5);
+        mostraConta.setEnabled(false);
         jScrollPane2.setViewportView(mostraConta);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setText("Resumo:");
+        jLabel5.setText("Resumo da conta:");
 
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
@@ -160,11 +172,11 @@ public class Caixa extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PrincipalLayout.createSequentialGroup()
-                                .addGap(44, 44, 44)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
                                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -179,11 +191,10 @@ public class Caixa extends javax.swing.JFrame {
                                         .addGap(48, 48, 48)))
                                 .addGap(13, 13, 13))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(finaliza)
                                 .addGap(39, 39, 39))))
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(116, 116, 116)
+                        .addGap(111, 111, 111)
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -191,9 +202,9 @@ public class Caixa extends javax.swing.JFrame {
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4))
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
@@ -208,7 +219,7 @@ public class Caixa extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(troco, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(finaliza))
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -221,48 +232,97 @@ public class Caixa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
+        tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
+        setContaInfo(); //Inicializa variáveis com informações da conta 
         //libera e preenche os campos à direita
+        mostraConta.setEnabled(true);
         valorConta.setText(valor);
         valorRecebido.setEnabled(true);
         valorRecebido.setEditable(true);
         troco.setEnabled(true);
-        finaliza.setEnabled(true);
     }//GEN-LAST:event_fechaContaActionPerformed
 
     private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
-        tableContas.remove(tableContas.getSelectedRow());
+        //Muda status da conta no BD
+        conn.comando_sql("UPDATE t_contas SET conta_status = 'FINALIZADO' WHERE conta_codigo = "+codigo+";");
+        //Remove Linha da conta da tabela de contas
+        ((DefaultTableModel)tableContas.getModel()).removeRow(tableContas.getSelectedRow());
     }//GEN-LAST:event_finalizaActionPerformed
 
     private void tableContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContasMouseClicked
-        setContaInfo(); //Inicializa variáveis
-        mostraConta.setText("Data: "+data+"\nHora: "+hora+"\nMesa: "+mesa+"\n"
-                            +"Valor Total: "+valor);
+        setContaInfo(); //Inicializa variáveis com informações da conta selecionada
+        mostraConta.setText(formataContaFinal());
     }//GEN-LAST:event_tableContasMouseClicked
+
+    //Após o valor recebido ser informado
+    private void valorRecebidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_valorRecebidoFocusLost
+        int indice = tableContas.getSelectedRow();
+        double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
+        double vr = Double.parseDouble(valorRecebido.getText());
+        double tAux = vr-vAux;
+        if(vAux<=vr){
+            troco.setText(nf.format(tAux));
+            finaliza.setEnabled(true);
+
+        }else{
+            troco.setText("Valor Recebido Insuficiente");
+        }
+        
+        valorRecebido.setText(nf.format(vr));
+    }//GEN-LAST:event_valorRecebidoFocusLost
     
+    //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
     private void setContaInfo(){
         int indice = tableContas.getSelectedRow();
         double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
-        
+        //Inicializa variáveis de coluna
         codigo = tabelaContas.get(indice).get(0);
         mesa = tabelaContas.get(indice).get(1);
         valor = nf.format(vAux);
         data = tabelaContas.get(indice).get(3);
         hora = tabelaContas.get(indice).get(4);
+        cpf = tabelaContas.get(indice).get(5);
+        
+        //Inicializa a lista de itens
+        ArrayList<ArrayList<String>> codItensPedido;  //Armazena os codigos dos itens de cada pedido 
+        ArrayList<ArrayList<String>> codPedidosConta; //Armazena os codigos dos pedidos referentes à conta
+        ArrayList<ArrayList<String>> Itens;  //Armazena os codigos dos itens de cada pedido 
+        infoItens.removeAll(infoItens); //Reset dos itens
+        
+        //SELECTS necessários para obtenção dos dados
+        codPedidosConta = conn.retornar_query("SELECT t_pedidos_ped_codigo FROM t_pedidos_contas "
+                                            + "WHERE t_contas_conta_codigo LIKE '"+codigo+"';");
+        for(ArrayList<String> cods: codPedidosConta){
+            codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
+                                                + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
+            for(ArrayList<String> itms: codItensPedido){
+                Itens = conn.retornar_query("SELECT itm_nome, itm_valor FROM t_itens "
+                                            + "WHERE itm_codigo LIKE "+itms.get(0)+";");
+                for(int i=0; i<Itens.size(); i++){
+                    ArrayList<String> aux = new ArrayList();
+                    aux.add(Itens.get(i).get(0)); //nome do item
+                    aux.add(codItensPedido.get(i).get(1)); // qtde do mesmo item
+                    aux.add(Itens.get(i).get(1)); //valor do item
+                    infoItens.add(aux); //Add to itens
+                }
+            }
+        }
+        //Formatação dos itens em String para amostragem
+        stringItens = ""; //reseta e impede de imprimir 'null' no começo
+        for(ArrayList<String> ar: infoItens){
+            stringItens+="\n"+ar.get(0)+"\t"+ar.get(1)+"\t"+nf.format(Double.parseDouble(ar.get(2)));
+        }
     }
     
     private void getDataEHora(){
@@ -273,6 +333,24 @@ public class Caixa extends javax.swing.JFrame {
         data = sdfD.format(d);
         hora = sdfH.format(d);
         //Fim data e hora
+    }
+    
+    private String formataContaFinal(){
+        String ContaFinal = "";
+        String CF = "Item\t\tQtde.\tValor"
+                +"\n---------------------------------------------------------------"+stringItens 
+                + "\n---------------------------------------------------------------"+"\nValor Total: "+valor;
+        
+        if (cpf == null) { //Se o cpf nao foi informado
+            ContaFinal = "----------------------CUPOM FISCAL----------------------"
+                    + "\nData: "+data+"\nHora do fechamento da conta: "+hora+""
+                    + "\nCPF do contribuinte: Não informado\n\n"+CF;
+        }else{// Se o cpf foi informado
+            ContaFinal = "----------------------CUPOM FISCAL----------------------"
+                    + "\nData: "+data+"\nHora do fechamento da conta: "+hora+""
+                    + "\nCPF do contribuinte: "+cpf+"\n\n"+CF;
+        }  
+        return ContaFinal;
     }
     
     public static void main(String args[]) {
