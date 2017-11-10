@@ -25,12 +25,13 @@ public class Cozinha extends javax.swing.JFrame {
         ArrayList<ArrayList<String>> codItens;
         
         Pedidos = conn.retornar_query(
-            "SELECT ped_codigo, itm_codigo, itm_qtde, ped_data, ped_hora FROM t_pedido_itens WHERE ped_status LIKE 'ABERTO';"
+            "SELECT itm_codigo, ped_codigo, itm_qtde, ped_data, ped_hora FROM t_pedido_itens WHERE ped_status LIKE 'ABERTO';"
         );
         
         for(int i=0; i<Pedidos.size(); i++){
-            String itm_codigo = Pedidos.get(i).get(1);
-            String ped_codigo = Pedidos.get(i).get(0);
+            String itm_codigo = Pedidos.get(i).get(0);
+            String ped_codigo = Pedidos.get(i).get(1);
+            System.out.println(ped_codigo);
             //Reetorna o item pertencente ao itm_codigo;
             codItens = conn.retornar_query(
                 "SELECT itm_nome FROM t_itens WHERE itm_codigo LIKE "+itm_codigo+";"
@@ -207,8 +208,8 @@ public class Cozinha extends javax.swing.JFrame {
     private void finalizaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaPedidoActionPerformed
         int indice = tablePedidos.getSelectedRow();
         if(indice != -1){
-            String ped_codigo = Pedidos.get(indice).get(0);
-            String itm_codigo = Pedidos.get(indice).get(1);
+            String ped_codigo = Pedidos.get(indice).get(1);
+            String itm_codigo = Pedidos.get(indice).get(0);
             //Atualiza status do pedido para CONCLUIDO
             conn.comando_sql(
                 "UPDATE t_pedido_itens SET ped_status = 'CONCLUIDO' "
@@ -226,8 +227,8 @@ public class Cozinha extends javax.swing.JFrame {
         int indice = tablePedidos.getSelectedRow();
         System.out.println(indice);
         if(indice != -1){
-            String ped_codigo = Pedidos.get(indice).get(0);
-            String itm_codigo = Pedidos.get(indice).get(1);
+            String ped_codigo = Pedidos.get(indice).get(1);
+            String itm_codigo = Pedidos.get(indice).get(0);
             //Atualiza status do pedido para CANCELADO
             conn.comando_sql(
                 "UPDATE t_pedido_itens SET ped_status = 'CANCELADO' "
