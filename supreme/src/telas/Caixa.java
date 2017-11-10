@@ -64,6 +64,8 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         mostraConta = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME - Caixa");
@@ -88,6 +90,8 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         tableContas.setAutoscrolls(false);
+        tableContas.setFillsViewportHeight(true);
+        tableContas.setRowHeight(20);
         tableContas.setSelectionBackground(new java.awt.Color(0, 153, 0));
         tableContas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableContas.getTableHeader().setReorderingAllowed(false);
@@ -99,6 +103,7 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tableContas);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Valor Recebido:");
 
         valorRecebido.setEditable(false);
@@ -113,9 +118,11 @@ public class Caixa extends javax.swing.JFrame {
         troco.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Troco:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Valor da Conta:");
 
         valorConta.setEditable(false);
@@ -141,6 +148,7 @@ public class Caixa extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Contas Finalizadas:");
 
         mostraConta.setEditable(false);
@@ -152,79 +160,89 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane2.setViewportView(mostraConta);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Resumo da conta:");
+
+        jLabel6.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Caixa");
+        jLabel6.setOpaque(true);
+
+        jLabel7.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel7.setText("Copyright © S.U.P.R.E.M.E");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel7.setOpaque(true);
 
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
         PrincipalLayout.setHorizontalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PrincipalLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(fechaConta, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel4)))
+                        .addGap(59, 59, 59)
+                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                        .addGap(70, 70, 70))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
-                                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(valorConta, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(valorRecebido, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(troco, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(48, 48, 48)))
-                                .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
-                                .addComponent(finaliza)
-                                .addGap(39, 39, 39))))
-                    .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
+                        .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(valorConta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(valorRecebido, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(troco, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15))))
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PrincipalLayout.setVerticalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorConta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(valorConta)
                         .addGap(60, 60, 60)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorRecebido, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(valorRecebido)
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(troco, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(finaliza))
+                        .addComponent(troco)
+                        .addGap(45, 45, 45)
+                        .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(fechaConta)
+                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -240,6 +258,7 @@ public class Caixa extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
@@ -285,43 +304,45 @@ public class Caixa extends javax.swing.JFrame {
     //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
     private void setContaInfo(){
         int indice = tableContas.getSelectedRow();
-        double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
-        //Inicializa variáveis de coluna
-        codigo = tabelaContas.get(indice).get(0);
-        mesa = tabelaContas.get(indice).get(1);
-        valor = nf.format(vAux);
-        data = tabelaContas.get(indice).get(3);
-        hora = tabelaContas.get(indice).get(4);
-        cpf = tabelaContas.get(indice).get(5);
-        
-        //Inicializa a lista de itens
-        ArrayList<ArrayList<String>> codItensPedido;  //Armazena os codigos dos itens de cada pedido 
-        ArrayList<ArrayList<String>> codPedidosConta; //Armazena os codigos dos pedidos referentes à conta
-        ArrayList<ArrayList<String>> Itens;  //Armazena os codigos dos itens de cada pedido 
-        infoItens.removeAll(infoItens); //Reset dos itens
-        
-        //SELECTS necessários para obtenção dos dados
-        codPedidosConta = conn.retornar_query("SELECT t_pedidos_ped_codigo FROM t_pedidos_contas "
-                                            + "WHERE t_contas_conta_codigo LIKE '"+codigo+"';");
-        for(ArrayList<String> cods: codPedidosConta){
-            codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
-                                                + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
-            for(ArrayList<String> itms: codItensPedido){
-                Itens = conn.retornar_query("SELECT itm_nome, itm_valor FROM t_itens "
-                                            + "WHERE itm_codigo LIKE "+itms.get(0)+";");
-                for(int i=0; i<Itens.size(); i++){
-                    ArrayList<String> aux = new ArrayList();
-                    aux.add(Itens.get(i).get(0)); //nome do item
-                    aux.add(codItensPedido.get(i).get(1)); // qtde do mesmo item
-                    aux.add(Itens.get(i).get(1)); //valor do item
-                    infoItens.add(aux); //Add to itens
+        if(indice != -1){
+            double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
+            //Inicializa variáveis de coluna
+            codigo = tabelaContas.get(indice).get(0);
+            mesa = tabelaContas.get(indice).get(1);
+            valor = nf.format(vAux);
+            data = tabelaContas.get(indice).get(3);
+            hora = tabelaContas.get(indice).get(4);
+            cpf = tabelaContas.get(indice).get(5);
+
+            //Inicializa a lista de itens
+            ArrayList<ArrayList<String>> codItensPedido;  //Armazena os codigos dos itens de cada pedido 
+            ArrayList<ArrayList<String>> codPedidosConta; //Armazena os codigos dos pedidos referentes à conta
+            ArrayList<ArrayList<String>> Itens;  //Armazena os codigos dos itens de cada pedido 
+            infoItens.removeAll(infoItens); //Reset dos itens
+
+            //SELECTS necessários para obtenção dos dados
+            codPedidosConta = conn.retornar_query("SELECT t_pedidos_ped_codigo FROM t_pedidos_contas "
+                                                + "WHERE t_contas_conta_codigo LIKE '"+codigo+"';");
+            for(ArrayList<String> cods: codPedidosConta){
+                codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
+                                                    + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
+                for(ArrayList<String> itms: codItensPedido){
+                    Itens = conn.retornar_query("SELECT itm_nome, itm_valor FROM t_itens "
+                                                + "WHERE itm_codigo LIKE "+itms.get(0)+";");
+                    for(int i=0; i<Itens.size(); i++){
+                        ArrayList<String> aux = new ArrayList();
+                        aux.add(Itens.get(i).get(0)); //nome do item
+                        aux.add(codItensPedido.get(i).get(1)); // qtde do mesmo item
+                        aux.add(Itens.get(i).get(1)); //valor do item
+                        infoItens.add(aux); //Add to itens
+                    }
                 }
             }
-        }
-        //Formatação dos itens em String para amostragem
-        stringItens = ""; //reseta e impede de imprimir 'null' no começo
-        for(ArrayList<String> ar: infoItens){
-            stringItens+="\n"+ar.get(0)+"\t"+ar.get(1)+"\t"+nf.format(Double.parseDouble(ar.get(2)));
+            //Formatação dos itens em String para amostragem
+            stringItens = ""; //reseta e impede de imprimir 'null' no começo
+            for(ArrayList<String> ar: infoItens){
+                stringItens+="\n"+ar.get(0)+"\t"+ar.get(1)+"\t"+nf.format(Double.parseDouble(ar.get(2)));
+            }
         }
     }
     
@@ -392,6 +413,8 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea mostraConta;
