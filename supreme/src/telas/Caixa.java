@@ -1,5 +1,6 @@
 package telas;
 
+import java.awt.Color;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,11 +14,11 @@ import javax.swing.table.TableRowSorter;
  * @author Rafael
  */
 public class Caixa extends javax.swing.JFrame {
-    private String codigo, mesa, data, hora, valor, cpf;
-    private codigo.Conexao conn = new codigo.Conexao();
-    private ArrayList<ArrayList<String>> infoItens = new ArrayList();
-    private String stringItens;
-    private ArrayList<ArrayList<String>> tabelaContas = new ArrayList();
+    private String codigo, mesa, data, hora, valor, cpf; //Dados da conta selecionada
+    private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
+    private ArrayList<ArrayList<String>> infoItens = new ArrayList(); //guarda as informações de cada item de cada pedido
+    private String stringItens; //string final dos itens da conta
+    private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     
     public Caixa() {
@@ -25,6 +26,7 @@ public class Caixa extends javax.swing.JFrame {
         fillTable();
     }
 
+    //Função que preenche a tabela da tela
     public void fillTable(){
         //Loga no banco
         conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
@@ -64,8 +66,9 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         mostraConta = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
+        rodape = new javax.swing.JLabel();
+        valorInsuficiente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME - Caixa");
@@ -156,6 +159,7 @@ public class Caixa extends javax.swing.JFrame {
         mostraConta.setColumns(20);
         mostraConta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mostraConta.setRows(5);
+        mostraConta.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         mostraConta.setEnabled(false);
         jScrollPane2.setViewportView(mostraConta);
 
@@ -163,20 +167,27 @@ public class Caixa extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Resumo da conta:");
 
-        jLabel6.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Caixa");
-        jLabel6.setOpaque(true);
+        titulo.setBackground(new java.awt.Color(0, 153, 153));
+        titulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo.setText("Caixa");
+        titulo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        titulo.setOpaque(true);
 
-        jLabel7.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel7.setText("Copyright © S.U.P.R.E.M.E");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel7.setOpaque(true);
+        rodape.setBackground(new java.awt.Color(0, 153, 153));
+        rodape.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rodape.setForeground(new java.awt.Color(255, 255, 255));
+        rodape.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodape.setText("Copyright © S.U.P.R.E.M.E ");
+        rodape.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        rodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rodape.setOpaque(true);
+
+        valorInsuficiente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        valorInsuficiente.setForeground(new java.awt.Color(255, 0, 0));
+        valorInsuficiente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        valorInsuficiente.setText("Valor Recebido é insuficiente!");
 
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
@@ -193,7 +204,7 @@ public class Caixa extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,20 +214,21 @@ public class Caixa extends javax.swing.JFrame {
                         .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
                         .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(valorInsuficiente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(valorConta, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(valorRecebido, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(troco, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(15, 15, 15))))
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PrincipalLayout.setVerticalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -227,12 +239,14 @@ public class Caixa extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valorConta)
-                        .addGap(60, 60, 60)
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valorRecebido)
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(troco)
                         .addGap(45, 45, 45)
@@ -240,11 +254,12 @@ public class Caixa extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(rodape, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        valorInsuficiente.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,14 +277,19 @@ public class Caixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
-        tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
-        setContaInfo(); //Inicializa variáveis com informações da conta 
-        //libera e preenche os campos à direita
-        mostraConta.setEnabled(true);
-        valorConta.setText(valor);
-        valorRecebido.setEnabled(true);
-        valorRecebido.setEditable(true);
-        troco.setEnabled(true);
+        //Se alguma conta estiver selecionada
+        if(tableContas.getSelectedRow()!= -1){
+            tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
+            fechaConta.setEnabled(false); //Impede que o botão seja clicado novamente
+            setContaInfo(); //Inicializa variáveis com informações da conta 
+
+            //libera e preenche os campos à direita
+            mostraConta.setEnabled(true);
+            valorConta.setText(valor);
+            valorRecebido.setEnabled(true);
+            valorRecebido.setEditable(true);
+            troco.setEnabled(true);
+        }
     }//GEN-LAST:event_fechaContaActionPerformed
 
     private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
@@ -290,15 +310,23 @@ public class Caixa extends javax.swing.JFrame {
         double vAux = Double.parseDouble(tabelaContas.get(indice).get(2));
         double vr = Double.parseDouble(valorRecebido.getText());
         double tAux = vr-vAux;
+        //Se valor recebido for maior que o valor da conta
         if(vAux<=vr){
+            //Caso ja tenha sido mudado para true, volta a ser false
+            valorInsuficiente.setVisible(false);
+            //Printa o valor recebido formatado no campo
+            valorRecebido.setText(nf.format(vr));
+            //Impede a edição do valor após o mesmo ser maior ou igual ao valor da conta
+            valorRecebido.setEditable(false);
+            //Printa o valor do troco formatado no campo
             troco.setText(nf.format(tAux));
+            //Libera o botão Finalizar
             finaliza.setEnabled(true);
-
-        }else{
-            troco.setText("Valor Recebido Insuficiente");
+        }else{ //Se não
+            valorInsuficiente.setVisible(true);
         }
         
-        valorRecebido.setText(nf.format(vr));
+        
     }//GEN-LAST:event_valorRecebidoFocusLost
     
     //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
@@ -413,14 +441,15 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea mostraConta;
+    private javax.swing.JLabel rodape;
     private javax.swing.JTable tableContas;
+    private javax.swing.JLabel titulo;
     private javax.swing.JTextField troco;
     private javax.swing.JTextField valorConta;
+    private javax.swing.JLabel valorInsuficiente;
     private javax.swing.JTextField valorRecebido;
     // End of variables declaration//GEN-END:variables
 }
