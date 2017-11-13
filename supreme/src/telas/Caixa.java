@@ -12,13 +12,14 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Rafael
  */
-public class Caixa extends javax.swing.JFrame {
+public class Caixa extends javax.swing.JFrame{
     private String codigo, mesa, data, hora, valor, cpf; //Dados da conta selecionada
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private ArrayList<ArrayList<String>> infoItens = new ArrayList(); //guarda as informações de cada item de cada pedido
     private String stringItens; //string final dos itens da conta
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
+    private DefaultTableModel model;
     
     public Caixa() {
         initComponents();
@@ -36,7 +37,9 @@ public class Caixa extends javax.swing.JFrame {
             + "FROM t_contas WHERE conta_status LIKE 'FECHADO';"
         );
         //model e rowsorter da tabela
-        DefaultTableModel model = (DefaultTableModel) tableContas.getModel();
+        model = (DefaultTableModel) tableContas.getModel();
+        //reset da tabela
+        model.setRowCount(0);
         tableContas.setRowSorter(new TableRowSorter(model));
         
         //Adiciona os dados à tabela, criando uma linha para cada conta
@@ -50,6 +53,10 @@ public class Caixa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Dialog = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        textoDialogo = new javax.swing.JLabel();
+        dialogButton = new javax.swing.JButton();
         Principal = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableContas = new javax.swing.JTable();
@@ -68,6 +75,65 @@ public class Caixa extends javax.swing.JFrame {
         rodape = new javax.swing.JLabel();
         valorInsuficiente = new javax.swing.JLabel();
         valorRecebido = new javax.swing.JTextField();
+
+        Dialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        Dialog.setTitle("S.U.P.R.E.M.E Dialog");
+        Dialog.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Dialog.setMinimumSize(new java.awt.Dimension(421, 183));
+        Dialog.setModal(true);
+        Dialog.setResizable(false);
+        Dialog.setType(java.awt.Window.Type.POPUP);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("Clique em OK para fechar.");
+
+        textoDialogo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        textoDialogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoDialogo.setText("Texto Dialogo");
+
+        dialogButton.setBackground(new java.awt.Color(0, 153, 153));
+        dialogButton.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        dialogButton.setForeground(new java.awt.Color(255, 255, 255));
+        dialogButton.setText("OK");
+        dialogButton.setToolTipText("Clique para continuar.");
+        dialogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dialogButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textoDialogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(textoDialogo)
+                .addGap(26, 26, 26)
+                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout DialogLayout = new javax.swing.GroupLayout(Dialog.getContentPane());
+        Dialog.getContentPane().setLayout(DialogLayout);
+        DialogLayout.setHorizontalGroup(
+            DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        DialogLayout.setVerticalGroup(
+            DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        Dialog.setLocationRelativeTo(Principal);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME - Caixa");
@@ -207,11 +273,11 @@ public class Caixa extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                        .addGap(70, 70, 70))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                        .addGap(65, 65, 65)))
                 .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
@@ -248,9 +314,9 @@ public class Caixa extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valorRecebido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(troco)
@@ -259,7 +325,7 @@ public class Caixa extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(15, 15, 15)
-                .addComponent(fechaConta, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
                 .addComponent(rodape)
                 .addGap(0, 0, 0))
@@ -303,7 +369,19 @@ public class Caixa extends javax.swing.JFrame {
         conn.comando_sql("UPDATE t_contas SET conta_status = 'FINALIZADO' WHERE conta_codigo = "+codigo+";");
         //Remove Linha da conta da tabela de contas
         ((DefaultTableModel)tableContas.getModel()).removeRow(tableContas.getSelectedRow());
+        //Abre dialogo
+        textoDialogo.setText("Transação finalizada com sucesso!");
+        Dialog.setVisible(true);
+        //Volta enabled na tabela
+        tableContas.setEnabled(true);
+        //Limpa campos de texto
+        valorRecebido.setText("");
+        valorConta.setText("");
+        troco.setText("");
+        mostraConta.setText("");
+        //bloqueia ações impróprias
         fechaConta.setEnabled(false);
+        mostraConta.setEnabled(false);
         finaliza.setEnabled(false);
     }//GEN-LAST:event_finalizaActionPerformed
 
@@ -343,6 +421,10 @@ public class Caixa extends javax.swing.JFrame {
             valorInsuficiente.setVisible(true);
         }   
     }//GEN-LAST:event_valorRecebidoKeyReleased
+
+    private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
+        Dialog.dispose();
+    }//GEN-LAST:event_dialogButtonActionPerformed
     
     //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
     private void setContaInfo(){
@@ -369,14 +451,14 @@ public class Caixa extends javax.swing.JFrame {
             for(ArrayList<String> cods: codPedidosConta){
                 codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
                                                     + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
-                for(ArrayList<String> itms: codItensPedido){
+                for(int i = 0; i<codItensPedido.size(); i++){
                     Itens = conn.retornar_query("SELECT itm_nome, itm_valor FROM t_itens "
-                                                + "WHERE itm_codigo LIKE "+itms.get(0)+";");
-                    for(int i=0; i<Itens.size(); i++){
+                                                + "WHERE itm_codigo LIKE "+codItensPedido.get(i).get(0)+";");
+                    for(int j=0; j<Itens.size(); j++){
                         ArrayList<String> aux = new ArrayList();
-                        aux.add(Itens.get(i).get(0)); //nome do item
+                        aux.add(Itens.get(j).get(0)); //nome do item
                         aux.add(codItensPedido.get(i).get(1)); // qtde do mesmo item
-                        aux.add(Itens.get(i).get(1)); //valor do item
+                        aux.add(Itens.get(j).get(1)); //valor do item
                         infoItens.add(aux); //Add to itens
                     }
                 }
@@ -403,7 +485,9 @@ public class Caixa extends javax.swing.JFrame {
         String ContaFinal = "";
         String CF = "Item\t\tQtde.\tValor"
                 +"\n---------------------------------------------------------------"+stringItens 
-                + "\n---------------------------------------------------------------"+"\nValor Total: "+valor;
+                + "\n---------------------------------------------------------------"+"\nValor Total: "+valor
+                +"\n\nVolte sempre!\nS.U.P.R.E.M.E.™ "
+                + "\n---------------------------------------------------------------";
         
         if (cpf == null) { //Se o cpf nao foi informado
             ContaFinal = "----------------------CUPOM FISCAL----------------------"
@@ -448,7 +532,9 @@ public class Caixa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Dialog;
     private javax.swing.JPanel Principal;
+    private javax.swing.JButton dialogButton;
     private javax.swing.JButton fechaConta;
     private javax.swing.JButton finaliza;
     private javax.swing.JLabel jLabel1;
@@ -456,11 +542,13 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea mostraConta;
     private javax.swing.JLabel rodape;
     private javax.swing.JTable tableContas;
+    private javax.swing.JLabel textoDialogo;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField troco;
     private javax.swing.JTextField valorConta;

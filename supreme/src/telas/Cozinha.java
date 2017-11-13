@@ -11,8 +11,9 @@ import javax.swing.table.TableRowSorter;
 public class Cozinha extends javax.swing.JFrame {
     
     private codigo.Conexao conn = new codigo.Conexao();
-    private ArrayList<ArrayList<String>> Pedidos; //Primitiva
+    private ArrayList<ArrayList<String>> Pedidos = new ArrayList();; //Primitiva
     private ArrayList<ArrayList<String>> tabelaPedidos = new ArrayList(); //Matriz modificada (tela)
+    private DefaultTableModel model;
     
     public Cozinha() {
         initComponents();
@@ -23,8 +24,14 @@ public class Cozinha extends javax.swing.JFrame {
         conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
         conn.comando_sql("USE bdsupreme2;");
         //Armazena os nomes dos itens
-        ArrayList<ArrayList<String>> nomeItens; 
+        ArrayList<ArrayList<String>> nomeItens = new ArrayList();
         
+        //Reset das tabelas
+        tabelaPedidos.removeAll(tabelaPedidos); 
+        model = (DefaultTableModel) tablePedidos.getModel();
+        model.setRowCount(0);
+        
+        //Preenche tabela primitiva
         Pedidos = conn.retornar_query(
             "SELECT itm_codigo, ped_codigo, itm_qtde, ped_data, ped_hora FROM t_pedido_itens WHERE ped_status LIKE 'ABERTO';"
         );
@@ -51,7 +58,7 @@ public class Cozinha extends javax.swing.JFrame {
             tabelaPedidos.get(i).add(ped_mesa);
         }
         
-        DefaultTableModel model = (DefaultTableModel) tablePedidos.getModel();
+        
         tablePedidos.setRowSorter(new TableRowSorter(model));
         
         for(ArrayList<String> ars: tabelaPedidos){ 
@@ -63,6 +70,10 @@ public class Cozinha extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Dialog = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        textoDialogo = new javax.swing.JLabel();
+        dialogButton = new javax.swing.JButton();
         TelaCozinha = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         finalizaPedido = new javax.swing.JButton();
@@ -72,6 +83,65 @@ public class Cozinha extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         rodape = new javax.swing.JLabel();
+
+        Dialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        Dialog.setTitle("S.U.P.R.E.M.E Dialog");
+        Dialog.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Dialog.setMinimumSize(new java.awt.Dimension(421, 183));
+        Dialog.setModal(true);
+        Dialog.setResizable(false);
+        Dialog.setType(java.awt.Window.Type.POPUP);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("Clique em OK para fechar.");
+
+        textoDialogo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        textoDialogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoDialogo.setText("Texto Dialogo");
+
+        dialogButton.setBackground(new java.awt.Color(0, 153, 153));
+        dialogButton.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        dialogButton.setForeground(new java.awt.Color(255, 255, 255));
+        dialogButton.setText("OK");
+        dialogButton.setToolTipText("Clique para continuar.");
+        dialogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dialogButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textoDialogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(textoDialogo)
+                .addGap(26, 26, 26)
+                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout DialogLayout = new javax.swing.GroupLayout(Dialog.getContentPane());
+        Dialog.getContentPane().setLayout(DialogLayout);
+        DialogLayout.setHorizontalGroup(
+            DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        DialogLayout.setVerticalGroup(
+            DialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        Dialog.setLocationRelativeTo(TelaCozinha);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME - Cozinha");
@@ -216,6 +286,7 @@ public class Cozinha extends javax.swing.JFrame {
     private void finalizaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaPedidoActionPerformed
         int indice = tablePedidos.getSelectedRow();
         //Conclui se algo estiver selecionado
+        
         if(indice != -1){
             String ped_codigo = Pedidos.get(indice).get(1);
             String itm_codigo = Pedidos.get(indice).get(0);
@@ -227,11 +298,11 @@ public class Cozinha extends javax.swing.JFrame {
 
             //Remove Linha da conta da tabela de pedidos
             ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice);
-            //Remove da tabela os indices;
-            Pedidos.remove(indice);
-            tabelaPedidos.remove(indice); 
             //Re-preenche a tabela
             fillTable();
+            //Abre tela de dialogo
+            textoDialogo.setText("Pedido concluído com sucesso!");
+            Dialog.setVisible(true);
         }
     }//GEN-LAST:event_finalizaPedidoActionPerformed
 
@@ -250,6 +321,9 @@ public class Cozinha extends javax.swing.JFrame {
 
             //Remove Linha da conta da tabela de pedidos
             ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice);
+            //Abre tela de dialogo
+            textoDialogo.setText("Pedido cancelado com sucesso!");
+            Dialog.setVisible(true);
             //Remove da tabela os indices;
             Pedidos.remove(indice);
             tabelaPedidos.remove(indice); 
@@ -257,6 +331,11 @@ public class Cozinha extends javax.swing.JFrame {
             fillTable();
         }   
     }//GEN-LAST:event_cancelaPedidoActionPerformed
+    
+    //Fecha a tela de dialogo
+    private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
+        Dialog.dispose();
+    }//GEN-LAST:event_dialogButtonActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -289,14 +368,18 @@ public class Cozinha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Dialog;
     private javax.swing.JPanel TelaCozinha;
     private javax.swing.JButton cancelaPedido;
+    private javax.swing.JButton dialogButton;
     private javax.swing.JButton finalizaPedido;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel rodape;
     private javax.swing.JTable tablePedidos;
+    private javax.swing.JLabel textoDialogo;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
