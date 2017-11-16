@@ -1,6 +1,8 @@
 package telas;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -362,7 +364,16 @@ public class Cozinha extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cozinha().setVisible(true);
+                Cozinha c = new Cozinha();
+                c.setVisible(true);
+                //Atualização dos itens da tabela a cada intervalo de 10 segundos.
+                final long TEMPO = 20000; //20 Segundos
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    public void run() {
+                        c.fillTable();
+                    }
+                },TEMPO, TEMPO);
             }
         });
     }

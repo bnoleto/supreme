@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -24,6 +26,7 @@ public class Caixa extends javax.swing.JFrame{
     public Caixa() {
         initComponents();
         fillTable();
+        
     }
 
     //Função que preenche a tabela da tela
@@ -526,7 +529,16 @@ public class Caixa extends javax.swing.JFrame{
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Caixa().setVisible(true);
+                Caixa c = new Caixa();
+                c.setVisible(true);
+                //Atualização dos itens da tabela a cada intervalo de 10 segundos.
+                final long TEMPO = 20000; //20 Segundos
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    public void run() {
+                        c.fillTable();
+                    }
+                },TEMPO, TEMPO);
             }
         });
     }
