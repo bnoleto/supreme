@@ -11,13 +11,6 @@ public class Mesa extends javax.swing.JFrame {
     
     public Mesa() {
         initComponents();
-        //Esconde os paineis na inicialização
-        Cardapios.setVisible(false);
-        confirmaFecha.setVisible(false);
-        questCPF.setVisible(false);
-        CPF.setVisible(false);
-        CPFinvalido.setVisible(false);
-        Final.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -31,17 +24,21 @@ public class Mesa extends javax.swing.JFrame {
         mostraResumo = new javax.swing.JScrollPane();
         resumo = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
+        rodapeHome = new javax.swing.JLabel();
         Cardapios = new javax.swing.JPanel();
-        tituloCardapios = new javax.swing.JLabel();
         btCP1 = new javax.swing.JButton();
         btCP2 = new javax.swing.JButton();
         btCP3 = new javax.swing.JButton();
         btCP4 = new javax.swing.JButton();
         btVoltarCardapios = new javax.swing.JButton();
+        tituloCategorias = new javax.swing.JLabel();
+        rodapeCategorias = new javax.swing.JLabel();
         confirmaFecha = new javax.swing.JPanel();
         textoConfirmaFecha = new javax.swing.JLabel();
         btConfirmaFechamento = new javax.swing.JButton();
         btCancelaFechamento = new javax.swing.JButton();
+        tituloFechaConta = new javax.swing.JLabel();
+        rodapeFecharConta = new javax.swing.JLabel();
         questCPF = new javax.swing.JPanel();
         textoConfirmaFecha1 = new javax.swing.JLabel();
         btSimCPF = new javax.swing.JButton();
@@ -61,6 +58,8 @@ public class Mesa extends javax.swing.JFrame {
         cpf3 = new javax.swing.JButton();
         cpf0 = new javax.swing.JButton();
         mostraCPF = new javax.swing.JTextField();
+        tituloCPF = new javax.swing.JLabel();
+        rodapeCPF = new javax.swing.JLabel();
         CPFinvalido = new javax.swing.JPanel();
         textoCPFInvalido = new javax.swing.JLabel();
         tentarNovamente = new javax.swing.JButton();
@@ -69,19 +68,24 @@ public class Mesa extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        rodapeHome1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME v0.000000000000000000000000000000001 alpha");
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMinimumSize(new java.awt.Dimension(720, 480));
+        setSize(new java.awt.Dimension(740, 502));
 
         Home.setBackground(new java.awt.Color(255, 255, 255));
-        Home.setMinimumSize(new java.awt.Dimension(720, 480));
-        Home.setPreferredSize(new java.awt.Dimension(720, 480));
+        Home.setMinimumSize(new java.awt.Dimension(740, 502));
+        Home.setPreferredSize(new java.awt.Dimension(740, 502));
 
+        numeroMesa.setBackground(new java.awt.Color(0, 0, 127));
         numeroMesa.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
+        numeroMesa.setForeground(new java.awt.Color(255, 255, 255));
         numeroMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numeroMesa.setText("Mesa ##");
+        numeroMesa.setOpaque(true);
 
         novoPedido.setBackground(new java.awt.Color(255, 255, 255));
         novoPedido.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
@@ -115,48 +119,53 @@ public class Mesa extends javax.swing.JFrame {
         jLabel1.setText("Resumo");
         jLabel1.setToolTipText("Resumo da conta até o momento.");
 
+        rodapeHome.setBackground(new java.awt.Color(0, 0, 127));
+        rodapeHome.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        rodapeHome.setForeground(new java.awt.Color(255, 255, 255));
+        rodapeHome.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodapeHome.setText(" ");
+        rodapeHome.setOpaque(true);
+
         javax.swing.GroupLayout HomeLayout = new javax.swing.GroupLayout(Home);
         Home.setLayout(HomeLayout);
         HomeLayout.setHorizontalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(numeroMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(HomeLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
-                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                    .addComponent(novoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecharConta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                     .addComponent(mostraResumo))
                 .addGap(54, 54, 54))
+            .addComponent(numeroMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodapeHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(numeroMesa)
+                .addComponent(numeroMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addGap(38, 38, 38)
-                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addGap(107, 107, 107))
+                        .addComponent(mostraResumo, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE))
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mostraResumo)
-                        .addGap(24, 24, 24))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(novoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(fecharConta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)))
+                .addComponent(rodapeHome))
         );
 
         Cardapios.setBackground(new java.awt.Color(255, 255, 255));
-        Cardapios.setMinimumSize(new java.awt.Dimension(720, 480));
-        Cardapios.setPreferredSize(new java.awt.Dimension(720, 480));
-
-        tituloCardapios.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        tituloCardapios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloCardapios.setText("Cardápios");
+        Cardapios.setMinimumSize(new java.awt.Dimension(740, 502));
+        Cardapios.setPreferredSize(new java.awt.Dimension(740, 502));
 
         btCP1.setBackground(new java.awt.Color(255, 255, 255));
         btCP1.setFont(new java.awt.Font("Arial", 0, 32)); // NOI18N
@@ -212,46 +221,66 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
+        tituloCategorias.setBackground(new java.awt.Color(0, 0, 127));
+        tituloCategorias.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        tituloCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        tituloCategorias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloCategorias.setText("Categorias");
+        tituloCategorias.setOpaque(true);
+
+        rodapeCategorias.setBackground(new java.awt.Color(0, 0, 127));
+        rodapeCategorias.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        rodapeCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        rodapeCategorias.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodapeCategorias.setText(" ");
+        rodapeCategorias.setOpaque(true);
+
         javax.swing.GroupLayout CardapiosLayout = new javax.swing.GroupLayout(Cardapios);
         Cardapios.setLayout(CardapiosLayout);
         CardapiosLayout.setHorizontalGroup(
             CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tituloCardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CardapiosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btVoltarCardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btVoltarCardapios, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                 .addGap(613, 613, 613))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardapiosLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
+            .addComponent(tituloCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodapeCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(CardapiosLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCP3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(70, 70, 70)
-                .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btCP3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCP1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btCP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCP4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(113, 113, 113))
+                    .addComponent(btCP4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CardapiosLayout.setVerticalGroup(
             CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardapiosLayout.createSequentialGroup()
-                .addComponent(tituloCardapios, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37)
-                .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCP3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCP4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(77, 77, 77)
-                .addComponent(btVoltarCardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tituloCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CardapiosLayout.createSequentialGroup()
+                        .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btCP1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(132, 132, 132))
+                    .addGroup(CardapiosLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(CardapiosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btCP3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCP4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(79, 79, 79)
+                .addComponent(btVoltarCardapios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rodapeCategorias))
         );
 
         confirmaFecha.setBackground(new java.awt.Color(255, 255, 255));
-        confirmaFecha.setMinimumSize(new java.awt.Dimension(720, 480));
-        confirmaFecha.setPreferredSize(new java.awt.Dimension(720, 480));
+        confirmaFecha.setMinimumSize(new java.awt.Dimension(740, 502));
+        confirmaFecha.setPreferredSize(new java.awt.Dimension(740, 502));
 
         textoConfirmaFecha.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         textoConfirmaFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -279,6 +308,20 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
+        tituloFechaConta.setBackground(new java.awt.Color(0, 0, 127));
+        tituloFechaConta.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        tituloFechaConta.setForeground(new java.awt.Color(255, 255, 255));
+        tituloFechaConta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloFechaConta.setText("Fechar Conta");
+        tituloFechaConta.setOpaque(true);
+
+        rodapeFecharConta.setBackground(new java.awt.Color(0, 0, 127));
+        rodapeFecharConta.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        rodapeFecharConta.setForeground(new java.awt.Color(255, 255, 255));
+        rodapeFecharConta.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodapeFecharConta.setText(" ");
+        rodapeFecharConta.setOpaque(true);
+
         javax.swing.GroupLayout confirmaFechaLayout = new javax.swing.GroupLayout(confirmaFecha);
         confirmaFecha.setLayout(confirmaFechaLayout);
         confirmaFechaLayout.setHorizontalGroup(
@@ -290,24 +333,28 @@ public class Mesa extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(btCancelaFechamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(172, 172, 172))
+            .addComponent(tituloFechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodapeFecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         confirmaFechaLayout.setVerticalGroup(
             confirmaFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(confirmaFechaLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addComponent(tituloFechaConta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
                 .addComponent(textoConfirmaFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(confirmaFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConfirmaFechamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btCancelaFechamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(165, 165, 165))
+                .addGap(140, 140, 140)
+                .addComponent(rodapeFecharConta))
         );
 
         questCPF.setBackground(new java.awt.Color(255, 255, 255));
         questCPF.setAlignmentX(0.0F);
         questCPF.setAlignmentY(0.0F);
-        questCPF.setMinimumSize(new java.awt.Dimension(720, 480));
-        questCPF.setPreferredSize(new java.awt.Dimension(720, 480));
+        questCPF.setMinimumSize(new java.awt.Dimension(740, 502));
+        questCPF.setPreferredSize(new java.awt.Dimension(740, 502));
 
         textoConfirmaFecha1.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         textoConfirmaFecha1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -344,7 +391,7 @@ public class Mesa extends javax.swing.JFrame {
             .addComponent(textoConfirmaFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(questCPFLayout.createSequentialGroup()
                 .addGap(223, 223, 223)
-                .addComponent(btSimCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btSimCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(74, 74, 74)
                 .addComponent(btNaoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(223, 223, 223))
@@ -362,8 +409,8 @@ public class Mesa extends javax.swing.JFrame {
         );
 
         CPF.setBackground(new java.awt.Color(255, 255, 255));
-        CPF.setMinimumSize(new java.awt.Dimension(720, 480));
-        CPF.setPreferredSize(new java.awt.Dimension(720, 480));
+        CPF.setMinimumSize(new java.awt.Dimension(740, 502));
+        CPF.setPreferredSize(new java.awt.Dimension(740, 502));
 
         textoConfirmaFecha2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         textoConfirmaFecha2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -531,6 +578,20 @@ public class Mesa extends javax.swing.JFrame {
         mostraCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         mostraCPF.setPreferredSize(new java.awt.Dimension(400, 50));
 
+        tituloCPF.setBackground(new java.awt.Color(0, 0, 127));
+        tituloCPF.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        tituloCPF.setForeground(new java.awt.Color(255, 255, 255));
+        tituloCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloCPF.setText("CPF");
+        tituloCPF.setOpaque(true);
+
+        rodapeCPF.setBackground(new java.awt.Color(0, 0, 127));
+        rodapeCPF.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        rodapeCPF.setForeground(new java.awt.Color(255, 255, 255));
+        rodapeCPF.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodapeCPF.setText(" ");
+        rodapeCPF.setOpaque(true);
+
         javax.swing.GroupLayout CPFLayout = new javax.swing.GroupLayout(CPF);
         CPF.setLayout(CPFLayout);
         CPFLayout.setHorizontalGroup(
@@ -540,36 +601,32 @@ public class Mesa extends javax.swing.JFrame {
                 .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textoConfirmaFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(CPFLayout.createSequentialGroup()
+                        .addComponent(cpfApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(86, 86, 86)
                         .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CPFLayout.createSequentialGroup()
-                                .addGap(231, 231, 231)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
+                                .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
-                                        .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(CPFLayout.createSequentialGroup()
+                                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(83, 83, 83))
+                                    .addGroup(CPFLayout.createSequentialGroup()
+                                        .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
-                                        .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(CPFLayout.createSequentialGroup()
-                                                .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(83, 83, 83))
-                                            .addGroup(CPFLayout.createSequentialGroup()
-                                                .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
-                                        .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
-                                        .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(CPFLayout.createSequentialGroup()
-                                .addComponent(cpfApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(317, 317, 317)))
+                                        .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
+                                .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFLayout.createSequentialGroup()
+                                .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(93, 93, 93)
                         .addComponent(cpfFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -577,12 +634,15 @@ public class Mesa extends javax.swing.JFrame {
                 .addGap(152, 152, 152)
                 .addComponent(mostraCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(168, 168, 168))
+            .addComponent(tituloCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodapeCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         CPFLayout.setVerticalGroup(
             CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CPFLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(textoConfirmaFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addComponent(tituloCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textoConfirmaFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(19, 19, 19)
                 .addComponent(mostraCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -602,17 +662,18 @@ public class Mesa extends javax.swing.JFrame {
                     .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2)
-                .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(CPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cpfFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cpfApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(cpfApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cpf0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rodapeCPF)
+                .addGap(10, 10, 10))
         );
 
         CPFinvalido.setBackground(new java.awt.Color(255, 255, 255));
-        CPFinvalido.setMinimumSize(new java.awt.Dimension(720, 480));
-        CPFinvalido.setPreferredSize(new java.awt.Dimension(720, 480));
+        CPFinvalido.setMinimumSize(new java.awt.Dimension(740, 502));
+        CPFinvalido.setPreferredSize(new java.awt.Dimension(740, 502));
 
         textoCPFInvalido.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         textoCPFInvalido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -635,24 +696,24 @@ public class Mesa extends javax.swing.JFrame {
         CPFinvalidoLayout.setHorizontalGroup(
             CPFinvalidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(textoCPFInvalido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CPFinvalidoLayout.createSequentialGroup()
-                .addContainerGap(247, Short.MAX_VALUE)
-                .addComponent(tentarNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(244, 244, 244))
+            .addGroup(CPFinvalidoLayout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(tentarNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         CPFinvalidoLayout.setVerticalGroup(
             CPFinvalidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CPFinvalidoLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(textoCPFInvalido, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addGap(167, 167, 167)
+                .addComponent(textoCPFInvalido, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(tentarNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(161, 161, 161))
+                .addComponent(tentarNovamente, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addGap(172, 172, 172))
         );
 
         Final.setBackground(new java.awt.Color(255, 255, 255));
-        Final.setMinimumSize(new java.awt.Dimension(720, 480));
-        Final.setPreferredSize(new java.awt.Dimension(720, 480));
+        Final.setMinimumSize(new java.awt.Dimension(740, 502));
+        Final.setPreferredSize(new java.awt.Dimension(740, 502));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -666,55 +727,115 @@ public class Mesa extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Quase lá...");
 
+        jLabel10.setBackground(new java.awt.Color(0, 0, 127));
         jLabel10.setFont(new java.awt.Font("Arial", 0, 100)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 255, 51));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("$");
+        jLabel10.setOpaque(true);
+
+        rodapeHome1.setBackground(new java.awt.Color(0, 0, 127));
+        rodapeHome1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        rodapeHome1.setForeground(new java.awt.Color(255, 255, 255));
+        rodapeHome1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        rodapeHome1.setText(" ");
+        rodapeHome1.setOpaque(true);
 
         javax.swing.GroupLayout FinalLayout = new javax.swing.GroupLayout(Final);
         Final.setLayout(FinalLayout);
         FinalLayout.setHorizontalGroup(
             FinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(rodapeHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         FinalLayout.setVerticalGroup(
             FinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FinalLayout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addGap(82, 82, 82)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                .addGap(88, 88, 88)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(91, 91, 91)
+                .addComponent(rodapeHome1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Final, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(confirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(CPFinvalido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Cardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(questCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(CPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Cardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(confirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(questCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(CPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(CPFinvalido, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Final, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Final, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(confirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(CPFinvalido, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(Cardapios, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(questCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(CPF, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Cardapios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(confirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(questCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(CPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(CPFinvalido, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(Final, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
+
+        Cardapios.setVisible(false);
+        confirmaFecha.setVisible(false);
+        questCPF.setVisible(false);
+        CPF.setVisible(false);
+        CPFinvalido.setVisible(false);
+        Final.setVisible(false);
 
         pack();
         setLocationRelativeTo(null);
@@ -939,11 +1060,18 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel numeroMesa;
     private javax.swing.JPanel questCPF;
     public static javax.swing.JTextPane resumo;
+    private javax.swing.JLabel rodapeCPF;
+    private javax.swing.JLabel rodapeCategorias;
+    private javax.swing.JLabel rodapeFecharConta;
+    private javax.swing.JLabel rodapeHome;
+    private javax.swing.JLabel rodapeHome1;
     private javax.swing.JButton tentarNovamente;
     private javax.swing.JLabel textoCPFInvalido;
     private javax.swing.JLabel textoConfirmaFecha;
     private javax.swing.JLabel textoConfirmaFecha1;
     private javax.swing.JLabel textoConfirmaFecha2;
-    private javax.swing.JLabel tituloCardapios;
+    private javax.swing.JLabel tituloCPF;
+    private javax.swing.JLabel tituloCategorias;
+    private javax.swing.JLabel tituloFechaConta;
     // End of variables declaration//GEN-END:variables
 }
