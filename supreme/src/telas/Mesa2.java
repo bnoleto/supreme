@@ -53,19 +53,19 @@ public class Mesa2 extends javax.swing.JFrame {
         headerCPF1 = new javax.swing.JLabel();
         footerCPF1 = new javax.swing.JLabel();
         getCPFText = new javax.swing.JLabel();
-        cpf8 = new javax.swing.JButton();
         cpfFinish = new javax.swing.JButton();
         cpfErase = new javax.swing.JButton();
-        cpf9 = new javax.swing.JButton();
-        cpf7 = new javax.swing.JButton();
-        cpf4 = new javax.swing.JButton();
-        cpf5 = new javax.swing.JButton();
-        cpf6 = new javax.swing.JButton();
+        showCPF = new javax.swing.JTextField();
+        cpf0 = new javax.swing.JButton();
         cpf1 = new javax.swing.JButton();
         cpf2 = new javax.swing.JButton();
         cpf3 = new javax.swing.JButton();
-        cpf0 = new javax.swing.JButton();
-        showCPF = new javax.swing.JTextField();
+        cpf4 = new javax.swing.JButton();
+        cpf5 = new javax.swing.JButton();
+        cpf7 = new javax.swing.JButton();
+        cpf8 = new javax.swing.JButton();
+        cpf9 = new javax.swing.JButton();
+        cpf6 = new javax.swing.JButton();
         invalidCPF = new javax.swing.JPanel();
         headerCPF2 = new javax.swing.JLabel();
         footerCPF2 = new javax.swing.JLabel();
@@ -79,9 +79,13 @@ public class Mesa2 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("S.U.P.R.E.M.E. V1.0");
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        setForeground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(720, 480));
-        setPreferredSize(new java.awt.Dimension(720, 480));
+        setName(""); // NOI18N
         setSize(new java.awt.Dimension(720, 480));
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -125,7 +129,7 @@ public class Mesa2 extends javax.swing.JFrame {
         novoPedido.setBackground(new java.awt.Color(255, 255, 255));
         novoPedido.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         novoPedido.setText("Novo Pedido");
-        novoPedido.setToolTipText("Clique aqui para fazer um novo pedido!");
+        novoPedido.setToolTipText("");
         novoPedido.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         novoPedido.setMinimumSize(new java.awt.Dimension(250, 100));
         novoPedido.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -138,7 +142,7 @@ public class Mesa2 extends javax.swing.JFrame {
         fecharConta.setBackground(new java.awt.Color(255, 255, 255));
         fecharConta.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         fecharConta.setText("Fechar Conta");
-        fecharConta.setToolTipText("Clique aqui para fazer um novo pedido!");
+        fecharConta.setToolTipText("");
         fecharConta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         fecharConta.setMinimumSize(new java.awt.Dimension(250, 100));
         fecharConta.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -159,16 +163,16 @@ public class Mesa2 extends javax.swing.JFrame {
             .addComponent(headerHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footerHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(60, 60, 60)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(novoPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(headerOptions, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(105, 105, 105)
-                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(76, 76, 76)
+                .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(headerResumo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
-                .addGap(43, 43, 43))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,11 +184,11 @@ public class Mesa2 extends javax.swing.JFrame {
                     .addComponent(headerOptions))
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(46, 46, 46)
                         .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(49, 49, 49)
+                        .addGap(53, 53, 53)
                         .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(71, 71, 71))
+                        .addGap(61, 61, 61))
                     .addGroup(HomeLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)))
@@ -271,22 +275,22 @@ public class Mesa2 extends javax.swing.JFrame {
                 .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(600, 600, 600))
             .addGroup(CategoriesLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(66, 66, 66)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(81, 81, 81))
+                .addGap(75, 75, 75)
+                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75))
             .addComponent(headerCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         CategoriesLayout.setVerticalGroup(
             CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CategoriesLayout.createSequentialGroup()
                 .addComponent(headerCategories)
-                .addGap(80, 80, 80)
+                .addGap(64, 64, 64)
                 .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -294,7 +298,7 @@ public class Mesa2 extends javax.swing.JFrame {
                 .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(40, 40, 40)
+                .addGap(56, 56, 56)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(footerCategories)
@@ -490,19 +494,6 @@ public class Mesa2 extends javax.swing.JFrame {
         getCPFText.setText("Informe seu CPF (apenas números):");
         getCPFText.setMaximumSize(new java.awt.Dimension(48000, 35000));
 
-        cpf8.setBackground(new java.awt.Color(255, 255, 255));
-        cpf8.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf8.setForeground(new java.awt.Color(1, 1, 1));
-        cpf8.setText("8");
-        cpf8.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf8.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf8.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf8ActionPerformed(evt);
-            }
-        });
-
         cpfFinish.setBackground(new java.awt.Color(255, 255, 255));
         cpfFinish.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         cpfFinish.setForeground(new java.awt.Color(1, 1, 1));
@@ -529,127 +520,140 @@ public class Mesa2 extends javax.swing.JFrame {
             }
         });
 
-        cpf9.setBackground(new java.awt.Color(255, 255, 255));
-        cpf9.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf9.setForeground(new java.awt.Color(1, 1, 1));
-        cpf9.setText("9");
-        cpf9.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf9.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf9.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf9ActionPerformed(evt);
-            }
-        });
-
-        cpf7.setBackground(new java.awt.Color(255, 255, 255));
-        cpf7.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf7.setForeground(new java.awt.Color(1, 1, 1));
-        cpf7.setText("7");
-        cpf7.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf7.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf7.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf7ActionPerformed(evt);
-            }
-        });
-
-        cpf4.setBackground(new java.awt.Color(255, 255, 255));
-        cpf4.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf4.setForeground(new java.awt.Color(1, 1, 1));
-        cpf4.setText("4");
-        cpf4.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf4.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf4.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf4ActionPerformed(evt);
-            }
-        });
-
-        cpf5.setBackground(new java.awt.Color(255, 255, 255));
-        cpf5.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf5.setForeground(new java.awt.Color(1, 1, 1));
-        cpf5.setText("5");
-        cpf5.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf5.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf5.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf5ActionPerformed(evt);
-            }
-        });
-
-        cpf6.setBackground(new java.awt.Color(255, 255, 255));
-        cpf6.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf6.setForeground(new java.awt.Color(1, 1, 1));
-        cpf6.setText("6");
-        cpf6.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf6.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf6.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf6ActionPerformed(evt);
-            }
-        });
-
-        cpf1.setBackground(new java.awt.Color(255, 255, 255));
-        cpf1.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf1.setForeground(new java.awt.Color(1, 1, 1));
-        cpf1.setText("1");
-        cpf1.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf1.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf1.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf1ActionPerformed(evt);
-            }
-        });
-
-        cpf2.setBackground(new java.awt.Color(255, 255, 255));
-        cpf2.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf2.setForeground(new java.awt.Color(1, 1, 1));
-        cpf2.setText("2");
-        cpf2.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf2.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf2.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf2ActionPerformed(evt);
-            }
-        });
-
-        cpf3.setBackground(new java.awt.Color(255, 255, 255));
-        cpf3.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf3.setForeground(new java.awt.Color(1, 1, 1));
-        cpf3.setText("3");
-        cpf3.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf3.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf3.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf3ActionPerformed(evt);
-            }
-        });
-
-        cpf0.setBackground(new java.awt.Color(255, 255, 255));
-        cpf0.setFont(new java.awt.Font("Arial", 0, 48)); // NOI18N
-        cpf0.setForeground(new java.awt.Color(1, 1, 1));
-        cpf0.setText("0");
-        cpf0.setMaximumSize(new java.awt.Dimension(70000, 70000));
-        cpf0.setMinimumSize(new java.awt.Dimension(65, 60));
-        cpf0.setPreferredSize(new java.awt.Dimension(65, 60));
-        cpf0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpf0ActionPerformed(evt);
-            }
-        });
-
         showCPF.setEditable(false);
         showCPF.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         showCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         showCPF.setPreferredSize(new java.awt.Dimension(400, 50));
+
+        cpf0.setBackground(new java.awt.Color(255, 255, 255));
+        cpf0.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf0.setText("0");
+        cpf0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf0.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf0.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf0.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf1.setBackground(new java.awt.Color(255, 255, 255));
+        cpf1.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf1.setText("1");
+        cpf1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf1.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf1.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf1.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf2.setBackground(new java.awt.Color(255, 255, 255));
+        cpf2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf2.setText("2");
+        cpf2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf2.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf2.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf2.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf3.setBackground(new java.awt.Color(255, 255, 255));
+        cpf3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf3.setText("3");
+        cpf3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf3.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf3.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf3.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf4.setBackground(new java.awt.Color(255, 255, 255));
+        cpf4.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf4.setText("4");
+        cpf4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf4.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf4.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf4.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf5.setBackground(new java.awt.Color(255, 255, 255));
+        cpf5.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf5.setText("5");
+        cpf5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf5.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf5.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf5.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf7.setBackground(new java.awt.Color(255, 255, 255));
+        cpf7.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf7.setText("7");
+        cpf7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf7.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf7.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf7.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf8.setBackground(new java.awt.Color(255, 255, 255));
+        cpf8.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf8.setText("8");
+        cpf8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf8.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf8.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf8.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf9.setBackground(new java.awt.Color(255, 255, 255));
+        cpf9.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf9.setText("9");
+        cpf9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf9.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf9.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf9.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf6.setBackground(new java.awt.Color(255, 255, 255));
+        cpf6.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf6.setText("6");
+        cpf6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf6.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf6.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf6.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
 
         javax.swing.GroupLayout getCPFLayout = new javax.swing.GroupLayout(getCPF);
         getCPF.setLayout(getCPFLayout);
@@ -662,73 +666,69 @@ public class Mesa2 extends javax.swing.JFrame {
                 .addGap(156, 156, 156)
                 .addComponent(showCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(164, 164, 164))
-            .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(getCPFLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(cpfErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(86, 86, 86)
-                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
-                            .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(getCPFLayout.createSequentialGroup()
-                                    .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(83, 83, 83))
-                                .addGroup(getCPFLayout.createSequentialGroup()
-                                    .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
-                            .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
-                            .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGap(93, 93, 93)
-                    .addComponent(cpfFinish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(getCPFLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
+                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cpf7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(getCPFLayout.createSequentialGroup()
+                        .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(getCPFLayout.createSequentialGroup()
+                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(99, 99, 99)
+                .addComponent(cpfFinish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         getCPFLayout.setVerticalGroup(
             getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(getCPFLayout.createSequentialGroup()
                 .addComponent(headerCPF1)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(getCPFText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(showCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(306, 306, 306)
-                .addComponent(footerCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(getCPFLayout.createSequentialGroup()
-                    .addGap(168, 168, 168)
-                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(getCPFLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGap(11, 11, 11)
-                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cpfFinish, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpfErase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cpf0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGap(39, 39, 39)))
+                            .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
+                    .addGroup(getCPFLayout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(footerCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         CPF.add(getCPF, "getCPF");
@@ -846,13 +846,13 @@ public class Mesa2 extends javax.swing.JFrame {
             FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FinalMessageLayout.createSequentialGroup()
                 .addComponent(headerFinalMessage)
-                .addGap(120, 120, 120)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addGap(94, 94, 94)
                 .addComponent(footerFinalMessage))
         );
 
@@ -862,11 +862,11 @@ public class Mesa2 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -878,18 +878,9 @@ public class Mesa2 extends javax.swing.JFrame {
         card.show(panelPrincipal, name);
     }
     
-    private void tecladoCPF(String num){
-        System.out.println("LOL");
-    }
-    
     private void novoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoPedidoActionPerformed
         showCard("Categories");
     }//GEN-LAST:event_novoPedidoActionPerformed
-
-    private void cpf8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf8ActionPerformed
-        cpf = showCPF.getText()+"8";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf8ActionPerformed
 
     private void cpfFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfFinishActionPerformed
         if(cpf == null || cpf.length()>11 || cpf.length()<11){
@@ -900,55 +891,26 @@ public class Mesa2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cpfFinishActionPerformed
 
+    //Método que age como ActionListener de TODOS os botões do teclado do CPF
+    //CUIDADO PARA NÃO CRIAR ACTION LISTENERS SEPARADOS!
+    private void tecladoCPF(java.awt.event.ActionEvent evt) {                                         
+        if(evt.getSource() == cpf0){    cpf = showCPF.getText()+"0";    }
+        if(evt.getSource() == cpf1){    cpf = showCPF.getText()+"1";    }
+        if(evt.getSource() == cpf2){    cpf = showCPF.getText()+"2";    }
+        if(evt.getSource() == cpf3){    cpf = showCPF.getText()+"3";    }
+        if(evt.getSource() == cpf4){    cpf = showCPF.getText()+"4";    }
+        if(evt.getSource() == cpf5){    cpf = showCPF.getText()+"5";    }
+        if(evt.getSource() == cpf6){    cpf = showCPF.getText()+"6";    }
+        if(evt.getSource() == cpf7){    cpf = showCPF.getText()+"7";    }
+        if(evt.getSource() == cpf8){    cpf = showCPF.getText()+"8";    }
+        if(evt.getSource() == cpf9){    cpf = showCPF.getText()+"9";    }
+        showCPF.setText(cpf);
+    }   
+    
     private void cpfEraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfEraseActionPerformed
         cpf = null;
         showCPF.setText(cpf);
     }//GEN-LAST:event_cpfEraseActionPerformed
-
-    private void cpf9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf9ActionPerformed
-        cpf = showCPF.getText()+"9";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf9ActionPerformed
-
-    private void cpf7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf7ActionPerformed
-        cpf = showCPF.getText()+"7";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf7ActionPerformed
-
-    private void cpf4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf4ActionPerformed
-        cpf = showCPF.getText()+"4";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf4ActionPerformed
-
-    private void cpf5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf5ActionPerformed
-        cpf = showCPF.getText()+"5";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf5ActionPerformed
-
-    private void cpf6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf6ActionPerformed
-        cpf = showCPF.getText()+"6";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf6ActionPerformed
-
-    private void cpf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf1ActionPerformed
-        cpf = showCPF.getText()+"1";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf1ActionPerformed
-
-    private void cpf2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf2ActionPerformed
-        cpf = showCPF.getText()+"2";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf2ActionPerformed
-
-    private void cpf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf3ActionPerformed
-        cpf = showCPF.getText()+"3";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf3ActionPerformed
-
-    private void cpf0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpf0ActionPerformed
-        cpf = showCPF.getText()+"0";
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpf0ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         showCard("Home");
