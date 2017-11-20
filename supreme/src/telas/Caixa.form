@@ -161,8 +161,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" pref="347" max="32767" attributes="0"/>
-                      <Component id="jLabel5" max="32767" attributes="0"/>
+                      <Component id="jLabel5" pref="347" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -209,8 +209,8 @@
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="finaliza" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                       <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="fechaConta" pref="46" max="32767" attributes="0"/>

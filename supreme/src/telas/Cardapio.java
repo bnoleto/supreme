@@ -427,7 +427,6 @@ public class Cardapio extends javax.swing.JFrame {
         //Printa o resumo modificado na tela inicial
 //        Mesa.resumo.setText(Mesa.conta.getTxtconta());
 //        Mesa.resumo.setText(Mesa.resumo.getText()+"\nValor Total: R$"+Mesa.conta.getTotalConta());
-        Mesa.Home.setVisible(true);
         dispose();
     }//GEN-LAST:event_btConfirmaPedidoActionPerformed
 
