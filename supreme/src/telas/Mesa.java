@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -18,15 +19,20 @@ public class Mesa extends javax.swing.JFrame {
     private double valorConta = 0.0;
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
+    private DefaultComboBoxModel defaultComboBox;
     
     public Mesa() {
         initComponents();
         //Loga no banco
         //troque ou crie este usuário para testar//
-        conn.conectar("bnoleto", "041995".toCharArray()); 
+        conn.conectar("test", "12345".toCharArray());
+        conn.comando_sql("USE bdsupreme2;");
+        //conn.conectar("bnoleto", "041995".toCharArray()); 
+        fillComboSelectMesa();
         createConta();
         dataHoraAbertura = getData()+" "+getHora();
         getContaInfo();
+        fillComboSelectMesa();
     }
     
     @SuppressWarnings("unchecked")
@@ -34,6 +40,12 @@ public class Mesa extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
+        SelectMesa1 = new javax.swing.JPanel();
+        headerHome2 = new javax.swing.JLabel();
+        footerHome2 = new javax.swing.JLabel();
+        comboBoxSelectMesa = new javax.swing.JComboBox<>();
+        textoSelectMesa = new javax.swing.JLabel();
+        selectMesaButton = new javax.swing.JButton();
         Home = new javax.swing.JPanel();
         headerHome = new javax.swing.JLabel();
         footerHome = new javax.swing.JLabel();
@@ -137,6 +149,77 @@ public class Mesa extends javax.swing.JFrame {
         panelPrincipal.setMinimumSize(new java.awt.Dimension(720, 480));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(720, 480));
         panelPrincipal.setLayout(new java.awt.CardLayout());
+
+        SelectMesa1.setBackground(new java.awt.Color(255, 255, 255));
+        SelectMesa1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        SelectMesa1.setInheritsPopupMenu(true);
+        SelectMesa1.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerHome2.setBackground(new java.awt.Color(0, 0, 127));
+        headerHome2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerHome2.setForeground(new java.awt.Color(255, 255, 255));
+        headerHome2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerHome2.setText("Selecione a sua mesa");
+        headerHome2.setToolTipText("");
+        headerHome2.setOpaque(true);
+
+        footerHome2.setBackground(new java.awt.Color(0, 0, 127));
+        footerHome2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerHome2.setForeground(new java.awt.Color(255, 255, 255));
+        footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerHome2.setText(" ");
+        footerHome2.setToolTipText("");
+        footerHome2.setOpaque(true);
+
+        comboBoxSelectMesa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        textoSelectMesa.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        textoSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoSelectMesa.setText("Informe o número desta mesa:");
+
+        selectMesaButton.setBackground(new java.awt.Color(0, 0, 127));
+        selectMesaButton.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        selectMesaButton.setForeground(new java.awt.Color(255, 255, 255));
+        selectMesaButton.setText("Prosseguir");
+        selectMesaButton.setMinimumSize(new java.awt.Dimension(170, 80));
+        selectMesaButton.setPreferredSize(new java.awt.Dimension(170, 80));
+        selectMesaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectMesaButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SelectMesa1Layout = new javax.swing.GroupLayout(SelectMesa1);
+        SelectMesa1.setLayout(SelectMesa1Layout);
+        SelectMesa1Layout.setHorizontalGroup(
+            SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(headerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+            .addComponent(footerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SelectMesa1Layout.createSequentialGroup()
+                .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(SelectMesa1Layout.createSequentialGroup()
+                .addGap(259, 259, 259)
+                .addGroup(SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectMesaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        SelectMesa1Layout.setVerticalGroup(
+            SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SelectMesa1Layout.createSequentialGroup()
+                .addComponent(headerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(comboBoxSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(selectMesaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(footerHome2))
+        );
+
+        panelPrincipal.add(SelectMesa1, "SelectMesa");
 
         Home.setBackground(new java.awt.Color(255, 255, 255));
         Home.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -999,59 +1082,58 @@ public class Mesa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(SelectMesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(98, 98, 98)
-                .addGroup(SelectMesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa22, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa23, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa19, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa21, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa16, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa17, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SelectMesaLayout.createSequentialGroup()
-                        .addComponent(mesa13, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesa15, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(SelectMesaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(SelectMesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(98, 98, 98)
+                        .addGroup(SelectMesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa22, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa23, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa19, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa21, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa16, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa17, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SelectMesaLayout.createSequentialGroup()
+                                .addComponent(mesa13, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa14, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mesa15, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SelectMesaLayout.setVerticalGroup(
@@ -1098,7 +1180,7 @@ public class Mesa extends javax.swing.JFrame {
 
         mesa1.getAccessibleContext().setAccessibleName("mesa01");
 
-        panelPrincipal.add(SelectMesa, "Home");
+        panelPrincipal.add(SelectMesa, "card7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1115,6 +1197,7 @@ public class Mesa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
+    //Função para troca de cards (name = nome do card)
     private void showCard(String name){
         CardLayout card = (CardLayout)panelPrincipal.getLayout();
         card.show(panelPrincipal, name);
@@ -1188,8 +1271,13 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_cpfTryAgainActionPerformed
 
     private void mesa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesa2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_mesa2ActionPerformed
+
+    private void selectMesaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMesaButtonActionPerformed
+        numMesa = Integer.parseInt(comboBoxSelectMesa.getSelectedItem().toString());
+        showCard("Home");
+    }//GEN-LAST:event_selectMesaButtonActionPerformed
     
     private String getData(){
         Date d = Calendar.getInstance().getTime();
@@ -1206,9 +1294,7 @@ public class Mesa extends javax.swing.JFrame {
     //-------------BEGIN SQL--------------//
     
         //Adiciona uma nova conta ao banco de dados.
-    private void createConta(){ 
-        //Comandos SQL para pegar as contas 
-        conn.comando_sql("USE bdsupreme2;");	
+    private void createConta(){ 	
         //Cria uma nova conta na tabela t_contas
         conn.comando_sql("INSERT INTO t_contas(conta_valor, conta_mesa, conta_status, conta_data, conta_hora)" 
                        + "VALUES ("+valorConta+","+numMesa+",'ABERTO','"+getData()+"','"+getHora()+"');");
@@ -1261,6 +1347,19 @@ public class Mesa extends javax.swing.JFrame {
         showResumo.setText(resumo);
     }
     
+    //Função que preenche a comboBox do SelectMesa
+    private void fillComboSelectMesa(){
+        ArrayList<ArrayList<String>> numList;
+        numList = conn.retornar_query("SELECT mesa_numero FROM t_mesas WHERE mesa_status = 0");
+        ArrayList<String> aux = new ArrayList();
+        for(ArrayList<String> s: numList){
+            aux.add(s.get(0));
+        }
+        
+        defaultComboBox = new DefaultComboBoxModel(aux.toArray());
+        comboBoxSelectMesa.setModel(defaultComboBox);
+    }
+    
     //-------------END SQL--------------//
     
     /**
@@ -1310,8 +1409,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel FinalMessage;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel SelectMesa;
+    private javax.swing.JPanel SelectMesa1;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cancelClose;
+    private javax.swing.JComboBox<String> comboBoxSelectMesa;
     private javax.swing.JButton confirmClose;
     private javax.swing.JButton cpf0;
     private javax.swing.JButton cpf1;
@@ -1335,6 +1436,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel footerFinalMessage;
     private javax.swing.JLabel footerHome;
     private javax.swing.JLabel footerHome1;
+    private javax.swing.JLabel footerHome2;
     private javax.swing.JPanel getCPF;
     private javax.swing.JLabel getCPFText;
     private javax.swing.JLabel headerCPF;
@@ -1345,6 +1447,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerFinalMessage;
     private javax.swing.JLabel headerHome;
     private javax.swing.JLabel headerHome1;
+    private javax.swing.JLabel headerHome2;
     private javax.swing.JLabel headerOptions;
     private javax.swing.JLabel headerResumo;
     private javax.swing.JPanel invalidCPF;
@@ -1383,9 +1486,11 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel questCPF;
     private javax.swing.JLabel questCPFText;
+    private javax.swing.JButton selectMesaButton;
     private javax.swing.JTextField showCPF;
     private javax.swing.JTextArea showResumo;
     private javax.swing.JLabel textoConfirmaFecha;
+    private javax.swing.JLabel textoSelectMesa;
     private javax.swing.JButton yesCPF;
     // End of variables declaration//GEN-END:variables
 }
