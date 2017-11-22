@@ -40,7 +40,7 @@ public class Mesa extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        SelectMesa1 = new javax.swing.JPanel();
+        SelectMesaProvavel = new javax.swing.JPanel();
         headerHome2 = new javax.swing.JLabel();
         footerHome2 = new javax.swing.JLabel();
         comboBoxSelectMesa = new javax.swing.JComboBox<>();
@@ -150,10 +150,10 @@ public class Mesa extends javax.swing.JFrame {
         panelPrincipal.setPreferredSize(new java.awt.Dimension(720, 480));
         panelPrincipal.setLayout(new java.awt.CardLayout());
 
-        SelectMesa1.setBackground(new java.awt.Color(255, 255, 255));
-        SelectMesa1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        SelectMesa1.setInheritsPopupMenu(true);
-        SelectMesa1.setMinimumSize(new java.awt.Dimension(720, 480));
+        SelectMesaProvavel.setBackground(new java.awt.Color(255, 255, 255));
+        SelectMesaProvavel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        SelectMesaProvavel.setInheritsPopupMenu(true);
+        SelectMesaProvavel.setMinimumSize(new java.awt.Dimension(720, 480));
 
         headerHome2.setBackground(new java.awt.Color(0, 0, 127));
         headerHome2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
@@ -189,25 +189,25 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout SelectMesa1Layout = new javax.swing.GroupLayout(SelectMesa1);
-        SelectMesa1.setLayout(SelectMesa1Layout);
-        SelectMesa1Layout.setHorizontalGroup(
-            SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout SelectMesaProvavelLayout = new javax.swing.GroupLayout(SelectMesaProvavel);
+        SelectMesaProvavel.setLayout(SelectMesaProvavelLayout);
+        SelectMesaProvavelLayout.setHorizontalGroup(
+            SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
             .addComponent(footerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SelectMesa1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SelectMesaProvavelLayout.createSequentialGroup()
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(SelectMesa1Layout.createSequentialGroup()
+            .addGroup(SelectMesaProvavelLayout.createSequentialGroup()
                 .addGap(259, 259, 259)
-                .addGroup(SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(selectMesaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        SelectMesa1Layout.setVerticalGroup(
-            SelectMesa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SelectMesa1Layout.createSequentialGroup()
+        SelectMesaProvavelLayout.setVerticalGroup(
+            SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SelectMesaProvavelLayout.createSequentialGroup()
                 .addComponent(headerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88)
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +219,7 @@ public class Mesa extends javax.swing.JFrame {
                 .addComponent(footerHome2))
         );
 
-        panelPrincipal.add(SelectMesa1, "SelectMesa");
+        panelPrincipal.add(SelectMesaProvavel, "SelectMesa");
 
         Home.setBackground(new java.awt.Color(255, 255, 255));
         Home.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -1275,7 +1275,12 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_mesa2ActionPerformed
 
     private void selectMesaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMesaButtonActionPerformed
+        //Recebe o número selecionado na comboBox
         numMesa = Integer.parseInt(comboBoxSelectMesa.getSelectedItem().toString());
+        //Faz o update do status da mesa no banco
+        conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_numero = "+numMesa+" ;");
+        //Altera o header da tela Home adicionando o número da mesa
+        headerHome.setText("Mesa: "+numMesa);
         showCard("Home");
     }//GEN-LAST:event_selectMesaButtonActionPerformed
     
@@ -1409,7 +1414,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel FinalMessage;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel SelectMesa;
-    private javax.swing.JPanel SelectMesa1;
+    private javax.swing.JPanel SelectMesaProvavel;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cancelClose;
     private javax.swing.JComboBox<String> comboBoxSelectMesa;
