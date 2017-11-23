@@ -170,7 +170,6 @@ public class Mesa extends javax.swing.JFrame {
         footerHome2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         footerHome2.setForeground(new java.awt.Color(255, 255, 255));
         footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerHome2.setText(" SUPREME v0.1");
         footerHome2.setToolTipText("");
         footerHome2.setOpaque(true);
 

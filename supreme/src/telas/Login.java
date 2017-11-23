@@ -72,7 +72,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         panel_principal = new javax.swing.JPanel();
-        campos_login = new javax.swing.JPanel();
         campo_usuario = new javax.swing.JTextField();
         campo_senha = new javax.swing.JPasswordField();
         label_usuario = new javax.swing.JLabel();
@@ -81,6 +80,7 @@ public class Login extends javax.swing.JFrame {
         titulo = new javax.swing.JLabel();
         bt_login = new javax.swing.JButton();
         bt_cancelar = new javax.swing.JButton();
+        titulo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Acesso Restrito");
@@ -91,9 +91,7 @@ public class Login extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(311, 235));
         setType(java.awt.Window.Type.POPUP);
 
-        panel_principal.setBackground(new java.awt.Color(0, 0, 126));
-
-        campos_login.setBackground(new java.awt.Color(244, 244, 255));
+        panel_principal.setBackground(new java.awt.Color(244, 244, 255));
 
         campo_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -107,57 +105,28 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        label_usuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         label_usuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label_usuario.setText("Usuário");
 
+        label_senha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         label_senha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label_senha.setText("Senha");
 
         caixa_status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         caixa_status.setText(" ");
 
-        javax.swing.GroupLayout campos_loginLayout = new javax.swing.GroupLayout(campos_login);
-        campos_login.setLayout(campos_loginLayout);
-        campos_loginLayout.setHorizontalGroup(
-            campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(campos_loginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, campos_loginLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_usuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_senha, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(caixa_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        campos_loginLayout.setVerticalGroup(
-            campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, campos_loginLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_usuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(campos_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_senha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(caixa_status)
-                .addGap(5, 5, 5))
-        );
-
+        titulo.setBackground(new java.awt.Color(0, 0, 126));
         titulo.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Autenticação de Usuário");
+        titulo.setOpaque(true);
         titulo.setPreferredSize(new java.awt.Dimension(141, 28));
 
-        bt_login.setBackground(new java.awt.Color(244, 244, 255));
+        bt_login.setBackground(new java.awt.Color(0, 0, 76));
+        bt_login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bt_login.setForeground(new java.awt.Color(244, 244, 255));
         bt_login.setText("Realizar Login");
         bt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +134,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        bt_cancelar.setBackground(new java.awt.Color(244, 244, 255));
+        bt_cancelar.setBackground(new java.awt.Color(0, 0, 76));
+        bt_cancelar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bt_cancelar.setForeground(new java.awt.Color(244, 244, 255));
         bt_cancelar.setText("Cancelar");
         bt_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,35 +144,57 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        titulo1.setBackground(new java.awt.Color(0, 0, 126));
+        titulo1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        titulo1.setForeground(new java.awt.Color(255, 255, 255));
+        titulo1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        titulo1.setOpaque(true);
+        titulo1.setPreferredSize(new java.awt.Dimension(141, 28));
+
         javax.swing.GroupLayout panel_principalLayout = new javax.swing.GroupLayout(panel_principal);
         panel_principal.setLayout(panel_principalLayout);
         panel_principalLayout.setHorizontalGroup(
             panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(campos_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+            .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel_principalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bt_cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_login)
+                .addContainerGap())
+            .addComponent(titulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel_principalLayout.createSequentialGroup()
+                .addGap(0, 85, Short.MAX_VALUE)
                 .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(85, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                        .addComponent(bt_cancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_login)
-                        .addContainerGap())))
+                    .addComponent(label_usuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label_senha, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 85, Short.MAX_VALUE))
+            .addComponent(caixa_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel_principalLayout.setVerticalGroup(
             panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_principalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(campos_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_usuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_senha))
+                .addGap(6, 6, 6)
+                .addComponent(caixa_status)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panel_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_cancelar)
                     .addComponent(bt_login))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,10 +275,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel caixa_status;
     private javax.swing.JPasswordField campo_senha;
     private javax.swing.JTextField campo_usuario;
-    private javax.swing.JPanel campos_login;
     private javax.swing.JLabel label_senha;
     private javax.swing.JLabel label_usuario;
     private javax.swing.JPanel panel_principal;
     private javax.swing.JLabel titulo;
+    private javax.swing.JLabel titulo1;
     // End of variables declaration//GEN-END:variables
 }
