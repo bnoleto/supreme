@@ -26,13 +26,12 @@ public class Caixa extends javax.swing.JFrame{
     
     public Caixa() {
         initComponents();
-        fillTable();
         
     }
     
     public void initConexao(Conexao conex){
         this.conn = conex;
-        conn.comando_sql("USE bdsupreme2;");
+        fillTable();
     }
 
     //Função que preenche a tabela da tela

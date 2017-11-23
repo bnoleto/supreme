@@ -20,17 +20,16 @@ public class Cozinha extends javax.swing.JFrame {
     
     public Cozinha() {
         initComponents();
-        fillTable();
+        
     }
     
     public void initConexao(Conexao conex){
         this.conn = conex;
-        conn.comando_sql("USE bdsupreme2;");
+        fillTable();
     }
     
     public void fillTable(){
-        conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
-        conn.comando_sql("USE bdsupreme2;");
+
         //Armazena os nomes dos itens
         ArrayList<ArrayList<String>> nomeItens = new ArrayList();
         

@@ -27,14 +27,16 @@ public class Mesa extends javax.swing.JFrame {
     
     public void initConexao(Conexao conex){
         this.conn = conex;
-        conn.comando_sql("USE bdsupreme2;");
-        //conn.conectar("bnoleto", "041995".toCharArray()); 
-        conn.conectar("test", "12345".toCharArray()); 
         fillComboSelectMesa();
         createConta();
         dataHoraAbertura = getData()+" "+getHora();
         getContaInfo();
         fillComboSelectMesa();
+    }
+    
+    // Irá liberar a mesa no banco de dados
+    public void liberarMesa(){
+        conn.comando_sql("UPDATE t_mesas SET mesa_status = 0 WHERE mesa_codigo = "+numMesa+";");
     }
     
     @SuppressWarnings("unchecked")
@@ -153,7 +155,7 @@ public class Mesa extends javax.swing.JFrame {
         desc_item = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("S.U.P.R.E.M.E. V1.0");
+        setTitle("SUPREME v1.0");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -161,6 +163,11 @@ public class Mesa extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName(""); // NOI18N
         setSize(new java.awt.Dimension(720, 480));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -1575,6 +1582,11 @@ public class Mesa extends javax.swing.JFrame {
     private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backButton2ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        liberarMesa();
+    }//GEN-LAST:event_formWindowClosing
     
     private String getData(){
         Date d = Calendar.getInstance().getTime();

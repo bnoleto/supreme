@@ -56,7 +56,7 @@ public class Login extends javax.swing.JFrame {
                     telaCaixa.initConexao(conn);
                     telaCaixa.setVisible(true);
                 }
-                else if(campo_usuario.getText().compareTo("COZINHA") == 0){
+                else if(categoria_usuario.compareTo("COZINHA") == 0){
                     Cozinha telaCozinha= new Cozinha();
                     telaCozinha.initConexao(conn);
                     telaCozinha.setVisible(true);
