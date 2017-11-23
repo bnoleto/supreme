@@ -43,6 +43,17 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
         }
     }
+    
+    public void verificarUsuario(){
+        novaConexao(campo_usuario, campo_senha);
+            if(conn.conectado){
+                if(campo_usuario.getText().compareTo("mesa") == 0){
+                    Mesa telaMesa= new Mesa();
+                    telaMesa.initConexao(conn);
+                    telaMesa.setVisible(true);
+                }
+            }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,7 +159,6 @@ public class Login extends javax.swing.JFrame {
 
         bt_login.setBackground(new java.awt.Color(244, 244, 255));
         bt_login.setText("Realizar Login");
-        bt_login.setEnabled(false);
         bt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_loginActionPerformed(evt);
@@ -209,25 +219,23 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
-        novaConexao(campo_usuario, campo_senha);
+        verificarUsuario();
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void campo_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_usuarioKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            novaConexao(campo_usuario, campo_senha);
+            verificarUsuario();
         }
     }//GEN-LAST:event_campo_usuarioKeyPressed
 
     private void campo_senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_senhaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            novaConexao(campo_usuario, campo_senha);
+            verificarUsuario();
         }
     }//GEN-LAST:event_campo_senhaKeyPressed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
         this.dispose();
-        TelaInicial tela_inicio = new TelaInicial();
-        tela_inicio.setVisible(true);
     }//GEN-LAST:event_bt_cancelarActionPerformed
 
     /**
@@ -263,8 +271,6 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
-                
-                
             }
             
         });

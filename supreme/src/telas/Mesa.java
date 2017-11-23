@@ -1,5 +1,6 @@
 package telas;
 
+import codigo.Conexao;
 import java.awt.CardLayout;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -23,9 +24,10 @@ public class Mesa extends javax.swing.JFrame {
     
     public Mesa() {
         initComponents();
-        //Loga no banco
-        //troque ou crie este usuário para testar//
-        conn.conectar("test", "12345".toCharArray());
+    }
+    
+    public void initConexao(Conexao conex){
+        this.conn = conex;
         conn.comando_sql("USE bdsupreme2;");
         //conn.conectar("bnoleto", "041995".toCharArray()); 
         fillComboSelectMesa();
@@ -175,7 +177,7 @@ public class Mesa extends javax.swing.JFrame {
 
         textoSelectMesa.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         textoSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoSelectMesa.setText("Informe o número desta mesa:");
+        textoSelectMesa.setText("Sr. funcionário, informe o número desta mesa:");
 
         selectMesaButton.setBackground(new java.awt.Color(0, 0, 127));
         selectMesaButton.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
