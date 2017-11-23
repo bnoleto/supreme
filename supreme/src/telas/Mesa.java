@@ -2,20 +2,18 @@ package telas;
 
 import codigo.Conexao;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.text.*;
+import javax.swing.JButton;
 
-/**
- *
- * @author Rafael
- */
 public class Mesa extends javax.swing.JFrame {
-
+    // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
     public static int numMesa, codConta;
     private double valorConta = 0.0;
@@ -59,14 +57,6 @@ public class Mesa extends javax.swing.JFrame {
         novoPedido = new javax.swing.JButton();
         fecharConta = new javax.swing.JButton();
         headerOptions = new javax.swing.JLabel();
-        Categories = new javax.swing.JPanel();
-        headerCategories = new javax.swing.JLabel();
-        footerCategories = new javax.swing.JLabel();
-        Cat1 = new javax.swing.JButton();
-        Cat3 = new javax.swing.JButton();
-        Cat4 = new javax.swing.JButton();
-        Cat2 = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
         Close = new javax.swing.JPanel();
         headerClose = new javax.swing.JLabel();
         footerClose = new javax.swing.JLabel();
@@ -136,11 +126,36 @@ public class Mesa extends javax.swing.JFrame {
         mesa23 = new javax.swing.JButton();
         mesa24 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        Categories = new javax.swing.JPanel();
+        menuCardapio = new javax.swing.JPanel();
+        headerCategories = new javax.swing.JLabel();
+        footerCategories = new javax.swing.JLabel();
+        Cat1 = new javax.swing.JButton();
+        Cat3 = new javax.swing.JButton();
+        Cat4 = new javax.swing.JButton();
+        Cat2 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        listaCardapio = new javax.swing.JPanel();
+        headerCategories1 = new javax.swing.JLabel();
+        footerCategories1 = new javax.swing.JLabel();
+        backButton1 = new javax.swing.JButton();
+        backButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lista_itens = new javax.swing.JPanel();
+        item = new javax.swing.JPanel();
+        check_item = new javax.swing.JToggleButton();
+        preco_item = new javax.swing.JLabel();
+        qtd_item = new javax.swing.JSpinner();
+        nome_item = new javax.swing.JLabel();
+        desc_item = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("S.U.P.R.E.M.E. V1.0");
         setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         setForeground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(720, 480));
@@ -175,6 +190,11 @@ public class Mesa extends javax.swing.JFrame {
         footerHome2.setOpaque(true);
 
         comboBoxSelectMesa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        comboBoxSelectMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSelectMesaActionPerformed(evt);
+            }
+        });
 
         textoSelectMesa.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         textoSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -184,6 +204,7 @@ public class Mesa extends javax.swing.JFrame {
         selectMesaButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         selectMesaButton.setForeground(new java.awt.Color(244, 244, 255));
         selectMesaButton.setText("Prosseguir");
+        selectMesaButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectMesaButton.setMinimumSize(new java.awt.Dimension(170, 80));
         selectMesaButton.setPreferredSize(new java.awt.Dimension(170, 80));
         selectMesaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +246,7 @@ public class Mesa extends javax.swing.JFrame {
         panelPrincipal.add(SelectMesaProvavel, "SelectMesa");
 
         Home.setBackground(new java.awt.Color(244, 244, 255));
+        Home.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Home.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         Home.setInheritsPopupMenu(true);
         Home.setMinimumSize(new java.awt.Dimension(720, 480));
@@ -264,6 +286,7 @@ public class Mesa extends javax.swing.JFrame {
         novoPedido.setForeground(new java.awt.Color(244, 244, 255));
         novoPedido.setText("Novo Pedido");
         novoPedido.setToolTipText("");
+        novoPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         novoPedido.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         novoPedido.setMinimumSize(new java.awt.Dimension(250, 100));
         novoPedido.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -279,6 +302,7 @@ public class Mesa extends javax.swing.JFrame {
         fecharConta.setForeground(new java.awt.Color(244, 244, 255));
         fecharConta.setText("Fechar Conta");
         fecharConta.setToolTipText("");
+        fecharConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fecharConta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         fecharConta.setMinimumSize(new java.awt.Dimension(250, 100));
         fecharConta.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -334,120 +358,6 @@ public class Mesa extends javax.swing.JFrame {
 
         panelPrincipal.add(Home, "Home");
 
-        Categories.setBackground(new java.awt.Color(244, 244, 255));
-        Categories.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        Categories.setInheritsPopupMenu(true);
-        Categories.setMinimumSize(new java.awt.Dimension(720, 480));
-        Categories.setPreferredSize(new java.awt.Dimension(720, 480));
-
-        headerCategories.setBackground(new java.awt.Color(0, 0, 127));
-        headerCategories.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        headerCategories.setForeground(new java.awt.Color(255, 255, 255));
-        headerCategories.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerCategories.setText("Categorias");
-        headerCategories.setToolTipText("");
-        headerCategories.setOpaque(true);
-
-        footerCategories.setBackground(new java.awt.Color(0, 0, 127));
-        footerCategories.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerCategories.setForeground(new java.awt.Color(255, 255, 255));
-        footerCategories.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerCategories.setText(" ");
-        footerCategories.setToolTipText("");
-        footerCategories.setOpaque(true);
-
-        Cat1.setBackground(new java.awt.Color(0, 0, 76));
-        Cat1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        Cat1.setForeground(new java.awt.Color(244, 244, 255));
-        Cat1.setText("Refeições");
-        Cat1.setToolTipText("Clique aqui para fazer um novo pedido!");
-        Cat1.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        Cat1.setMinimumSize(new java.awt.Dimension(250, 100));
-        Cat1.setPreferredSize(new java.awt.Dimension(250, 100));
-
-        Cat3.setBackground(new java.awt.Color(0, 0, 76));
-        Cat3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        Cat3.setForeground(new java.awt.Color(244, 244, 255));
-        Cat3.setText("Sobremesas");
-        Cat3.setToolTipText("Clique aqui para fazer um novo pedido!");
-        Cat3.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        Cat3.setMinimumSize(new java.awt.Dimension(250, 100));
-        Cat3.setPreferredSize(new java.awt.Dimension(250, 100));
-
-        Cat4.setBackground(new java.awt.Color(0, 0, 76));
-        Cat4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        Cat4.setForeground(new java.awt.Color(244, 244, 255));
-        Cat4.setText("Lanches");
-        Cat4.setToolTipText("Clique aqui para fazer um novo pedido!");
-        Cat4.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        Cat4.setMinimumSize(new java.awt.Dimension(250, 100));
-        Cat4.setPreferredSize(new java.awt.Dimension(250, 100));
-
-        Cat2.setBackground(new java.awt.Color(0, 0, 76));
-        Cat2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        Cat2.setForeground(new java.awt.Color(244, 244, 255));
-        Cat2.setText("Bebidas");
-        Cat2.setToolTipText("Clique aqui para fazer um novo pedido!");
-        Cat2.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        Cat2.setMinimumSize(new java.awt.Dimension(250, 100));
-        Cat2.setPreferredSize(new java.awt.Dimension(250, 100));
-
-        backButton.setBackground(new java.awt.Color(0, 0, 76));
-        backButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        backButton.setForeground(new java.awt.Color(244, 244, 255));
-        backButton.setText("Voltar");
-        backButton.setToolTipText("Clique aqui para fazer um novo pedido!");
-        backButton.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        backButton.setMinimumSize(new java.awt.Dimension(110, 35));
-        backButton.setPreferredSize(new java.awt.Dimension(110, 35));
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout CategoriesLayout = new javax.swing.GroupLayout(Categories);
-        Categories.setLayout(CategoriesLayout);
-        CategoriesLayout.setHorizontalGroup(
-            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(footerCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(headerCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(CategoriesLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(CategoriesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        CategoriesLayout.setVerticalGroup(
-            CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CategoriesLayout.createSequentialGroup()
-                .addComponent(headerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11)
-                .addComponent(footerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        panelPrincipal.add(Categories, "Categories");
-
         Close.setBackground(new java.awt.Color(244, 244, 255));
         Close.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         Close.setInheritsPopupMenu(true);
@@ -473,6 +383,7 @@ public class Mesa extends javax.swing.JFrame {
         cancelClose.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         cancelClose.setForeground(new java.awt.Color(244, 244, 255));
         cancelClose.setText("Cancelar");
+        cancelClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelClose.setMinimumSize(new java.awt.Dimension(170, 80));
         cancelClose.setPreferredSize(new java.awt.Dimension(170, 80));
         cancelClose.addActionListener(new java.awt.event.ActionListener() {
@@ -489,6 +400,7 @@ public class Mesa extends javax.swing.JFrame {
         confirmClose.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         confirmClose.setForeground(new java.awt.Color(244, 244, 255));
         confirmClose.setText("Confirmar");
+        confirmClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         confirmClose.setMinimumSize(new java.awt.Dimension(170, 80));
         confirmClose.setPreferredSize(new java.awt.Dimension(170, 80));
         confirmClose.addActionListener(new java.awt.event.ActionListener() {
@@ -564,6 +476,7 @@ public class Mesa extends javax.swing.JFrame {
         yesCPF.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         yesCPF.setForeground(new java.awt.Color(244, 244, 255));
         yesCPF.setText("Sim");
+        yesCPF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         yesCPF.setMinimumSize(new java.awt.Dimension(100, 80));
         yesCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,6 +488,7 @@ public class Mesa extends javax.swing.JFrame {
         noCPF.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         noCPF.setForeground(new java.awt.Color(244, 244, 255));
         noCPF.setText("Não");
+        noCPF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noCPF.setMinimumSize(new java.awt.Dimension(100, 80));
         noCPF.setPreferredSize(new java.awt.Dimension(100, 80));
         noCPF.addActionListener(new java.awt.event.ActionListener() {
@@ -642,6 +556,7 @@ public class Mesa extends javax.swing.JFrame {
         cpfFinish.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpfFinish.setForeground(new java.awt.Color(244, 244, 255));
         cpfFinish.setText("Finalizar");
+        cpfFinish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpfFinish.setMaximumSize(new java.awt.Dimension(1252342, 323429));
         cpfFinish.setMinimumSize(new java.awt.Dimension(145, 60));
         cpfFinish.setPreferredSize(new java.awt.Dimension(145, 60));
@@ -655,6 +570,7 @@ public class Mesa extends javax.swing.JFrame {
         cpfErase.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpfErase.setForeground(new java.awt.Color(244, 244, 255));
         cpfErase.setText("Apagar");
+        cpfErase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpfErase.setMaximumSize(new java.awt.Dimension(111342, 123139));
         cpfErase.setMinimumSize(new java.awt.Dimension(145, 60));
         cpfErase.setPreferredSize(new java.awt.Dimension(145, 60));
@@ -673,6 +589,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf0.setForeground(new java.awt.Color(244, 244, 255));
         cpf0.setText("0");
+        cpf0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf0.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf0.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -687,6 +604,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf1.setForeground(new java.awt.Color(244, 244, 255));
         cpf1.setText("1");
+        cpf1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf1.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf1.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -701,6 +619,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf2.setForeground(new java.awt.Color(244, 244, 255));
         cpf2.setText("2");
+        cpf2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf2.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf2.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -715,6 +634,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf3.setForeground(new java.awt.Color(244, 244, 255));
         cpf3.setText("3");
+        cpf3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf3.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf3.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -729,6 +649,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf4.setForeground(new java.awt.Color(244, 244, 255));
         cpf4.setText("4");
+        cpf4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf4.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf4.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -743,6 +664,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf5.setForeground(new java.awt.Color(244, 244, 255));
         cpf5.setText("5");
+        cpf5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf5.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf5.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -757,6 +679,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf7.setForeground(new java.awt.Color(244, 244, 255));
         cpf7.setText("7");
+        cpf7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf7.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf7.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -771,6 +694,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf8.setForeground(new java.awt.Color(244, 244, 255));
         cpf8.setText("8");
+        cpf8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf8.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf8.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -785,6 +709,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf9.setForeground(new java.awt.Color(244, 244, 255));
         cpf9.setText("9");
+        cpf9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf9.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf9.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -799,6 +724,7 @@ public class Mesa extends javax.swing.JFrame {
         cpf6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpf6.setForeground(new java.awt.Color(244, 244, 255));
         cpf6.setText("6");
+        cpf6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpf6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf6.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
         cpf6.setMinimumSize(new java.awt.Dimension(60, 60));
@@ -917,6 +843,7 @@ public class Mesa extends javax.swing.JFrame {
         cpfTryAgain.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cpfTryAgain.setForeground(new java.awt.Color(244, 244, 255));
         cpfTryAgain.setText("Tentar novamente");
+        cpfTryAgain.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cpfTryAgain.setMaximumSize(new java.awt.Dimension(229123123, 12313139));
         cpfTryAgain.setMinimumSize(new java.awt.Dimension(240, 87));
         cpfTryAgain.setPreferredSize(new java.awt.Dimension(240, 87));
@@ -1211,6 +1138,321 @@ public class Mesa extends javax.swing.JFrame {
 
         panelPrincipal.add(SelectMesa, "card7");
 
+        Categories.setLayout(new java.awt.CardLayout());
+
+        menuCardapio.setBackground(new java.awt.Color(244, 244, 255));
+        menuCardapio.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        menuCardapio.setInheritsPopupMenu(true);
+        menuCardapio.setMinimumSize(new java.awt.Dimension(720, 480));
+        menuCardapio.setPreferredSize(new java.awt.Dimension(720, 480));
+
+        headerCategories.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories.setText("Categorias");
+        headerCategories.setToolTipText("");
+        headerCategories.setOpaque(true);
+
+        footerCategories.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories.setText(" ");
+        footerCategories.setToolTipText("");
+        footerCategories.setOpaque(true);
+
+        Cat1.setBackground(new java.awt.Color(0, 0, 76));
+        Cat1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat1.setForeground(new java.awt.Color(244, 244, 255));
+        Cat1.setText("Refeições");
+        Cat1.setToolTipText("Clique aqui para fazer um novo pedido!");
+        Cat1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cat1.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        Cat1.setMinimumSize(new java.awt.Dimension(250, 100));
+        Cat1.setPreferredSize(new java.awt.Dimension(250, 100));
+
+        Cat3.setBackground(new java.awt.Color(0, 0, 76));
+        Cat3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat3.setForeground(new java.awt.Color(244, 244, 255));
+        Cat3.setText("Sobremesas");
+        Cat3.setToolTipText("Clique aqui para fazer um novo pedido!");
+        Cat3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cat3.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        Cat3.setMinimumSize(new java.awt.Dimension(250, 100));
+        Cat3.setPreferredSize(new java.awt.Dimension(250, 100));
+
+        Cat4.setBackground(new java.awt.Color(0, 0, 76));
+        Cat4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat4.setForeground(new java.awt.Color(244, 244, 255));
+        Cat4.setText("Lanches");
+        Cat4.setToolTipText("Clique aqui para fazer um novo pedido!");
+        Cat4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cat4.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        Cat4.setMinimumSize(new java.awt.Dimension(250, 100));
+        Cat4.setPreferredSize(new java.awt.Dimension(250, 100));
+
+        Cat2.setBackground(new java.awt.Color(0, 0, 76));
+        Cat2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat2.setForeground(new java.awt.Color(244, 244, 255));
+        Cat2.setText("Bebidas");
+        Cat2.setToolTipText("Clique aqui para fazer um novo pedido!");
+        Cat2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cat2.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        Cat2.setMinimumSize(new java.awt.Dimension(250, 100));
+        Cat2.setPreferredSize(new java.awt.Dimension(250, 100));
+        Cat2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cat2ActionPerformed(evt);
+            }
+        });
+
+        backButton.setBackground(new java.awt.Color(0, 0, 76));
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(244, 244, 255));
+        backButton.setText("Voltar");
+        backButton.setToolTipText("Clique aqui para fazer um novo pedido!");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        backButton.setMinimumSize(new java.awt.Dimension(110, 35));
+        backButton.setPreferredSize(new java.awt.Dimension(110, 35));
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuCardapioLayout = new javax.swing.GroupLayout(menuCardapio);
+        menuCardapio.setLayout(menuCardapioLayout);
+        menuCardapioLayout.setHorizontalGroup(
+            menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(menuCardapioLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(menuCardapioLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuCardapioLayout.setVerticalGroup(
+            menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuCardapioLayout.createSequentialGroup()
+                .addComponent(headerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addComponent(footerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        Categories.add(menuCardapio, "Categories.menuCardapio");
+
+        listaCardapio.setBackground(new java.awt.Color(244, 244, 255));
+        listaCardapio.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        listaCardapio.setInheritsPopupMenu(true);
+        listaCardapio.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerCategories1.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories1.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories1.setText("<Nome do cardápio>");
+        headerCategories1.setToolTipText("");
+        headerCategories1.setOpaque(true);
+
+        footerCategories1.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories1.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories1.setText(" ");
+        footerCategories1.setToolTipText("");
+        footerCategories1.setOpaque(true);
+
+        backButton1.setBackground(new java.awt.Color(0, 0, 76));
+        backButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        backButton1.setForeground(new java.awt.Color(244, 244, 255));
+        backButton1.setText("Voltar");
+        backButton1.setToolTipText("Clique aqui para fazer um novo pedido!");
+        backButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton1.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        backButton1.setMinimumSize(new java.awt.Dimension(110, 35));
+        backButton1.setPreferredSize(new java.awt.Dimension(110, 35));
+        backButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButton1ActionPerformed(evt);
+            }
+        });
+
+        backButton2.setBackground(new java.awt.Color(0, 0, 76));
+        backButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        backButton2.setForeground(new java.awt.Color(244, 244, 255));
+        backButton2.setText("Adicionar itens");
+        backButton2.setToolTipText("Clique aqui para fazer um novo pedido!");
+        backButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backButton2.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        backButton2.setMinimumSize(new java.awt.Dimension(110, 35));
+        backButton2.setPreferredSize(new java.awt.Dimension(110, 35));
+        backButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel8.setText("Adicionar?");
+
+        jLabel3.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel3.setText("Item");
+
+        jLabel4.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel4.setText("Preço (un.)");
+
+        jLabel5.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel5.setText("Quantidade");
+
+        lista_itens.setAutoscrolls(true);
+        lista_itens.setOpaque(false);
+
+        item.setBackground(new java.awt.Color(244, 244, 255));
+
+        check_item.setPreferredSize(new java.awt.Dimension(48, 48));
+        check_item.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
+
+        preco_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        preco_item.setText("R$ 99,99");
+
+        qtd_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        qtd_item.setModel(new javax.swing.SpinnerNumberModel(1, 1, 9, 1));
+        qtd_item.setEditor(new javax.swing.JSpinner.NumberEditor(qtd_item, ""));
+
+        nome_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        nome_item.setText("Item 1");
+
+        desc_item.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        desc_item.setText("Descrição do item 1");
+
+        javax.swing.GroupLayout itemLayout = new javax.swing.GroupLayout(item);
+        item.setLayout(itemLayout);
+        itemLayout.setHorizontalGroup(
+            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nome_item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(desc_item, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(preco_item)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+        itemLayout.setVerticalGroup(
+            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(itemLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(itemLayout.createSequentialGroup()
+                                .addComponent(nome_item, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(itemLayout.createSequentialGroup()
+                        .addComponent(preco_item, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(desc_item)
+                .addGap(14, 14, 14))
+        );
+
+        javax.swing.GroupLayout lista_itensLayout = new javax.swing.GroupLayout(lista_itens);
+        lista_itens.setLayout(lista_itensLayout);
+        lista_itensLayout.setHorizontalGroup(
+            lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(item, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        lista_itensLayout.setVerticalGroup(
+            lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lista_itensLayout.createSequentialGroup()
+                .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 279, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout listaCardapioLayout = new javax.swing.GroupLayout(listaCardapio);
+        listaCardapio.setLayout(listaCardapioLayout);
+        listaCardapioLayout.setHorizontalGroup(
+            listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(listaCardapioLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(listaCardapioLayout.createSequentialGroup()
+                        .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(listaCardapioLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel5)))
+                .addGap(15, 15, 15))
+            .addComponent(lista_itens, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        listaCardapioLayout.setVerticalGroup(
+            listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listaCardapioLayout.createSequentialGroup()
+                .addComponent(headerCategories1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lista_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(footerCategories1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        Categories.add(listaCardapio, "Categories.listaCardapio");
+
+        panelPrincipal.add(Categories, "Categories");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1307,11 +1549,32 @@ public class Mesa extends javax.swing.JFrame {
         //Recebe o número selecionado na comboBox
         numMesa = Integer.parseInt(comboBoxSelectMesa.getSelectedItem().toString());
         //Faz o update do status da mesa no banco
-        conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_numero = "+numMesa+" ;");
+        conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_codigo = "+numMesa+";");
         //Altera o header da tela Home adicionando o número da mesa
         headerHome.setText("Mesa: "+numMesa);
         showCard("Home");
     }//GEN-LAST:event_selectMesaButtonActionPerformed
+
+    private void comboBoxSelectMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSelectMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxSelectMesaActionPerformed
+
+    private void Cat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat2ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        JButton dummy = (JButton) evt.getSource();
+        headerCategories1.setText(dummy.getText());
+        card.show(Categories, "Categories.listaCardapio");
+
+    }//GEN-LAST:event_Cat2ActionPerformed
+
+    private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
+    }//GEN-LAST:event_backButton1ActionPerformed
+
+    private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backButton2ActionPerformed
     
     private String getData(){
         Date d = Calendar.getInstance().getTime();
@@ -1444,7 +1707,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel SelectMesa;
     private javax.swing.JPanel SelectMesaProvavel;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton backButton1;
+    private javax.swing.JButton backButton2;
     private javax.swing.JButton cancelClose;
+    private javax.swing.JToggleButton check_item;
     private javax.swing.JComboBox<String> comboBoxSelectMesa;
     private javax.swing.JButton confirmClose;
     private javax.swing.JButton cpf0;
@@ -1460,11 +1726,13 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton cpfErase;
     private javax.swing.JButton cpfFinish;
     private javax.swing.JButton cpfTryAgain;
+    private javax.swing.JLabel desc_item;
     private javax.swing.JButton fecharConta;
     private javax.swing.JLabel footerCPF;
     private javax.swing.JLabel footerCPF1;
     private javax.swing.JLabel footerCPF2;
     private javax.swing.JLabel footerCategories;
+    private javax.swing.JLabel footerCategories1;
     private javax.swing.JLabel footerClose;
     private javax.swing.JLabel footerFinalMessage;
     private javax.swing.JLabel footerHome;
@@ -1476,6 +1744,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerCPF1;
     private javax.swing.JLabel headerCPF2;
     private javax.swing.JLabel headerCategories;
+    private javax.swing.JLabel headerCategories1;
     private javax.swing.JLabel headerClose;
     private javax.swing.JLabel headerFinalMessage;
     private javax.swing.JLabel headerHome;
@@ -1485,11 +1754,19 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerResumo;
     private javax.swing.JPanel invalidCPF;
     private javax.swing.JLabel invalidCPFText;
+    private javax.swing.JPanel item;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel listaCardapio;
+    private javax.swing.JPanel lista_itens;
+    private javax.swing.JPanel menuCardapio;
     private javax.swing.JButton mesa1;
     private javax.swing.JButton mesa10;
     private javax.swing.JButton mesa11;
@@ -1515,8 +1792,11 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton mesa8;
     private javax.swing.JButton mesa9;
     private javax.swing.JButton noCPF;
+    private javax.swing.JLabel nome_item;
     private javax.swing.JButton novoPedido;
-    private javax.swing.JPanel panelPrincipal;
+    protected javax.swing.JPanel panelPrincipal;
+    private javax.swing.JLabel preco_item;
+    private javax.swing.JSpinner qtd_item;
     private javax.swing.JPanel questCPF;
     private javax.swing.JLabel questCPFText;
     private javax.swing.JButton selectMesaButton;
@@ -1526,4 +1806,5 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel textoSelectMesa;
     private javax.swing.JButton yesCPF;
     // End of variables declaration//GEN-END:variables
+// </editor-fold> 
 }

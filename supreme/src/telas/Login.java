@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -47,11 +48,25 @@ public class Login extends javax.swing.JFrame {
     public void verificarUsuario(){
         novaConexao(campo_usuario, campo_senha);
             if(conn.conectado){
-                if(campo_usuario.getText().compareTo("mesa") == 0){
+                conn.comando_sql("USE bdsupreme2;");
+                ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM tipo_usuario WHERE usuario = '"+campo_usuario.getText()+"';");
+                String categoria_usuario = query.get(0).get(1);
+                if(categoria_usuario.compareTo("CAIXA") == 0){
+                    Caixa telaCaixa= new Caixa();
+                    telaCaixa.initConexao(conn);
+                    telaCaixa.setVisible(true);
+                }
+                else if(campo_usuario.getText().compareTo("COZINHA") == 0){
+                    Cozinha telaCozinha= new Cozinha();
+                    telaCozinha.initConexao(conn);
+                    telaCozinha.setVisible(true);
+                }
+                else{
                     Mesa telaMesa= new Mesa();
                     telaMesa.initConexao(conn);
                     telaMesa.setVisible(true);
                 }
+                
             }
     }
 
@@ -128,6 +143,7 @@ public class Login extends javax.swing.JFrame {
         bt_login.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         bt_login.setForeground(new java.awt.Color(244, 244, 255));
         bt_login.setText("Realizar Login");
+        bt_login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_loginActionPerformed(evt);
@@ -138,6 +154,7 @@ public class Login extends javax.swing.JFrame {
         bt_cancelar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         bt_cancelar.setForeground(new java.awt.Color(244, 244, 255));
         bt_cancelar.setText("Cancelar");
+        bt_cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bt_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_cancelarActionPerformed(evt);

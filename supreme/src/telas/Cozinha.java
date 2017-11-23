@@ -1,5 +1,6 @@
 package telas;
 
+import codigo.Conexao;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +21,11 @@ public class Cozinha extends javax.swing.JFrame {
     public Cozinha() {
         initComponents();
         fillTable();
+    }
+    
+    public void initConexao(Conexao conex){
+        this.conn = conex;
+        conn.comando_sql("USE bdsupreme2;");
     }
     
     public void fillTable(){

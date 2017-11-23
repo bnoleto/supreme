@@ -1,5 +1,6 @@
 package telas;
 
+import codigo.Conexao;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,13 +29,15 @@ public class Caixa extends javax.swing.JFrame{
         fillTable();
         
     }
+    
+    public void initConexao(Conexao conex){
+        this.conn = conex;
+        conn.comando_sql("USE bdsupreme2;");
+    }
 
     //Função que preenche a tabela da tela
     public void fillTable(){
         //Loga no banco
-        conn.conectar("test", "12345".toCharArray()); //troque ou crie este usuário para testar//
-        //Comandos SQL para pegar as contas 
-        conn.comando_sql("USE bdsupreme2;");	
         tabelaContas = conn.retornar_query(
             "SELECT conta_codigo, conta_mesa, conta_valor, conta_data, conta_hora, conta_cpf "
             + "FROM t_contas WHERE conta_status LIKE 'FECHADO';"
