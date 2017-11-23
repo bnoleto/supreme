@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.*;
 
 /**
  *
@@ -152,7 +153,7 @@ public class Mesa extends javax.swing.JFrame {
         panelPrincipal.setPreferredSize(new java.awt.Dimension(720, 480));
         panelPrincipal.setLayout(new java.awt.CardLayout());
 
-        SelectMesaProvavel.setBackground(new java.awt.Color(255, 255, 255));
+        SelectMesaProvavel.setBackground(new java.awt.Color(244, 244, 255));
         SelectMesaProvavel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         SelectMesaProvavel.setInheritsPopupMenu(true);
         SelectMesaProvavel.setMinimumSize(new java.awt.Dimension(720, 480));
@@ -166,22 +167,22 @@ public class Mesa extends javax.swing.JFrame {
         headerHome2.setOpaque(true);
 
         footerHome2.setBackground(new java.awt.Color(0, 0, 127));
-        footerHome2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerHome2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         footerHome2.setForeground(new java.awt.Color(255, 255, 255));
         footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerHome2.setText(" ");
+        footerHome2.setText(" SUPREME v0.1");
         footerHome2.setToolTipText("");
         footerHome2.setOpaque(true);
 
         comboBoxSelectMesa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
-        textoSelectMesa.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        textoSelectMesa.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         textoSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoSelectMesa.setText("Sr. funcionário, informe o número desta mesa:");
 
-        selectMesaButton.setBackground(new java.awt.Color(0, 0, 127));
-        selectMesaButton.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
-        selectMesaButton.setForeground(new java.awt.Color(255, 255, 255));
+        selectMesaButton.setBackground(new java.awt.Color(0, 0, 76));
+        selectMesaButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        selectMesaButton.setForeground(new java.awt.Color(244, 244, 255));
         selectMesaButton.setText("Prosseguir");
         selectMesaButton.setMinimumSize(new java.awt.Dimension(170, 80));
         selectMesaButton.setPreferredSize(new java.awt.Dimension(170, 80));
@@ -195,7 +196,7 @@ public class Mesa extends javax.swing.JFrame {
         SelectMesaProvavel.setLayout(SelectMesaProvavelLayout);
         SelectMesaProvavelLayout.setHorizontalGroup(
             SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(headerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+            .addComponent(headerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SelectMesaProvavelLayout.createSequentialGroup()
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,27 +211,27 @@ public class Mesa extends javax.swing.JFrame {
         SelectMesaProvavelLayout.setVerticalGroup(
             SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SelectMesaProvavelLayout.createSequentialGroup()
-                .addComponent(headerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addComponent(headerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(comboBoxSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(selectMesaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(footerHome2))
+                .addComponent(footerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPrincipal.add(SelectMesaProvavel, "SelectMesa");
 
-        Home.setBackground(new java.awt.Color(255, 255, 255));
+        Home.setBackground(new java.awt.Color(244, 244, 255));
         Home.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         Home.setInheritsPopupMenu(true);
         Home.setMinimumSize(new java.awt.Dimension(720, 480));
         Home.setPreferredSize(new java.awt.Dimension(720, 480));
 
         headerHome.setBackground(new java.awt.Color(0, 0, 127));
-        headerHome.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerHome.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerHome.setForeground(new java.awt.Color(255, 255, 255));
         headerHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerHome.setText("Mesa ##");
@@ -254,12 +255,13 @@ public class Mesa extends javax.swing.JFrame {
         showResumo.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(showResumo);
 
-        headerResumo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        headerResumo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         headerResumo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerResumo.setText("Resumo:");
 
-        novoPedido.setBackground(new java.awt.Color(255, 255, 255));
-        novoPedido.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        novoPedido.setBackground(new java.awt.Color(0, 0, 76));
+        novoPedido.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        novoPedido.setForeground(new java.awt.Color(244, 244, 255));
         novoPedido.setText("Novo Pedido");
         novoPedido.setToolTipText("");
         novoPedido.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -272,8 +274,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        fecharConta.setBackground(new java.awt.Color(255, 255, 255));
-        fecharConta.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        fecharConta.setBackground(new java.awt.Color(0, 0, 76));
+        fecharConta.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        fecharConta.setForeground(new java.awt.Color(244, 244, 255));
         fecharConta.setText("Fechar Conta");
         fecharConta.setToolTipText("");
         fecharConta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
@@ -285,7 +288,7 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        headerOptions.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        headerOptions.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         headerOptions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerOptions.setText("Opções:");
 
@@ -310,35 +313,35 @@ public class Mesa extends javax.swing.JFrame {
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeLayout.createSequentialGroup()
-                .addComponent(headerHome)
-                .addGap(15, 15, 15)
+                .addComponent(headerHome, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(headerResumo)
                     .addComponent(headerOptions))
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                         .addGap(41, 41, 41)
-                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                         .addGap(79, 79, 79))
                     .addGroup(HomeLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(footerHome))
+                .addComponent(footerHome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPrincipal.add(Home, "Home");
 
-        Categories.setBackground(new java.awt.Color(255, 255, 255));
+        Categories.setBackground(new java.awt.Color(244, 244, 255));
         Categories.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         Categories.setInheritsPopupMenu(true);
         Categories.setMinimumSize(new java.awt.Dimension(720, 480));
         Categories.setPreferredSize(new java.awt.Dimension(720, 480));
 
         headerCategories.setBackground(new java.awt.Color(0, 0, 127));
-        headerCategories.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerCategories.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerCategories.setForeground(new java.awt.Color(255, 255, 255));
         headerCategories.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerCategories.setText("Categorias");
@@ -353,40 +356,45 @@ public class Mesa extends javax.swing.JFrame {
         footerCategories.setToolTipText("");
         footerCategories.setOpaque(true);
 
-        Cat1.setBackground(new java.awt.Color(255, 255, 255));
-        Cat1.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        Cat1.setBackground(new java.awt.Color(0, 0, 76));
+        Cat1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat1.setForeground(new java.awt.Color(244, 244, 255));
         Cat1.setText("Refeições");
         Cat1.setToolTipText("Clique aqui para fazer um novo pedido!");
         Cat1.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat1.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat1.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        Cat3.setBackground(new java.awt.Color(255, 255, 255));
-        Cat3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        Cat3.setBackground(new java.awt.Color(0, 0, 76));
+        Cat3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat3.setForeground(new java.awt.Color(244, 244, 255));
         Cat3.setText("Sobremesas");
         Cat3.setToolTipText("Clique aqui para fazer um novo pedido!");
         Cat3.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat3.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat3.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        Cat4.setBackground(new java.awt.Color(255, 255, 255));
-        Cat4.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        Cat4.setBackground(new java.awt.Color(0, 0, 76));
+        Cat4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat4.setForeground(new java.awt.Color(244, 244, 255));
         Cat4.setText("Lanches");
         Cat4.setToolTipText("Clique aqui para fazer um novo pedido!");
         Cat4.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat4.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat4.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        Cat2.setBackground(new java.awt.Color(255, 255, 255));
-        Cat2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        Cat2.setBackground(new java.awt.Color(0, 0, 76));
+        Cat2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Cat2.setForeground(new java.awt.Color(244, 244, 255));
         Cat2.setText("Bebidas");
         Cat2.setToolTipText("Clique aqui para fazer um novo pedido!");
         Cat2.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat2.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat2.setPreferredSize(new java.awt.Dimension(250, 100));
 
-        backButton.setBackground(new java.awt.Color(255, 255, 255));
-        backButton.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        backButton.setBackground(new java.awt.Color(0, 0, 76));
+        backButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        backButton.setForeground(new java.awt.Color(244, 244, 255));
         backButton.setText("Voltar");
         backButton.setToolTipText("Clique aqui para fazer um novo pedido!");
         backButton.setMaximumSize(new java.awt.Dimension(2050, 4500));
@@ -422,31 +430,31 @@ public class Mesa extends javax.swing.JFrame {
         CategoriesLayout.setVerticalGroup(
             CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CategoriesLayout.createSequentialGroup()
-                .addComponent(headerCategories)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(headerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(CategoriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(11, 11, 11)
-                .addComponent(footerCategories)
+                .addComponent(footerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
         panelPrincipal.add(Categories, "Categories");
 
-        Close.setBackground(new java.awt.Color(255, 255, 255));
+        Close.setBackground(new java.awt.Color(244, 244, 255));
         Close.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         Close.setInheritsPopupMenu(true);
         Close.setMinimumSize(new java.awt.Dimension(720, 480));
 
         headerClose.setBackground(new java.awt.Color(0, 0, 127));
-        headerClose.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerClose.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerClose.setForeground(new java.awt.Color(255, 255, 255));
         headerClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerClose.setText("Fechar Conta");
@@ -461,8 +469,9 @@ public class Mesa extends javax.swing.JFrame {
         footerClose.setToolTipText("");
         footerClose.setOpaque(true);
 
-        cancelClose.setBackground(new java.awt.Color(255, 255, 255));
-        cancelClose.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cancelClose.setBackground(new java.awt.Color(0, 0, 76));
+        cancelClose.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        cancelClose.setForeground(new java.awt.Color(244, 244, 255));
         cancelClose.setText("Cancelar");
         cancelClose.setMinimumSize(new java.awt.Dimension(170, 80));
         cancelClose.setPreferredSize(new java.awt.Dimension(170, 80));
@@ -472,12 +481,13 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        textoConfirmaFecha.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        textoConfirmaFecha.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         textoConfirmaFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoConfirmaFecha.setText("Confirme o fechamento de sua conta");
+        textoConfirmaFecha.setText("Confirma o fechamento de sua conta?");
 
-        confirmClose.setBackground(new java.awt.Color(255, 255, 255));
-        confirmClose.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        confirmClose.setBackground(new java.awt.Color(0, 0, 76));
+        confirmClose.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        confirmClose.setForeground(new java.awt.Color(244, 244, 255));
         confirmClose.setText("Confirmar");
         confirmClose.setMinimumSize(new java.awt.Dimension(170, 80));
         confirmClose.setPreferredSize(new java.awt.Dimension(170, 80));
@@ -504,15 +514,15 @@ public class Mesa extends javax.swing.JFrame {
         CloseLayout.setVerticalGroup(
             CloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CloseLayout.createSequentialGroup()
-                .addComponent(headerClose)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(textoConfirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(headerClose, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addComponent(textoConfirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
                 .addGroup(CloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cancelClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addComponent(footerClose)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addComponent(footerClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -525,11 +535,11 @@ public class Mesa extends javax.swing.JFrame {
         CPF.setPreferredSize(new java.awt.Dimension(720, 480));
         CPF.setLayout(new java.awt.CardLayout());
 
-        questCPF.setBackground(new java.awt.Color(255, 255, 255));
+        questCPF.setBackground(new java.awt.Color(244, 244, 255));
         questCPF.setMinimumSize(new java.awt.Dimension(720, 480));
 
         headerCPF.setBackground(new java.awt.Color(0, 0, 127));
-        headerCPF.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerCPF.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerCPF.setForeground(new java.awt.Color(255, 255, 255));
         headerCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerCPF.setText("CPF");
@@ -544,15 +554,16 @@ public class Mesa extends javax.swing.JFrame {
         footerCPF.setToolTipText("");
         footerCPF.setOpaque(true);
 
-        questCPFText.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        questCPFText.setBackground(new java.awt.Color(244, 244, 255));
+        questCPFText.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         questCPFText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         questCPFText.setText("CPF na nota?");
         questCPFText.setMaximumSize(new java.awt.Dimension(18300, 35000));
 
-        yesCPF.setBackground(new java.awt.Color(255, 255, 255));
-        yesCPF.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        yesCPF.setBackground(new java.awt.Color(0, 0, 76));
+        yesCPF.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        yesCPF.setForeground(new java.awt.Color(244, 244, 255));
         yesCPF.setText("Sim");
-        yesCPF.setMaximumSize(null);
         yesCPF.setMinimumSize(new java.awt.Dimension(100, 80));
         yesCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -560,10 +571,10 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        noCPF.setBackground(new java.awt.Color(255, 255, 255));
-        noCPF.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        noCPF.setBackground(new java.awt.Color(0, 0, 76));
+        noCPF.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        noCPF.setForeground(new java.awt.Color(244, 244, 255));
         noCPF.setText("Não");
-        noCPF.setMaximumSize(null);
         noCPF.setMinimumSize(new java.awt.Dimension(100, 80));
         noCPF.setPreferredSize(new java.awt.Dimension(100, 80));
         noCPF.addActionListener(new java.awt.event.ActionListener() {
@@ -589,25 +600,25 @@ public class Mesa extends javax.swing.JFrame {
         questCPFLayout.setVerticalGroup(
             questCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(questCPFLayout.createSequentialGroup()
-                .addComponent(headerCPF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addComponent(questCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addComponent(headerCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(questCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(questCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(noCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(yesCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(footerCPF)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(footerCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
         CPF.add(questCPF, "questCPF");
 
-        getCPF.setBackground(new java.awt.Color(255, 255, 255));
+        getCPF.setBackground(new java.awt.Color(244, 244, 255));
         getCPF.setMinimumSize(new java.awt.Dimension(720, 480));
 
         headerCPF1.setBackground(new java.awt.Color(0, 0, 127));
-        headerCPF1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerCPF1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerCPF1.setForeground(new java.awt.Color(255, 255, 255));
         headerCPF1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerCPF1.setText("CPF");
@@ -622,14 +633,14 @@ public class Mesa extends javax.swing.JFrame {
         footerCPF1.setToolTipText("");
         footerCPF1.setOpaque(true);
 
-        getCPFText.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        getCPFText.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         getCPFText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getCPFText.setText("Informe seu CPF (apenas números):");
         getCPFText.setMaximumSize(new java.awt.Dimension(48000, 35000));
 
-        cpfFinish.setBackground(new java.awt.Color(255, 255, 255));
-        cpfFinish.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        cpfFinish.setForeground(new java.awt.Color(1, 1, 1));
+        cpfFinish.setBackground(new java.awt.Color(0, 0, 76));
+        cpfFinish.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpfFinish.setForeground(new java.awt.Color(244, 244, 255));
         cpfFinish.setText("Finalizar");
         cpfFinish.setMaximumSize(new java.awt.Dimension(1252342, 323429));
         cpfFinish.setMinimumSize(new java.awt.Dimension(145, 60));
@@ -640,9 +651,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpfErase.setBackground(new java.awt.Color(254, 254, 254));
-        cpfErase.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        cpfErase.setForeground(new java.awt.Color(1, 1, 1));
+        cpfErase.setBackground(new java.awt.Color(0, 0, 76));
+        cpfErase.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpfErase.setForeground(new java.awt.Color(244, 244, 255));
         cpfErase.setText("Apagar");
         cpfErase.setMaximumSize(new java.awt.Dimension(111342, 123139));
         cpfErase.setMinimumSize(new java.awt.Dimension(145, 60));
@@ -658,8 +669,9 @@ public class Mesa extends javax.swing.JFrame {
         showCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         showCPF.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        cpf0.setBackground(new java.awt.Color(255, 255, 255));
-        cpf0.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf0.setBackground(new java.awt.Color(0, 0, 76));
+        cpf0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf0.setForeground(new java.awt.Color(244, 244, 255));
         cpf0.setText("0");
         cpf0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf0.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -671,8 +683,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf1.setBackground(new java.awt.Color(255, 255, 255));
-        cpf1.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf1.setBackground(new java.awt.Color(0, 0, 76));
+        cpf1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf1.setForeground(new java.awt.Color(244, 244, 255));
         cpf1.setText("1");
         cpf1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf1.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -684,8 +697,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf2.setBackground(new java.awt.Color(255, 255, 255));
-        cpf2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf2.setBackground(new java.awt.Color(0, 0, 76));
+        cpf2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf2.setForeground(new java.awt.Color(244, 244, 255));
         cpf2.setText("2");
         cpf2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf2.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -697,8 +711,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf3.setBackground(new java.awt.Color(255, 255, 255));
-        cpf3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf3.setBackground(new java.awt.Color(0, 0, 76));
+        cpf3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf3.setForeground(new java.awt.Color(244, 244, 255));
         cpf3.setText("3");
         cpf3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf3.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -710,8 +725,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf4.setBackground(new java.awt.Color(255, 255, 255));
-        cpf4.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf4.setBackground(new java.awt.Color(0, 0, 76));
+        cpf4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf4.setForeground(new java.awt.Color(244, 244, 255));
         cpf4.setText("4");
         cpf4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf4.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -723,8 +739,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf5.setBackground(new java.awt.Color(255, 255, 255));
-        cpf5.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf5.setBackground(new java.awt.Color(0, 0, 76));
+        cpf5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf5.setForeground(new java.awt.Color(244, 244, 255));
         cpf5.setText("5");
         cpf5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf5.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -736,8 +753,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf7.setBackground(new java.awt.Color(255, 255, 255));
-        cpf7.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf7.setBackground(new java.awt.Color(0, 0, 76));
+        cpf7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf7.setForeground(new java.awt.Color(244, 244, 255));
         cpf7.setText("7");
         cpf7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf7.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -749,8 +767,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf8.setBackground(new java.awt.Color(255, 255, 255));
-        cpf8.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf8.setBackground(new java.awt.Color(0, 0, 76));
+        cpf8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf8.setForeground(new java.awt.Color(244, 244, 255));
         cpf8.setText("8");
         cpf8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf8.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -762,8 +781,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf9.setBackground(new java.awt.Color(255, 255, 255));
-        cpf9.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf9.setBackground(new java.awt.Color(0, 0, 76));
+        cpf9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf9.setForeground(new java.awt.Color(244, 244, 255));
         cpf9.setText("9");
         cpf9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf9.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -775,8 +795,9 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf6.setBackground(new java.awt.Color(255, 255, 255));
-        cpf6.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        cpf6.setBackground(new java.awt.Color(0, 0, 76));
+        cpf6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf6.setForeground(new java.awt.Color(244, 244, 255));
         cpf6.setText("6");
         cpf6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cpf6.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
@@ -831,11 +852,11 @@ public class Mesa extends javax.swing.JFrame {
         getCPFLayout.setVerticalGroup(
             getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(getCPFLayout.createSequentialGroup()
-                .addComponent(headerCPF1)
+                .addComponent(headerCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(getCPFText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(showCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 46, Short.MAX_VALUE)
+                .addComponent(showCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(getCPFLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
@@ -854,10 +875,10 @@ public class Mesa extends javax.swing.JFrame {
                             .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                         .addGap(11, 11, 11))
                     .addGroup(getCPFLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                         .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -867,12 +888,12 @@ public class Mesa extends javax.swing.JFrame {
 
         CPF.add(getCPF, "getCPF");
 
-        invalidCPF.setBackground(new java.awt.Color(255, 255, 255));
+        invalidCPF.setBackground(new java.awt.Color(244, 244, 255));
         invalidCPF.setMinimumSize(new java.awt.Dimension(720, 480));
         invalidCPF.setPreferredSize(new java.awt.Dimension(720, 480));
 
         headerCPF2.setBackground(new java.awt.Color(0, 0, 127));
-        headerCPF2.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerCPF2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerCPF2.setForeground(new java.awt.Color(255, 255, 255));
         headerCPF2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerCPF2.setText("CPF");
@@ -887,12 +908,14 @@ public class Mesa extends javax.swing.JFrame {
         footerCPF2.setToolTipText("");
         footerCPF2.setOpaque(true);
 
-        invalidCPFText.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        invalidCPFText.setBackground(new java.awt.Color(244, 244, 255));
+        invalidCPFText.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         invalidCPFText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         invalidCPFText.setText("CPF Inválido!");
 
-        cpfTryAgain.setBackground(new java.awt.Color(255, 255, 255));
-        cpfTryAgain.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        cpfTryAgain.setBackground(new java.awt.Color(0, 0, 76));
+        cpfTryAgain.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpfTryAgain.setForeground(new java.awt.Color(244, 244, 255));
         cpfTryAgain.setText("Tentar novamente");
         cpfTryAgain.setMaximumSize(new java.awt.Dimension(229123123, 12313139));
         cpfTryAgain.setMinimumSize(new java.awt.Dimension(229, 87));
@@ -918,13 +941,13 @@ public class Mesa extends javax.swing.JFrame {
         invalidCPFLayout.setVerticalGroup(
             invalidCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invalidCPFLayout.createSequentialGroup()
-                .addComponent(headerCPF2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(headerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addComponent(footerCPF2)
+                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addComponent(footerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -932,14 +955,14 @@ public class Mesa extends javax.swing.JFrame {
 
         panelPrincipal.add(CPF, "CPF");
 
-        FinalMessage.setBackground(new java.awt.Color(255, 255, 255));
+        FinalMessage.setBackground(new java.awt.Color(244, 244, 255));
         FinalMessage.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         FinalMessage.setInheritsPopupMenu(true);
         FinalMessage.setMinimumSize(new java.awt.Dimension(720, 480));
         FinalMessage.setPreferredSize(new java.awt.Dimension(720, 480));
 
         headerFinalMessage.setBackground(new java.awt.Color(0, 0, 127));
-        headerFinalMessage.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        headerFinalMessage.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         headerFinalMessage.setForeground(new java.awt.Color(255, 255, 255));
         headerFinalMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerFinalMessage.setText("Pagamento");
@@ -954,15 +977,15 @@ public class Mesa extends javax.swing.JFrame {
         footerFinalMessage.setToolTipText("");
         footerFinalMessage.setOpaque(true);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Por favor, compareça ao caixa para finalizar o pagamento.");
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Agradecemos aos nossos clientes pela preferência.");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Quase lá...");
 
@@ -970,24 +993,28 @@ public class Mesa extends javax.swing.JFrame {
         FinalMessage.setLayout(FinalMessageLayout);
         FinalMessageLayout.setHorizontalGroup(
             FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
-            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footerFinalMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(headerFinalMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerFinalMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addGroup(FinalMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         FinalMessageLayout.setVerticalGroup(
             FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FinalMessageLayout.createSequentialGroup()
-                .addComponent(headerFinalMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(headerFinalMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(footerFinalMessage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(footerFinalMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPrincipal.add(FinalMessage, "FinalMessage");
@@ -1386,15 +1413,14 @@ public class Mesa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

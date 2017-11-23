@@ -49,38 +49,19 @@ public class Cardapio extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-		
-		quantidade = tabela.size();
-        
-        itens = new java.util.ArrayList<javax.swing.JPanel>();
-        preco_item = new java.util.ArrayList<javax.swing.JLabel>();
-        qtd_item = new java.util.ArrayList<javax.swing.JSpinner>();
-        nome_item = new java.util.ArrayList<javax.swing.JLabel>();
-        check_item = new java.util.ArrayList<javax.swing.JToggleButton>();
-        desc_item = new java.util.ArrayList<javax.swing.JLabel>();
-        
+
         panel_principal = new javax.swing.JPanel();
         panel_cardapio = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        javax.swing.JPanel lista_itens = new javax.swing.JPanel();
-        javax.swing.JScrollPane scroll = new javax.swing.JScrollPane();
-        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setOpaque(false);
-		scroll.getVerticalScrollBar().setUnitIncrement(16);
-        
-        
-        for(int i = 0; i < quantidade; i++){
-            itens.add(new javax.swing.JPanel());
-            check_item.add(new javax.swing.JToggleButton());
-            preco_item.add(new javax.swing.JLabel());
-            qtd_item.add(new javax.swing.JSpinner());
-            nome_item.add(new javax.swing.JLabel());
-            desc_item.add(new javax.swing.JLabel());
-			
-			itens.get(i).setOpaque(false);
-        }
-        
+        lista_itens = new javax.swing.JPanel();
+        item = new javax.swing.JPanel();
+        check_item = new javax.swing.JToggleButton();
+        preco_item = new javax.swing.JLabel();
+        qtd_item = new javax.swing.JSpinner();
+        nome_item = new javax.swing.JLabel();
+        desc_item = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -104,127 +85,89 @@ public class Cardapio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Caladea", 3, 36)); // NOI18N
         jLabel1.setText("Bebidas");
 
-        lista_itens.setOpaque(false);
         lista_itens.setAutoscrolls(true);
-        
-		java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
-		
-        for(int i = 0; i<quantidade; i++){
+        lista_itens.setOpaque(false);
 
-            check_item.get(i).setPreferredSize(new java.awt.Dimension(48, 48));
-            check_item.get(i).setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
-			
-			double valor = Double.parseDouble(tabela.get(i).get(4));
-			
-            preco_item.get(i).setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-            preco_item.get(i).setText("R$ "+formatter.format(valor));
+        check_item.setPreferredSize(new java.awt.Dimension(48, 48));
+        check_item.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
 
-            qtd_item.get(i).setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-            qtd_item.get(i).setModel(new javax.swing.SpinnerNumberModel(1, 1, 9, 1));
-            qtd_item.get(i).setEditor(new javax.swing.JSpinner.NumberEditor(qtd_item.get(i), ""));
+        preco_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        preco_item.setText("R$ 99,99");
 
-            nome_item.get(i).setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-            nome_item.get(i).setText(tabela.get(i).get(1));
+        qtd_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        qtd_item.setModel(new javax.swing.SpinnerNumberModel(1, 1, 9, 1));
+        qtd_item.setEditor(new javax.swing.JSpinner.NumberEditor(qtd_item, ""));
 
-            desc_item.get(i).setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
-            desc_item.get(i).setText(tabela.get(i).get(2));
-        }
+        nome_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        nome_item.setText("Item 1");
 
-        java.util.ArrayList<javax.swing.GroupLayout> itemLayout = new java.util.ArrayList();
-        
-        for(int i = 0; i < quantidade; i++){
-        
-            itemLayout.add(new javax.swing.GroupLayout(itens.get(i)));
-            itens.get(i).setLayout(itemLayout.get(i));
-            itemLayout.get(i).setHorizontalGroup(
-                itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(itemLayout.get(i).createSequentialGroup()
-                    .addGap(15, 15, 15)
-                    .addComponent(check_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addGroup(itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(nome_item.get(i), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(desc_item.get(i), javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
-                    .addContainerGap()
-                    .addComponent(preco_item.get(i))
-                    .addGap(10, 10, 10)
-                    .addComponent(qtd_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap())
-            );
-            itemLayout.get(i).setVerticalGroup(
-                itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(itemLayout.get(i).createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.get(i).createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(qtd_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(itemLayout.get(i).createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addGroup(itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(check_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(itemLayout.get(i).createSequentialGroup()
-                                    .addComponent(nome_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(21, 21, 21)))
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(itemLayout.get(i).createSequentialGroup()
-                            .addComponent(preco_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addContainerGap())
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.get(i).createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(desc_item.get(i))
-                    .addGap(14, 14, 14))
-            );
-        }
-        
+        desc_item.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        desc_item.setText("Descrição do item 1");
+
+        javax.swing.GroupLayout itemLayout = new javax.swing.GroupLayout(item);
+        item.setLayout(itemLayout);
+        itemLayout.setHorizontalGroup(
+            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nome_item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(desc_item, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(preco_item)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        itemLayout.setVerticalGroup(
+            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(itemLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(itemLayout.createSequentialGroup()
+                                .addComponent(nome_item, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(itemLayout.createSequentialGroup()
+                        .addComponent(preco_item, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(desc_item)
+                .addGap(14, 14, 14))
+        );
+
         javax.swing.GroupLayout lista_itensLayout = new javax.swing.GroupLayout(lista_itens);
-		lista_itens.setLayout(lista_itensLayout);
-		
-		
-		// GRUPO HORIZONTAL
-		javax.swing.GroupLayout.SequentialGroup hGroup = lista_itensLayout.createSequentialGroup();
-		
-        javax.swing.GroupLayout.ParallelGroup pGroupH = lista_itensLayout
-            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-		
-		hGroup.addGroup(pGroupH);
-		
-        for(int i = 0; i< quantidade; i++){
-			if(i == quantidade-1){
-				pGroupH.addComponent(itens.get(i), javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-			}
-			else{
-				pGroupH.addComponent(itens.get(i), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-			}
-        }
-		
-		// GRUPO VERTICAL
-		
-		javax.swing.GroupLayout.ParallelGroup vGroup = lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-		
-        javax.swing.GroupLayout.SequentialGroup sGroupV = lista_itensLayout
-            .createSequentialGroup();
-		
-		vGroup.addGroup(sGroupV);
-		
-        for(int i = 0; i< quantidade; i++){
-			sGroupV.addComponent(itens.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-			if(i == quantidade-1){
-				//sGroupV.addGap(0, 100, Short.MAX_VALUE);
-			}
-        }
-		
-        
+        lista_itens.setLayout(lista_itensLayout);
         lista_itensLayout.setHorizontalGroup(
             lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lista_itensLayout.createSequentialGroup()
-                .addGroup(hGroup)
+                .addGroup(lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lista_itensLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(323, 323, 323)))
                 .addContainerGap())
         );
-        lista_itensLayout.setVerticalGroup(vGroup);
-        
-        scroll.setViewportView(lista_itens);
+        lista_itensLayout.setVerticalGroup(
+            lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lista_itensLayout.createSequentialGroup()
+                .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 97, Short.MAX_VALUE))
+        );
 
         jLabel2.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
         jLabel2.setText("Item");
@@ -245,7 +188,7 @@ public class Cardapio extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lista_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel5)
@@ -253,9 +196,9 @@ public class Cardapio extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addGap(50, 50, 50)
+                        .addGap(53, 53, 53)
                         .addComponent(jLabel4)
-                        .addGap(30, 30, 30))
+                        .addGap(9, 9, 9))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
@@ -274,8 +217,8 @@ public class Cardapio extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lista_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
@@ -301,22 +244,24 @@ public class Cardapio extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(panel_cardapioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_cardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_cardapioLayout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_cardapioLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(panel_cardapioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_cardapioLayout.setVerticalGroup(
             panel_cardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_cardapioLayout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(panel_cardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,15 +327,9 @@ public class Cardapio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private int quantidade = 1;
-    
-    private java.util.ArrayList<javax.swing.JPanel> itens;
-    private java.util.ArrayList<javax.swing.JLabel> preco_item;
-    private java.util.ArrayList<javax.swing.JSpinner> qtd_item;
-    private java.util.ArrayList<javax.swing.JLabel> nome_item;
-    private java.util.ArrayList<javax.swing.JToggleButton> check_item;
-    private java.util.ArrayList<javax.swing.JLabel> desc_item;
-    
+    private javax.swing.JToggleButton check_item;
+    private javax.swing.JLabel desc_item;
+    private javax.swing.JPanel item;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -400,10 +339,12 @@ public class Cardapio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JPanel lista_itens;
+    private javax.swing.JLabel nome_item;
     private javax.swing.JPanel panel_cardapio;
     private javax.swing.JPanel panel_principal;
-    private javax.swing.JScrollPane scroll;
-    
+    private javax.swing.JLabel preco_item;
+    private javax.swing.JSpinner qtd_item;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,7 +75,7 @@
         <Container class="javax.swing.JPanel" name="SelectMesaProvavel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -94,7 +94,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="headerHome2" alignment="0" pref="721" max="32767" attributes="0"/>
+                  <Component id="headerHome2" alignment="0" max="32767" attributes="0"/>
                   <Component id="footerHome2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="textoSelectMesa" min="-2" pref="721" max="-2" attributes="0"/>
@@ -113,15 +113,15 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="headerHome2" min="-2" pref="43" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="headerHome2" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="textoSelectMesa" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="comboBoxSelectMesa" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="selectMesaButton" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace pref="131" max="32767" attributes="0"/>
-                      <Component id="footerHome2" min="-2" max="-2" attributes="0"/>
+                      <Component id="footerHome2" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -150,13 +150,13 @@
                   <Color blue="7f" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="0"/>
+                  <Font name="Arial" size="12" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="text" type="java.lang.String" value=" "/>
+                <Property name="text" type="java.lang.String" value=" SUPREME v0.1"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
@@ -177,7 +177,7 @@
             <Component class="javax.swing.JLabel" name="textoSelectMesa">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Caladea" size="30" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Sr. funcion&#xe1;rio, informe o n&#xfa;mero desta mesa:"/>
@@ -186,13 +186,13 @@
             <Component class="javax.swing.JButton" name="selectMesaButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="7f" green="0" red="0" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Prosseguir"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -211,7 +211,7 @@
         <Container class="javax.swing.JPanel" name="Home">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -254,8 +254,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="headerHome" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="headerHome" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="headerResumo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="headerOptions" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -263,9 +263,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                              <Component id="novoPedido" max="32767" attributes="0"/>
+                              <Component id="novoPedido" pref="107" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="fecharConta" max="32767" attributes="0"/>
+                              <Component id="fecharConta" pref="107" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -274,7 +274,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="footerHome" min="-2" max="-2" attributes="0"/>
+                      <Component id="footerHome" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -286,7 +286,7 @@
                   <Color blue="7f" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="36" style="0"/>
+                  <Font name="Arial" size="24" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -339,7 +339,7 @@
             <Component class="javax.swing.JLabel" name="headerResumo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="0"/>
+                  <Font name="Tahoma" size="18" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Resumo:"/>
@@ -348,10 +348,13 @@
             <Component class="javax.swing.JButton" name="novoPedido">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Novo Pedido"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -373,10 +376,13 @@
             <Component class="javax.swing.JButton" name="fecharConta">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fechar Conta"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -397,7 +403,7 @@
             <Component class="javax.swing.JLabel" name="headerOptions">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="0"/>
+                  <Font name="Tahoma" size="18" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es:"/>
@@ -408,7 +414,7 @@
         <Container class="javax.swing.JPanel" name="Categories">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -455,21 +461,21 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="headerCategories" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Cat1" alignment="3" max="32767" attributes="0"/>
-                          <Component id="Cat2" alignment="3" max="32767" attributes="0"/>
+                      <Component id="headerCategories" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="Cat1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Cat2" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Cat3" alignment="3" max="32767" attributes="0"/>
                           <Component id="Cat4" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <EmptySpace pref="97" max="32767" attributes="0"/>
                       <Component id="backButton" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Component id="footerCategories" min="-2" max="-2" attributes="0"/>
+                      <Component id="footerCategories" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -482,7 +488,7 @@
                   <Color blue="7f" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="36" style="0"/>
+                  <Font name="Arial" size="24" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -513,10 +519,13 @@
             <Component class="javax.swing.JButton" name="Cat1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Refei&#xe7;&#xf5;es"/>
                 <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
@@ -534,10 +543,13 @@
             <Component class="javax.swing.JButton" name="Cat3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sobremesas"/>
                 <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
@@ -555,10 +567,13 @@
             <Component class="javax.swing.JButton" name="Cat4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Lanches"/>
                 <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
@@ -576,10 +591,13 @@
             <Component class="javax.swing.JButton" name="Cat2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bebidas"/>
                 <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
@@ -597,10 +615,13 @@
             <Component class="javax.swing.JButton" name="backButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="0"/>
+                  <Font name="Tahoma" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
                 <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
@@ -623,7 +644,7 @@
         <Container class="javax.swing.JPanel" name="Close">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -657,16 +678,16 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="headerClose" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="112" max="32767" attributes="0"/>
-                      <Component id="textoConfirmaFecha" pref="75" max="32767" attributes="0"/>
+                      <Component id="headerClose" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
+                      <Component id="textoConfirmaFecha" pref="78" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="confirmClose" alignment="3" max="32767" attributes="0"/>
                           <Component id="cancelClose" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
-                      <Component id="footerClose" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="140" max="32767" attributes="0"/>
+                      <Component id="footerClose" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -679,7 +700,7 @@
                   <Color blue="7f" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="36" style="0"/>
+                  <Font name="Arial" size="24" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -710,10 +731,13 @@
             <Component class="javax.swing.JButton" name="cancelClose">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -730,19 +754,22 @@
             <Component class="javax.swing.JLabel" name="textoConfirmaFecha">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Caladea" size="30" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Confirme o fechamento de sua conta"/>
+                <Property name="text" type="java.lang.String" value="Confirma o fechamento de sua conta?"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="confirmClose">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="4c" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="30" style="0"/>
+                  <Font name="Tahoma" size="30" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar"/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -785,7 +812,7 @@
             <Container class="javax.swing.JPanel" name="questCPF">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[720, 480]"/>
@@ -815,16 +842,16 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCPF" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="110" max="32767" attributes="0"/>
-                          <Component id="questCPFText" pref="77" max="32767" attributes="0"/>
+                          <Component id="headerCPF" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace pref="111" max="32767" attributes="0"/>
+                          <Component id="questCPFText" pref="80" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="noCPF" alignment="3" max="32767" attributes="0"/>
                               <Component id="yesCPF" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="130" max="32767" attributes="0"/>
-                          <Component id="footerCPF" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="131" max="32767" attributes="0"/>
+                          <Component id="footerCPF" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -837,7 +864,7 @@
                       <Color blue="7f" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="36" style="0"/>
+                      <Font name="Arial" size="24" style="3"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -867,8 +894,11 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="questCPFText">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Caladea" size="30" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="CPF na nota?"/>
@@ -880,15 +910,15 @@
                 <Component class="javax.swing.JButton" name="yesCPF">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="36" style="0"/>
+                      <Font name="Tahoma" size="36" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Sim"/>
-                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="null"/>
-                    </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[100, 80]"/>
                     </Property>
@@ -900,15 +930,15 @@
                 <Component class="javax.swing.JButton" name="noCPF">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="36" style="0"/>
+                      <Font name="Tahoma" size="36" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="N&#xe3;o"/>
-                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="null"/>
-                    </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[100, 80]"/>
                     </Property>
@@ -925,7 +955,7 @@
             <Container class="javax.swing.JPanel" name="getCPF">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[720, 480]"/>
@@ -989,11 +1019,11 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCPF1" min="-2" max="-2" attributes="0"/>
+                          <Component id="headerCPF1" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="getCPFText" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="showCPF" pref="46" max="32767" attributes="0"/>
+                          <Component id="showCPF" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
@@ -1015,11 +1045,11 @@
                                       <Component id="cpf3" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cpf0" pref="64" max="32767" attributes="0"/>
+                                  <Component id="cpf0" pref="62" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace pref="245" max="32767" attributes="0"/>
+                                  <EmptySpace pref="244" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cpfErase" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cpfFinish" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1039,7 +1069,7 @@
                       <Color blue="7f" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="36" style="0"/>
+                      <Font name="Arial" size="24" style="3"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1070,7 +1100,7 @@
                 <Component class="javax.swing.JLabel" name="getCPFText">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Caladea" size="30" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Informe seu CPF (apenas n&#xfa;meros):"/>
@@ -1082,13 +1112,13 @@
                 <Component class="javax.swing.JButton" name="cpfFinish">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="24" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="1" green="1" red="1" type="rgb"/>
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Finalizar"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1108,13 +1138,13 @@
                 <Component class="javax.swing.JButton" name="cpfErase">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="fe" red="fe" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="24" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="1" green="1" red="1" type="rgb"/>
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Apagar"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1151,10 +1181,13 @@
                 <Component class="javax.swing.JButton" name="cpf0">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1175,10 +1208,13 @@
                 <Component class="javax.swing.JButton" name="cpf1">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="1"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1199,10 +1235,13 @@
                 <Component class="javax.swing.JButton" name="cpf2">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="2"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1223,10 +1262,13 @@
                 <Component class="javax.swing.JButton" name="cpf3">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="3"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1247,10 +1289,13 @@
                 <Component class="javax.swing.JButton" name="cpf4">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="4"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1271,10 +1316,13 @@
                 <Component class="javax.swing.JButton" name="cpf5">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="5"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1295,10 +1343,13 @@
                 <Component class="javax.swing.JButton" name="cpf7">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="7"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1319,10 +1370,13 @@
                 <Component class="javax.swing.JButton" name="cpf8">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="8"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1343,10 +1397,13 @@
                 <Component class="javax.swing.JButton" name="cpf9">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="9"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1367,10 +1424,13 @@
                 <Component class="javax.swing.JButton" name="cpf6">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="6"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -1393,7 +1453,7 @@
             <Container class="javax.swing.JPanel" name="invalidCPF">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
                 </Property>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[720, 480]"/>
@@ -1424,13 +1484,13 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCPF2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="112" max="32767" attributes="0"/>
-                          <Component id="invalidCPFText" pref="48" max="32767" attributes="0"/>
+                          <Component id="headerCPF2" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace pref="114" max="32767" attributes="0"/>
+                          <Component id="invalidCPFText" pref="50" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="32767" attributes="0"/>
-                          <Component id="cpfTryAgain" pref="97" max="32767" attributes="0"/>
-                          <EmptySpace pref="140" max="32767" attributes="0"/>
-                          <Component id="footerCPF2" min="-2" max="-2" attributes="0"/>
+                          <Component id="cpfTryAgain" pref="99" max="32767" attributes="0"/>
+                          <EmptySpace pref="139" max="32767" attributes="0"/>
+                          <Component id="footerCPF2" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1443,7 +1503,7 @@
                       <Color blue="7f" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="36" style="0"/>
+                      <Font name="Arial" size="24" style="3"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1473,8 +1533,11 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="invalidCPFText">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="30" style="0"/>
+                      <Font name="Caladea" size="30" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="CPF Inv&#xe1;lido!"/>
@@ -1483,10 +1546,13 @@
                 <Component class="javax.swing.JButton" name="cpfTryAgain">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="24" style="0"/>
+                      <Font name="Tahoma" size="24" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Tentar novamente"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1510,7 +1576,7 @@
         <Container class="javax.swing.JPanel" name="FinalMessage">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="ff" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="20" style="0"/>
@@ -1532,25 +1598,31 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel6" alignment="2" pref="720" max="32767" attributes="0"/>
-                  <Component id="jLabel7" alignment="2" max="32767" attributes="0"/>
-                  <Component id="jLabel9" alignment="2" max="32767" attributes="0"/>
                   <Component id="footerFinalMessage" alignment="0" max="32767" attributes="0"/>
-                  <Component id="headerFinalMessage" alignment="0" max="32767" attributes="0"/>
+                  <Component id="headerFinalMessage" alignment="0" pref="720" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel6" alignment="2" pref="708" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="2" max="32767" attributes="0"/>
+                          <Component id="jLabel9" alignment="2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="headerFinalMessage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <Component id="headerFinalMessage" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace pref="121" max="32767" attributes="0"/>
                       <Component id="jLabel9" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace pref="94" max="32767" attributes="0"/>
-                      <Component id="footerFinalMessage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
+                      <Component id="footerFinalMessage" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1562,7 +1634,7 @@
                   <Color blue="7f" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="36" style="0"/>
+                  <Font name="Arial" size="24" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1593,7 +1665,7 @@
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="0"/>
+                  <Font name="Caladea" size="24" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Por favor, compare&#xe7;a ao caixa para finalizar o pagamento."/>
@@ -1602,7 +1674,7 @@
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="0"/>
+                  <Font name="Caladea" size="24" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Agradecemos aos nossos clientes pela prefer&#xea;ncia."/>
@@ -1611,7 +1683,7 @@
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="0"/>
+                  <Font name="Caladea" size="24" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Quase l&#xe1;..."/>

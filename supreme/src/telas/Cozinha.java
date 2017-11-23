@@ -153,15 +153,15 @@ public class Cozinha extends javax.swing.JFrame {
         TelaCozinha.setMinimumSize(new java.awt.Dimension(780, 510));
 
         titulo.setBackground(new java.awt.Color(0, 153, 153));
-        titulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        titulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Cozinha");
-        titulo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        titulo.setBorder(null);
         titulo.setOpaque(true);
 
         finalizaPedido.setBackground(new java.awt.Color(0, 153, 153));
-        finalizaPedido.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        finalizaPedido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         finalizaPedido.setForeground(new java.awt.Color(255, 255, 255));
         finalizaPedido.setText("Concluído");
         finalizaPedido.setToolTipText("Clique para concluir o pedido selecionado.");
@@ -175,7 +175,7 @@ public class Cozinha extends javax.swing.JFrame {
         });
 
         cancelaPedido.setBackground(new java.awt.Color(255, 51, 51));
-        cancelaPedido.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cancelaPedido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cancelaPedido.setForeground(new java.awt.Color(255, 255, 255));
         cancelaPedido.setText("Cancelar Pedido");
         cancelaPedido.setToolTipText("Clique para cancelar o pedido selecionado.");
@@ -212,11 +212,11 @@ public class Cozinha extends javax.swing.JFrame {
             tablePedidos.getColumnModel().getColumn(0).setMinWidth(400);
         }
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Lista de Pedidos:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Opções:");
 
@@ -227,7 +227,7 @@ public class Cozinha extends javax.swing.JFrame {
         rodape.setText(" Copyright © S.U.P.R.E.M.E ");
         rodape.setToolTipText("");
         rodape.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        rodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rodape.setBorder(null);
         rodape.setOpaque(true);
 
         javax.swing.GroupLayout TelaCozinhaLayout = new javax.swing.GroupLayout(TelaCozinha);
@@ -240,7 +240,7 @@ public class Cozinha extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addGroup(TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,14 +251,14 @@ public class Cozinha extends javax.swing.JFrame {
         TelaCozinhaLayout.setVerticalGroup(
             TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TelaCozinhaLayout.createSequentialGroup()
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                     .addGroup(TelaCozinhaLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(finalizaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)

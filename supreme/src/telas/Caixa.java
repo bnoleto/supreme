@@ -236,11 +236,11 @@ public class Caixa extends javax.swing.JFrame{
         jLabel5.setText("Resumo da conta:");
 
         titulo.setBackground(new java.awt.Color(0, 153, 153));
-        titulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        titulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("Caixa");
-        titulo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        titulo.setBorder(null);
         titulo.setOpaque(true);
 
         rodape.setBackground(new java.awt.Color(0, 153, 153));
@@ -249,7 +249,7 @@ public class Caixa extends javax.swing.JFrame{
         rodape.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         rodape.setText("Copyright © S.U.P.R.E.M.E ");
         rodape.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        rodape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rodape.setBorder(null);
         rodape.setOpaque(true);
 
         valorInsuficiente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -302,7 +302,7 @@ public class Caixa extends javax.swing.JFrame{
         PrincipalLayout.setVerticalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -319,7 +319,7 @@ public class Caixa extends javax.swing.JFrame{
                         .addComponent(valorRecebido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(troco)
@@ -328,9 +328,9 @@ public class Caixa extends javax.swing.JFrame{
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addGap(15, 15, 15)
-                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
-                .addComponent(rodape)
+                .addComponent(rodape, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
