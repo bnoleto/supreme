@@ -31,6 +31,7 @@ public class Mesa extends javax.swing.JFrame {
         this.conn = conex;
         conn.comando_sql("USE bdsupreme2;");
         //conn.conectar("bnoleto", "041995".toCharArray()); 
+        conn.conectar("test", "12345".toCharArray()); 
         fillComboSelectMesa();
         createConta();
         dataHoraAbertura = getData()+" "+getHora();
@@ -319,11 +320,11 @@ public class Mesa extends javax.swing.JFrame {
                     .addComponent(headerOptions))
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(novoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                        .addGap(65, 65, 65)
+                        .addComponent(novoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                        .addGap(79, 79, 79))
+                        .addComponent(fecharConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE))
                     .addGroup(HomeLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)
@@ -917,8 +918,8 @@ public class Mesa extends javax.swing.JFrame {
         cpfTryAgain.setForeground(new java.awt.Color(244, 244, 255));
         cpfTryAgain.setText("Tentar novamente");
         cpfTryAgain.setMaximumSize(new java.awt.Dimension(229123123, 12313139));
-        cpfTryAgain.setMinimumSize(new java.awt.Dimension(229, 87));
-        cpfTryAgain.setPreferredSize(new java.awt.Dimension(229, 87));
+        cpfTryAgain.setMinimumSize(new java.awt.Dimension(240, 87));
+        cpfTryAgain.setPreferredSize(new java.awt.Dimension(240, 87));
         cpfTryAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cpfTryAgainActionPerformed(evt);
@@ -931,21 +932,21 @@ public class Mesa extends javax.swing.JFrame {
             invalidCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerCPF2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footerCPF2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(invalidCPFText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(invalidCPFText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(invalidCPFLayout.createSequentialGroup()
                 .addGap(245, 245, 245)
-                .addComponent(cpfTryAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(246, 246, 246))
+                .addComponent(cpfTryAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         invalidCPFLayout.setVerticalGroup(
             invalidCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invalidCPFLayout.createSequentialGroup()
                 .addComponent(headerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(footerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -1383,7 +1384,7 @@ public class Mesa extends javax.swing.JFrame {
     //Função que preenche a comboBox do SelectMesa
     private void fillComboSelectMesa(){
         ArrayList<ArrayList<String>> numList;
-        numList = conn.retornar_query("SELECT mesa_numero FROM t_mesas WHERE mesa_status = 0");
+        numList = conn.retornar_query("SELECT mesa_codigo FROM t_mesas WHERE mesa_status = 0");
         ArrayList<String> aux = new ArrayList();
         for(ArrayList<String> s: numList){
             aux.add(s.get(0));
