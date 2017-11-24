@@ -48,7 +48,7 @@ public class Login extends javax.swing.JFrame {
     public void verificarUsuario(){
         novaConexao(campo_usuario, campo_senha);
             if(conn.conectado){
-                ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_usuarios WHERE usuario = '"+campo_usuario.getText()+"';");
+                ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+campo_usuario.getText()+"';");
                 String categoria_usuario = query.get(0).get(2);
                 if(categoria_usuario.compareTo("CAIXA") == 0){
                     Caixa telaCaixa= new Caixa(conn);
