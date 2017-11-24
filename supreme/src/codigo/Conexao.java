@@ -22,8 +22,8 @@ public class Conexao {
                     conectado = true;
                     this.status = "Conexão estabelecida como "+usuario+"!";
                     this.usuario = usuario;
-                    
-                    ArrayList<ArrayList<String>> query = this.retornar_query("SELECT * FROM t_usuarios WHERE usuario = '"+usuario+"';");
+                    comando_sql("USE bdsupreme2;");
+                    ArrayList<ArrayList<String>> query = retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+usuario+"';");
                     this.nome = query.get(0).get(1);
                     
                     return 1;
