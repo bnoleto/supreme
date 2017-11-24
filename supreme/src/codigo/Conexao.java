@@ -9,14 +9,23 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSetInternalMethods;
 import com.mysql.jdbc.Statement;
 public class Conexao {
+        private final String endereco_ip = "localhost";
 	private Connection conn = null;
 	private String status = "";
 	public boolean conectado = false;
+        private String usuario = null;
+        private String nome = null;
+        
 	public int conectar(String usuario, char[] senha) {
 		try {
-                    this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/?user="+usuario+"&password="+String.valueOf(senha)+"&useSSL=false");
+                    this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://"+endereco_ip+"/?user="+usuario+"&password="+String.valueOf(senha)+"&useSSL=false");
                     conectado = true;
                     this.status = "Conexão estabelecida como "+usuario+"!";
+                    this.usuario = usuario;
+                    
+                    ArrayList<ArrayList<String>> query = this.retornar_query("SELECT * FROM t_usuarios WHERE usuario = '"+usuario+"';");
+                    this.nome = query.get(0).get(1);
+                    
                     return 1;
 		} catch(SQLException e) {
                     this.status = "Erro na autenticação!";
@@ -33,6 +42,14 @@ public class Conexao {
 	public String getStatus() {
 		return this.status;
 	}
+        
+        public String getNome() {
+		return this.nome;
+	}
+        
+        public String getUsuario(){
+            return this.usuario;
+        }
 	
 	public void comando_sql(String str) {
 		try {

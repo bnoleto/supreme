@@ -49,11 +49,10 @@ public class Login extends javax.swing.JFrame {
         novaConexao(campo_usuario, campo_senha);
             if(conn.conectado){
                 conn.comando_sql("USE bdsupreme2;");
-                ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM tipo_usuario WHERE usuario = '"+campo_usuario.getText()+"';");
-                String categoria_usuario = query.get(0).get(1);
+                ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_usuarios WHERE usuario = '"+campo_usuario.getText()+"';");
+                String categoria_usuario = query.get(0).get(2);
                 if(categoria_usuario.compareTo("CAIXA") == 0){
-                    Caixa telaCaixa= new Caixa();
-                    telaCaixa.initConexao(conn);
+                    Caixa telaCaixa= new Caixa(conn);
                     telaCaixa.setVisible(true);
                 }
                 else if(categoria_usuario.compareTo("COZINHA") == 0){

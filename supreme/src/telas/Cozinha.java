@@ -151,7 +151,7 @@ public class Cozinha extends javax.swing.JFrame {
         Dialog.setLocationRelativeTo(TelaCozinha);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SUPREME - Cozinha");
+        setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(780, 510));
 
         TelaCozinha.setBackground(new java.awt.Color(255, 255, 255));
@@ -228,10 +228,9 @@ public class Cozinha extends javax.swing.JFrame {
         rodape.setBackground(new java.awt.Color(0, 153, 153));
         rodape.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rodape.setForeground(new java.awt.Color(255, 255, 255));
-        rodape.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        rodape.setText(" Copyright © S.U.P.R.E.M.E ");
+        rodape.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rodape.setText(conn.getStatus());
         rodape.setToolTipText("");
-        rodape.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         rodape.setBorder(null);
         rodape.setOpaque(true);
 

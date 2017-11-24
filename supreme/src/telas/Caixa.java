@@ -17,21 +17,22 @@ import javax.swing.table.TableRowSorter;
  */
 public class Caixa extends javax.swing.JFrame{
     private String codigo, mesa, data, hora, valor, cpf; //Dados da conta selecionada
-    private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
+    private codigo.Conexao conn = null; //conexao com o banco de dados
     private ArrayList<ArrayList<String>> infoItens = new ArrayList(); //guarda as informações de cada item de cada pedido
     private String stringItens; //string final dos itens da conta
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultTableModel model;
     
-    public Caixa() {
+    public Caixa(Conexao conex) {
+        this.conn = conex;
         initComponents();
+        fillTable();
         
     }
     
     public void initConexao(Conexao conex){
-        this.conn = conex;
-        fillTable();
+        
     }
 
     //Função que preenche a tabela da tela
@@ -141,7 +142,7 @@ public class Caixa extends javax.swing.JFrame{
         Dialog.setLocationRelativeTo(Principal);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SUPREME - Caixa");
+        setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(800, 587));
 
         Principal.setBackground(new java.awt.Color(255, 255, 255));
@@ -248,9 +249,8 @@ public class Caixa extends javax.swing.JFrame{
         rodape.setBackground(new java.awt.Color(0, 153, 153));
         rodape.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rodape.setForeground(new java.awt.Color(255, 255, 255));
-        rodape.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        rodape.setText("Copyright © S.U.P.R.E.M.E ");
-        rodape.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        rodape.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rodape.setText(conn.getStatus());
         rodape.setBorder(null);
         rodape.setOpaque(true);
 
@@ -531,7 +531,7 @@ public class Caixa extends javax.swing.JFrame{
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Caixa c = new Caixa();
+                Caixa c = new Caixa(new Conexao());
                 c.setVisible(true);
                 //Atualização dos itens da tabela a cada intervalo de 10 segundos.
                 final long TEMPO = 20000; //20 Segundos

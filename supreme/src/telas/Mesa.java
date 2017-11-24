@@ -2,8 +2,6 @@ package telas;
 
 import codigo.Conexao;
 import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +10,12 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
+
+
 public class Mesa extends javax.swing.JFrame {
+    
+    public static String versao_supreme = "v0.3.0-alpha";
+    
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
     public static int numMesa, codConta;
@@ -155,7 +158,7 @@ public class Mesa extends javax.swing.JFrame {
         desc_item = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SUPREME v1.0");
+        setTitle("SUPREME "+Mesa.versao_supreme);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
