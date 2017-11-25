@@ -23,13 +23,24 @@ public class Mesa extends javax.swing.JFrame {
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultComboBoxModel defaultComboBox;
+    Cardapio bebidas = null;
+    Cardapio refeicoes = null;
+    Cardapio lanches = null;
+    Cardapio sobremesas = null;
     
-    public Mesa() {
+    javax.swing.JScrollPane cardapioAtual = new javax.swing.JScrollPane();
+    
+    public Mesa(Conexao conex) {
+        this.conn = conex;
+        bebidas = new Cardapio(conn,"BEBIDAS");
+        refeicoes = new Cardapio(conn,"REFEIÇÕES");
+        lanches = new Cardapio(conn,"LANCHES");
+        sobremesas = new Cardapio(conn,"SOBREMESAS");
         initComponents();
     }
     
-    public void initConexao(Conexao conex){
-        this.conn = conex;
+    public void initConexao(){
+        System.out.println("***/: "+conn.getStatus());
         fillComboSelectMesa();
         createConta();
         dataHoraAbertura = getData()+" "+getHora();
@@ -79,19 +90,20 @@ public class Mesa extends javax.swing.JFrame {
         headerCPF1 = new javax.swing.JLabel();
         footerCPF1 = new javax.swing.JLabel();
         getCPFText = new javax.swing.JLabel();
-        cpfFinish = new javax.swing.JButton();
-        cpfErase = new javax.swing.JButton();
         showCPF = new javax.swing.JTextField();
-        cpf0 = new javax.swing.JButton();
-        cpf1 = new javax.swing.JButton();
-        cpf2 = new javax.swing.JButton();
-        cpf3 = new javax.swing.JButton();
-        cpf4 = new javax.swing.JButton();
-        cpf5 = new javax.swing.JButton();
-        cpf7 = new javax.swing.JButton();
-        cpf8 = new javax.swing.JButton();
-        cpf9 = new javax.swing.JButton();
+        teclas = new javax.swing.JPanel();
         cpf6 = new javax.swing.JButton();
+        cpf9 = new javax.swing.JButton();
+        cpf8 = new javax.swing.JButton();
+        cpf7 = new javax.swing.JButton();
+        cpf5 = new javax.swing.JButton();
+        cpf4 = new javax.swing.JButton();
+        cpf3 = new javax.swing.JButton();
+        cpf2 = new javax.swing.JButton();
+        cpf1 = new javax.swing.JButton();
+        cpf0 = new javax.swing.JButton();
+        cpfErase = new javax.swing.JButton();
+        cpfFinish = new javax.swing.JButton();
         invalidCPF = new javax.swing.JPanel();
         headerCPF2 = new javax.swing.JLabel();
         footerCPF2 = new javax.swing.JLabel();
@@ -140,22 +152,46 @@ public class Mesa extends javax.swing.JFrame {
         Cat4 = new javax.swing.JButton();
         Cat2 = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        listaCardapio = new javax.swing.JPanel();
-        headerCategories1 = new javax.swing.JLabel();
-        footerCategories1 = new javax.swing.JLabel();
-        backButton1 = new javax.swing.JButton();
-        backButton2 = new javax.swing.JButton();
+        cardapioBebidas = new javax.swing.JPanel();
+        headerCategories_lista = new javax.swing.JLabel();
+        footerCategories_lista = new javax.swing.JLabel();
+        bt_voltar = new javax.swing.JButton();
+        bt_confirmar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lista_itens = new javax.swing.JPanel();
-        item = new javax.swing.JPanel();
-        check_item = new javax.swing.JToggleButton();
-        preco_item = new javax.swing.JLabel();
-        qtd_item = new javax.swing.JSpinner();
-        nome_item = new javax.swing.JLabel();
-        desc_item = new javax.swing.JLabel();
+        lista_itens = new javax.swing.JScrollPane();
+        cardapioRefeicoes = new javax.swing.JPanel();
+        headerCategories_lista1 = new javax.swing.JLabel();
+        footerCategories_lista1 = new javax.swing.JLabel();
+        bt_voltar1 = new javax.swing.JButton();
+        bt_confirmar1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lista_itens1 = new javax.swing.JScrollPane();
+        cardapioSobremesas = new javax.swing.JPanel();
+        headerCategories_lista2 = new javax.swing.JLabel();
+        footerCategories_lista2 = new javax.swing.JLabel();
+        bt_voltar2 = new javax.swing.JButton();
+        bt_confirmar2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lista_itens2 = new javax.swing.JScrollPane();
+        cardapioLanches = new javax.swing.JPanel();
+        headerCategories_lista3 = new javax.swing.JLabel();
+        footerCategories_lista3 = new javax.swing.JLabel();
+        bt_voltar3 = new javax.swing.JButton();
+        bt_confirmar3 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lista_itens3 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME "+Mesa.versao_supreme);
@@ -208,7 +244,7 @@ public class Mesa extends javax.swing.JFrame {
 
         textoSelectMesa.setFont(new java.awt.Font("Caladea", 3, 30)); // NOI18N
         textoSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoSelectMesa.setText("Sr. funcionário, informe o número desta mesa:");
+        textoSelectMesa.setText("Sr. "+conn.getNome()+", informe o número desta mesa:");
 
         selectMesaButton.setBackground(new java.awt.Color(0, 0, 76));
         selectMesaButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -338,7 +374,7 @@ public class Mesa extends javax.swing.JFrame {
                     .addComponent(novoPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(headerOptions, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fecharConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(headerResumo, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
@@ -354,7 +390,7 @@ public class Mesa extends javax.swing.JFrame {
                     .addComponent(headerOptions))
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addComponent(novoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(fecharConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,12 +474,12 @@ public class Mesa extends javax.swing.JFrame {
             .addGroup(CloseLayout.createSequentialGroup()
                 .addComponent(headerClose, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                .addComponent(textoConfirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addComponent(textoConfirmaFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
                 .addGroup(CloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cancelClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(footerClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -526,12 +562,12 @@ public class Mesa extends javax.swing.JFrame {
             .addGroup(questCPFLayout.createSequentialGroup()
                 .addComponent(headerCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addComponent(questCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(questCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(questCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(noCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(yesCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(footerCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -562,154 +598,28 @@ public class Mesa extends javax.swing.JFrame {
         getCPFText.setText("Informe seu CPF (apenas números):");
         getCPFText.setMaximumSize(new java.awt.Dimension(48000, 35000));
 
-        cpfFinish.setBackground(new java.awt.Color(0, 0, 76));
-        cpfFinish.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpfFinish.setForeground(new java.awt.Color(244, 244, 255));
-        cpfFinish.setText("Finalizar");
-        cpfFinish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpfFinish.setMaximumSize(new java.awt.Dimension(1252342, 323429));
-        cpfFinish.setMinimumSize(new java.awt.Dimension(145, 60));
-        cpfFinish.setPreferredSize(new java.awt.Dimension(145, 60));
-        cpfFinish.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfFinishActionPerformed(evt);
-            }
-        });
-
-        cpfErase.setBackground(new java.awt.Color(0, 0, 76));
-        cpfErase.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpfErase.setForeground(new java.awt.Color(244, 244, 255));
-        cpfErase.setText("Apagar");
-        cpfErase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpfErase.setMaximumSize(new java.awt.Dimension(111342, 123139));
-        cpfErase.setMinimumSize(new java.awt.Dimension(145, 60));
-        cpfErase.setPreferredSize(new java.awt.Dimension(145, 60));
-        cpfErase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpfEraseActionPerformed(evt);
-            }
-        });
-
         showCPF.setEditable(false);
         showCPF.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         showCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         showCPF.setPreferredSize(new java.awt.Dimension(400, 50));
-
-        cpf0.setBackground(new java.awt.Color(0, 0, 76));
-        cpf0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf0.setForeground(new java.awt.Color(244, 244, 255));
-        cpf0.setText("0");
-        cpf0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf0.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf0.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf0.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf0.addActionListener(new java.awt.event.ActionListener() {
+        showCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
+                showCPFActionPerformed(evt);
             }
         });
 
-        cpf1.setBackground(new java.awt.Color(0, 0, 76));
-        cpf1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf1.setForeground(new java.awt.Color(244, 244, 255));
-        cpf1.setText("1");
-        cpf1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf1.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf1.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf1.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
+        teclas.setBackground(new java.awt.Color(244, 244, 255));
 
-        cpf2.setBackground(new java.awt.Color(0, 0, 76));
-        cpf2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf2.setForeground(new java.awt.Color(244, 244, 255));
-        cpf2.setText("2");
-        cpf2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf2.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf2.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf2.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
-
-        cpf3.setBackground(new java.awt.Color(0, 0, 76));
-        cpf3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf3.setForeground(new java.awt.Color(244, 244, 255));
-        cpf3.setText("3");
-        cpf3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf3.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf3.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf3.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
-
-        cpf4.setBackground(new java.awt.Color(0, 0, 76));
-        cpf4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf4.setForeground(new java.awt.Color(244, 244, 255));
-        cpf4.setText("4");
-        cpf4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf4.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf4.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf4.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
-
-        cpf5.setBackground(new java.awt.Color(0, 0, 76));
-        cpf5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf5.setForeground(new java.awt.Color(244, 244, 255));
-        cpf5.setText("5");
-        cpf5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf5.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf5.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf5.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
-
-        cpf7.setBackground(new java.awt.Color(0, 0, 76));
-        cpf7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf7.setForeground(new java.awt.Color(244, 244, 255));
-        cpf7.setText("7");
-        cpf7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf7.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf7.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf7.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tecladoCPF(evt);
-            }
-        });
-
-        cpf8.setBackground(new java.awt.Color(0, 0, 76));
-        cpf8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf8.setForeground(new java.awt.Color(244, 244, 255));
-        cpf8.setText("8");
-        cpf8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf8.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf8.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf8.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf8.addActionListener(new java.awt.event.ActionListener() {
+        cpf6.setBackground(new java.awt.Color(0, 0, 76));
+        cpf6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf6.setForeground(new java.awt.Color(244, 244, 255));
+        cpf6.setText("6");
+        cpf6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf6.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf6.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf6.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tecladoCPF(evt);
             }
@@ -730,20 +640,215 @@ public class Mesa extends javax.swing.JFrame {
             }
         });
 
-        cpf6.setBackground(new java.awt.Color(0, 0, 76));
-        cpf6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cpf6.setForeground(new java.awt.Color(244, 244, 255));
-        cpf6.setText("6");
-        cpf6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cpf6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cpf6.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
-        cpf6.setMinimumSize(new java.awt.Dimension(60, 60));
-        cpf6.setPreferredSize(new java.awt.Dimension(60, 60));
-        cpf6.addActionListener(new java.awt.event.ActionListener() {
+        cpf8.setBackground(new java.awt.Color(0, 0, 76));
+        cpf8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf8.setForeground(new java.awt.Color(244, 244, 255));
+        cpf8.setText("8");
+        cpf8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf8.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf8.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf8.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tecladoCPF(evt);
             }
         });
+
+        cpf7.setBackground(new java.awt.Color(0, 0, 76));
+        cpf7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf7.setForeground(new java.awt.Color(244, 244, 255));
+        cpf7.setText("7");
+        cpf7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf7.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf7.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf7.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf5.setBackground(new java.awt.Color(0, 0, 76));
+        cpf5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf5.setForeground(new java.awt.Color(244, 244, 255));
+        cpf5.setText("5");
+        cpf5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf5.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf5.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf5.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf4.setBackground(new java.awt.Color(0, 0, 76));
+        cpf4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf4.setForeground(new java.awt.Color(244, 244, 255));
+        cpf4.setText("4");
+        cpf4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf4.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf4.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf4.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf3.setBackground(new java.awt.Color(0, 0, 76));
+        cpf3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf3.setForeground(new java.awt.Color(244, 244, 255));
+        cpf3.setText("3");
+        cpf3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf3.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf3.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf3.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf2.setBackground(new java.awt.Color(0, 0, 76));
+        cpf2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf2.setForeground(new java.awt.Color(244, 244, 255));
+        cpf2.setText("2");
+        cpf2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf2.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf2.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf2.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf1.setBackground(new java.awt.Color(0, 0, 76));
+        cpf1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf1.setForeground(new java.awt.Color(244, 244, 255));
+        cpf1.setText("1");
+        cpf1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf1.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf1.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf1.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpf0.setBackground(new java.awt.Color(0, 0, 76));
+        cpf0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpf0.setForeground(new java.awt.Color(244, 244, 255));
+        cpf0.setText("0");
+        cpf0.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpf0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cpf0.setMaximumSize(new java.awt.Dimension(5000000, 5000000));
+        cpf0.setMinimumSize(new java.awt.Dimension(60, 60));
+        cpf0.setPreferredSize(new java.awt.Dimension(60, 60));
+        cpf0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tecladoCPF(evt);
+            }
+        });
+
+        cpfErase.setBackground(new java.awt.Color(0, 0, 76));
+        cpfErase.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpfErase.setForeground(new java.awt.Color(244, 244, 255));
+        cpfErase.setText("Apagar");
+        cpfErase.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpfErase.setMaximumSize(new java.awt.Dimension(111342, 123139));
+        cpfErase.setMinimumSize(new java.awt.Dimension(145, 60));
+        cpfErase.setPreferredSize(new java.awt.Dimension(145, 60));
+        cpfErase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpfEraseActionPerformed(evt);
+            }
+        });
+
+        cpfFinish.setBackground(new java.awt.Color(0, 0, 76));
+        cpfFinish.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cpfFinish.setForeground(new java.awt.Color(244, 244, 255));
+        cpfFinish.setText("Finalizar");
+        cpfFinish.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cpfFinish.setMaximumSize(new java.awt.Dimension(1252342, 323429));
+        cpfFinish.setMinimumSize(new java.awt.Dimension(145, 60));
+        cpfFinish.setPreferredSize(new java.awt.Dimension(145, 60));
+        cpfFinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpfFinishActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout teclasLayout = new javax.swing.GroupLayout(teclas);
+        teclas.setLayout(teclasLayout);
+        teclasLayout.setHorizontalGroup(
+            teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teclasLayout.createSequentialGroup()
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(teclasLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(teclasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(teclasLayout.createSequentialGroup()
+                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(teclasLayout.createSequentialGroup()
+                        .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(teclasLayout.createSequentialGroup()
+                        .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        teclasLayout.setVerticalGroup(
+            teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teclasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(teclasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout getCPFLayout = new javax.swing.GroupLayout(getCPF);
         getCPF.setLayout(getCPFLayout);
@@ -751,39 +856,15 @@ public class Mesa extends javax.swing.JFrame {
             getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerCPF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(footerCPF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(getCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(getCPFLayout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(showCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(164, 164, 164))
+            .addComponent(getCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(getCPFLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
-                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cpf4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cpf1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cpf7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(getCPFLayout.createSequentialGroup()
-                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(78, 78, 78))
-                    .addGroup(getCPFLayout.createSequentialGroup()
-                        .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(getCPFLayout.createSequentialGroup()
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(97, 97, 97)
-                .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(teclas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(showCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         getCPFLayout.setVerticalGroup(
             getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -791,34 +872,11 @@ public class Mesa extends javax.swing.JFrame {
                 .addComponent(headerCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(getCPFText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(showCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(getCPFLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpf7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(14, 14, 14)
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpf4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpf2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cpf3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(cpf0, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                        .addGap(11, 11, 11))
-                    .addGroup(getCPFLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
-                        .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpfErase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpfFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(showCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(teclas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(footerCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -879,11 +937,11 @@ public class Mesa extends javax.swing.JFrame {
             invalidCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invalidCPFLayout.createSequentialGroup()
                 .addComponent(headerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(invalidCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addComponent(cpfTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(footerCPF2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -1181,6 +1239,11 @@ public class Mesa extends javax.swing.JFrame {
         Cat1.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat1.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat1.setPreferredSize(new java.awt.Dimension(250, 100));
+        Cat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cat1ActionPerformed(evt);
+            }
+        });
 
         Cat3.setBackground(new java.awt.Color(0, 0, 76));
         Cat3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -1191,6 +1254,11 @@ public class Mesa extends javax.swing.JFrame {
         Cat3.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat3.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat3.setPreferredSize(new java.awt.Dimension(250, 100));
+        Cat3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cat3ActionPerformed(evt);
+            }
+        });
 
         Cat4.setBackground(new java.awt.Color(0, 0, 76));
         Cat4.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -1201,6 +1269,11 @@ public class Mesa extends javax.swing.JFrame {
         Cat4.setMaximumSize(new java.awt.Dimension(2050, 4500));
         Cat4.setMinimumSize(new java.awt.Dimension(250, 100));
         Cat4.setPreferredSize(new java.awt.Dimension(250, 100));
+        Cat4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cat4ActionPerformed(evt);
+            }
+        });
 
         Cat2.setBackground(new java.awt.Color(0, 0, 76));
         Cat2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -1239,15 +1312,15 @@ public class Mesa extends javax.swing.JFrame {
             .addComponent(footerCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(headerCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuCardapioLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(menuCardapioLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1261,7 +1334,7 @@ public class Mesa extends javax.swing.JFrame {
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1274,54 +1347,54 @@ public class Mesa extends javax.swing.JFrame {
 
         Categories.add(menuCardapio, "Categories.menuCardapio");
 
-        listaCardapio.setBackground(new java.awt.Color(244, 244, 255));
-        listaCardapio.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        listaCardapio.setInheritsPopupMenu(true);
-        listaCardapio.setMinimumSize(new java.awt.Dimension(720, 480));
+        cardapioBebidas.setBackground(new java.awt.Color(244, 244, 255));
+        cardapioBebidas.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cardapioBebidas.setInheritsPopupMenu(true);
+        cardapioBebidas.setMinimumSize(new java.awt.Dimension(720, 480));
 
-        headerCategories1.setBackground(new java.awt.Color(0, 0, 127));
-        headerCategories1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        headerCategories1.setForeground(new java.awt.Color(255, 255, 255));
-        headerCategories1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerCategories1.setText("<Nome do cardápio>");
-        headerCategories1.setToolTipText("");
-        headerCategories1.setOpaque(true);
+        headerCategories_lista.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories_lista.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories_lista.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories_lista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories_lista.setText("Bebidas");
+        headerCategories_lista.setToolTipText("");
+        headerCategories_lista.setOpaque(true);
 
-        footerCategories1.setBackground(new java.awt.Color(0, 0, 127));
-        footerCategories1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerCategories1.setForeground(new java.awt.Color(255, 255, 255));
-        footerCategories1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerCategories1.setText(" ");
-        footerCategories1.setToolTipText("");
-        footerCategories1.setOpaque(true);
+        footerCategories_lista.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories_lista.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories_lista.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories_lista.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories_lista.setText(" ");
+        footerCategories_lista.setToolTipText("");
+        footerCategories_lista.setOpaque(true);
 
-        backButton1.setBackground(new java.awt.Color(0, 0, 76));
-        backButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        backButton1.setForeground(new java.awt.Color(244, 244, 255));
-        backButton1.setText("Voltar");
-        backButton1.setToolTipText("Clique aqui para fazer um novo pedido!");
-        backButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        backButton1.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        backButton1.setMinimumSize(new java.awt.Dimension(110, 35));
-        backButton1.setPreferredSize(new java.awt.Dimension(110, 35));
-        backButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_voltar.setBackground(new java.awt.Color(0, 0, 76));
+        bt_voltar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_voltar.setForeground(new java.awt.Color(244, 244, 255));
+        bt_voltar.setText("Voltar");
+        bt_voltar.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_voltar.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_voltar.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_voltar.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButton1ActionPerformed(evt);
+                bt_voltarActionPerformed(evt);
             }
         });
 
-        backButton2.setBackground(new java.awt.Color(0, 0, 76));
-        backButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        backButton2.setForeground(new java.awt.Color(244, 244, 255));
-        backButton2.setText("Adicionar itens");
-        backButton2.setToolTipText("Clique aqui para fazer um novo pedido!");
-        backButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        backButton2.setMaximumSize(new java.awt.Dimension(2050, 4500));
-        backButton2.setMinimumSize(new java.awt.Dimension(110, 35));
-        backButton2.setPreferredSize(new java.awt.Dimension(110, 35));
-        backButton2.addActionListener(new java.awt.event.ActionListener() {
+        bt_confirmar.setBackground(new java.awt.Color(0, 0, 76));
+        bt_confirmar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_confirmar.setForeground(new java.awt.Color(244, 244, 255));
+        bt_confirmar.setText("Concluído");
+        bt_confirmar.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_confirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_confirmar.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_confirmar.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_confirmar.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButton2ActionPerformed(evt);
+                bt_confirmarActionPerformed(evt);
             }
         });
 
@@ -1337,129 +1410,418 @@ public class Mesa extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
         jLabel5.setText("Quantidade");
 
-        lista_itens.setAutoscrolls(true);
-        lista_itens.setOpaque(false);
+        lista_itens.setBackground(new java.awt.Color(244, 244, 255));
+        lista_itens.setBorder(null);
+        lista_itens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        lista_itens.setViewportBorder(null);
+        lista_itens.setOpaque(true);
 
-        item.setBackground(new java.awt.Color(244, 244, 255));
+        lista_itens = bebidas.getPanel();
 
-        check_item.setPreferredSize(new java.awt.Dimension(48, 48));
-        check_item.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
-
-        preco_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        preco_item.setText("R$ 99,99");
-
-        qtd_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        qtd_item.setModel(new javax.swing.SpinnerNumberModel(1, 1, 9, 1));
-        qtd_item.setEditor(new javax.swing.JSpinner.NumberEditor(qtd_item, ""));
-
-        nome_item.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        nome_item.setText("Item 1");
-
-        desc_item.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
-        desc_item.setText("Descrição do item 1");
-
-        javax.swing.GroupLayout itemLayout = new javax.swing.GroupLayout(item);
-        item.setLayout(itemLayout);
-        itemLayout.setHorizontalGroup(
-            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLayout.createSequentialGroup()
+        javax.swing.GroupLayout cardapioBebidasLayout = new javax.swing.GroupLayout(cardapioBebidas);
+        cardapioBebidas.setLayout(cardapioBebidasLayout);
+        cardapioBebidasLayout.setHorizontalGroup(
+            cardapioBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories_lista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories_lista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cardapioBebidasLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nome_item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(desc_item, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-                .addComponent(preco_item)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-        );
-        itemLayout.setVerticalGroup(
-            itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(itemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(qtd_item, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(itemLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(itemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(check_item, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(itemLayout.createSequentialGroup()
-                                .addComponent(nome_item, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(itemLayout.createSequentialGroup()
-                        .addComponent(preco_item, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(desc_item)
-                .addGap(14, 14, 14))
-        );
-
-        javax.swing.GroupLayout lista_itensLayout = new javax.swing.GroupLayout(lista_itens);
-        lista_itens.setLayout(lista_itensLayout);
-        lista_itensLayout.setHorizontalGroup(
-            lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(item, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        lista_itensLayout.setVerticalGroup(
-            lista_itensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lista_itensLayout.createSequentialGroup()
-                .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 279, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout listaCardapioLayout = new javax.swing.GroupLayout(listaCardapio);
-        listaCardapio.setLayout(listaCardapioLayout);
-        listaCardapioLayout.setHorizontalGroup(
-            listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(footerCategories1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(headerCategories1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(listaCardapioLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(listaCardapioLayout.createSequentialGroup()
-                        .addComponent(backButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(listaCardapioLayout.createSequentialGroup()
+                .addGroup(cardapioBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardapioBebidasLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(12, 12, 12)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(53, 53, 53)
-                        .addComponent(jLabel5)))
-                .addGap(15, 15, 15))
-            .addComponent(lista_itens, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(30, 30, 30))
+                    .addGroup(cardapioBebidasLayout.createSequentialGroup()
+                        .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_confirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
+            .addComponent(lista_itens)
         );
-        listaCardapioLayout.setVerticalGroup(
-            listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listaCardapioLayout.createSequentialGroup()
-                .addComponent(headerCategories1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+        cardapioBebidasLayout.setVerticalGroup(
+            cardapioBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardapioBebidasLayout.createSequentialGroup()
+                .addComponent(headerCategories_lista, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(cardapioBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lista_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lista_itens, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(listaCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(backButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(cardapioBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_voltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
-                .addComponent(footerCategories1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(footerCategories_lista, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
-        Categories.add(listaCardapio, "Categories.listaCardapio");
+        Categories.add(cardapioBebidas, "cardapioBebidas");
+
+        cardapioRefeicoes.setBackground(new java.awt.Color(244, 244, 255));
+        cardapioRefeicoes.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cardapioRefeicoes.setInheritsPopupMenu(true);
+        cardapioRefeicoes.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerCategories_lista1.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories_lista1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories_lista1.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories_lista1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories_lista1.setText("Refeições");
+        headerCategories_lista1.setToolTipText("");
+        headerCategories_lista1.setOpaque(true);
+
+        footerCategories_lista1.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories_lista1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories_lista1.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories_lista1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories_lista1.setText(" ");
+        footerCategories_lista1.setToolTipText("");
+        footerCategories_lista1.setOpaque(true);
+
+        bt_voltar1.setBackground(new java.awt.Color(0, 0, 76));
+        bt_voltar1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_voltar1.setForeground(new java.awt.Color(244, 244, 255));
+        bt_voltar1.setText("Voltar");
+        bt_voltar1.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_voltar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_voltar1.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_voltar1.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_voltar1.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_voltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltar1ActionPerformed(evt);
+            }
+        });
+
+        bt_confirmar1.setBackground(new java.awt.Color(0, 0, 76));
+        bt_confirmar1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_confirmar1.setForeground(new java.awt.Color(244, 244, 255));
+        bt_confirmar1.setText("Concluído");
+        bt_confirmar1.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_confirmar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_confirmar1.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_confirmar1.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_confirmar1.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_confirmar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_confirmar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel10.setText("Adicionar?");
+
+        jLabel11.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel11.setText("Item");
+
+        jLabel12.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel12.setText("Preço (un.)");
+
+        jLabel13.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel13.setText("Quantidade");
+
+        lista_itens1.setBackground(new java.awt.Color(244, 244, 255));
+        lista_itens1.setBorder(null);
+        lista_itens1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        lista_itens1.setViewportBorder(null);
+        lista_itens1.setOpaque(true);
+
+        lista_itens1 = refeicoes.getPanel();
+
+        javax.swing.GroupLayout cardapioRefeicoesLayout = new javax.swing.GroupLayout(cardapioRefeicoes);
+        cardapioRefeicoes.setLayout(cardapioRefeicoesLayout);
+        cardapioRefeicoesLayout.setHorizontalGroup(
+            cardapioRefeicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories_lista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories_lista1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cardapioRefeicoesLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(cardapioRefeicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardapioRefeicoesLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel13)
+                        .addGap(30, 30, 30))
+                    .addGroup(cardapioRefeicoesLayout.createSequentialGroup()
+                        .addComponent(bt_voltar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_confirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
+            .addComponent(lista_itens1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+        );
+        cardapioRefeicoesLayout.setVerticalGroup(
+            cardapioRefeicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardapioRefeicoesLayout.createSequentialGroup()
+                .addComponent(headerCategories_lista1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioRefeicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lista_itens1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioRefeicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_voltar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_confirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(footerCategories_lista1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        Categories.add(cardapioRefeicoes, "cardapioRefeicoes");
+
+        cardapioSobremesas.setBackground(new java.awt.Color(244, 244, 255));
+        cardapioSobremesas.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cardapioSobremesas.setInheritsPopupMenu(true);
+        cardapioSobremesas.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerCategories_lista2.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories_lista2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories_lista2.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories_lista2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories_lista2.setText("Sobremesas");
+        headerCategories_lista2.setToolTipText("");
+        headerCategories_lista2.setOpaque(true);
+
+        footerCategories_lista2.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories_lista2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories_lista2.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories_lista2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories_lista2.setText(" ");
+        footerCategories_lista2.setToolTipText("");
+        footerCategories_lista2.setOpaque(true);
+
+        bt_voltar2.setBackground(new java.awt.Color(0, 0, 76));
+        bt_voltar2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_voltar2.setForeground(new java.awt.Color(244, 244, 255));
+        bt_voltar2.setText("Voltar");
+        bt_voltar2.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_voltar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_voltar2.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_voltar2.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_voltar2.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_voltar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltar2ActionPerformed(evt);
+            }
+        });
+
+        bt_confirmar2.setBackground(new java.awt.Color(0, 0, 76));
+        bt_confirmar2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_confirmar2.setForeground(new java.awt.Color(244, 244, 255));
+        bt_confirmar2.setText("Concluído");
+        bt_confirmar2.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_confirmar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_confirmar2.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_confirmar2.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_confirmar2.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_confirmar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_confirmar2ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel14.setText("Adicionar?");
+
+        jLabel15.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel15.setText("Item");
+
+        jLabel16.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel16.setText("Preço (un.)");
+
+        jLabel17.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel17.setText("Quantidade");
+
+        lista_itens2.setBackground(new java.awt.Color(244, 244, 255));
+        lista_itens2.setBorder(null);
+        lista_itens2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        lista_itens2.setViewportBorder(null);
+        lista_itens2.setOpaque(true);
+
+        lista_itens2 = sobremesas.getPanel();
+
+        javax.swing.GroupLayout cardapioSobremesasLayout = new javax.swing.GroupLayout(cardapioSobremesas);
+        cardapioSobremesas.setLayout(cardapioSobremesasLayout);
+        cardapioSobremesasLayout.setHorizontalGroup(
+            cardapioSobremesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories_lista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories_lista2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cardapioSobremesasLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(cardapioSobremesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardapioSobremesasLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel17)
+                        .addGap(30, 30, 30))
+                    .addGroup(cardapioSobremesasLayout.createSequentialGroup()
+                        .addComponent(bt_voltar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_confirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
+            .addComponent(lista_itens2)
+        );
+        cardapioSobremesasLayout.setVerticalGroup(
+            cardapioSobremesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardapioSobremesasLayout.createSequentialGroup()
+                .addComponent(headerCategories_lista2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioSobremesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lista_itens2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioSobremesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_voltar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_confirmar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(footerCategories_lista2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        Categories.add(cardapioSobremesas, "cardapioSobremesas");
+
+        cardapioLanches.setBackground(new java.awt.Color(244, 244, 255));
+        cardapioLanches.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cardapioLanches.setInheritsPopupMenu(true);
+        cardapioLanches.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerCategories_lista3.setBackground(new java.awt.Color(0, 0, 127));
+        headerCategories_lista3.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerCategories_lista3.setForeground(new java.awt.Color(255, 255, 255));
+        headerCategories_lista3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerCategories_lista3.setText("Lanches");
+        headerCategories_lista3.setToolTipText("");
+        headerCategories_lista3.setOpaque(true);
+
+        footerCategories_lista3.setBackground(new java.awt.Color(0, 0, 127));
+        footerCategories_lista3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerCategories_lista3.setForeground(new java.awt.Color(255, 255, 255));
+        footerCategories_lista3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerCategories_lista3.setText(" ");
+        footerCategories_lista3.setToolTipText("");
+        footerCategories_lista3.setOpaque(true);
+
+        bt_voltar3.setBackground(new java.awt.Color(0, 0, 76));
+        bt_voltar3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_voltar3.setForeground(new java.awt.Color(244, 244, 255));
+        bt_voltar3.setText("Voltar");
+        bt_voltar3.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_voltar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_voltar3.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_voltar3.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_voltar3.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_voltar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_voltar3ActionPerformed(evt);
+            }
+        });
+
+        bt_confirmar3.setBackground(new java.awt.Color(0, 0, 76));
+        bt_confirmar3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_confirmar3.setForeground(new java.awt.Color(244, 244, 255));
+        bt_confirmar3.setText("Concluído");
+        bt_confirmar3.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_confirmar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_confirmar3.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_confirmar3.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_confirmar3.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_confirmar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_confirmar3ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel18.setText("Adicionar?");
+
+        jLabel19.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel19.setText("Item");
+
+        jLabel20.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel20.setText("Preço (un.)");
+
+        jLabel21.setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
+        jLabel21.setText("Quantidade");
+
+        lista_itens3.setBackground(new java.awt.Color(244, 244, 255));
+        lista_itens3.setBorder(null);
+        lista_itens3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        lista_itens3.setViewportBorder(null);
+        lista_itens3.setOpaque(true);
+
+        lista_itens3 = lanches.getPanel();
+
+        javax.swing.GroupLayout cardapioLanchesLayout = new javax.swing.GroupLayout(cardapioLanches);
+        cardapioLanches.setLayout(cardapioLanchesLayout);
+        cardapioLanchesLayout.setHorizontalGroup(
+            cardapioLanchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(footerCategories_lista3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerCategories_lista3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cardapioLanchesLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(cardapioLanchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardapioLanchesLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                        .addComponent(jLabel20)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel21)
+                        .addGap(30, 30, 30))
+                    .addGroup(cardapioLanchesLayout.createSequentialGroup()
+                        .addComponent(bt_voltar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_confirmar3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
+            .addComponent(lista_itens3)
+        );
+        cardapioLanchesLayout.setVerticalGroup(
+            cardapioLanchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardapioLanchesLayout.createSequentialGroup()
+                .addComponent(headerCategories_lista3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioLanchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lista_itens3, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cardapioLanchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_voltar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_confirmar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(footerCategories_lista3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        Categories.add(cardapioLanches, "cardapioLanches");
 
         panelPrincipal.add(Categories, "Categories");
 
@@ -1484,18 +1846,16 @@ public class Mesa extends javax.swing.JFrame {
         card.show(panelPrincipal, name);
     }
     
+    private void showCardapio(java.awt.event.ActionEvent evt){
+        CardLayout card = (CardLayout)Categories.getLayout();
+        JButton dummy = (JButton) evt.getSource();
+        headerCategories_lista.setText(dummy.getText());
+        card.show(Categories, "Categories.listaCardapio");
+    }
+    
     private void novoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoPedidoActionPerformed
         showCard("Categories");
     }//GEN-LAST:event_novoPedidoActionPerformed
-
-    private void cpfFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfFinishActionPerformed
-        if(cpf == null || cpf.length()>11 || cpf.length()<11){
-            CardLayout card = (CardLayout)CPF.getLayout();
-            card.show(CPF, "invalidCPF");
-        }else{
-            showCard("FinalMessage");
-        }
-    }//GEN-LAST:event_cpfFinishActionPerformed
 
     //Método que age como ActionListener de TODOS os botões do teclado do CPF
     //CUIDADO PARA NÃO CRIAR ACTION LISTENERS SEPARADOS!
@@ -1513,11 +1873,6 @@ public class Mesa extends javax.swing.JFrame {
         showCPF.setText(cpf);
     }   
     
-    private void cpfEraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfEraseActionPerformed
-        cpf = null;
-        showCPF.setText(cpf);
-    }//GEN-LAST:event_cpfEraseActionPerformed
-
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         getContaInfo();
         showCard("Home");
@@ -1571,25 +1926,83 @@ public class Mesa extends javax.swing.JFrame {
 
     private void Cat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat2ActionPerformed
         CardLayout card = (CardLayout)Categories.getLayout();
-        JButton dummy = (JButton) evt.getSource();
-        headerCategories1.setText(dummy.getText());
-        card.show(Categories, "Categories.listaCardapio");
+        card.show(Categories, "cardapioBebidas");
 
     }//GEN-LAST:event_Cat2ActionPerformed
 
-    private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
+    private void bt_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarActionPerformed
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
-    }//GEN-LAST:event_backButton1ActionPerformed
+    }//GEN-LAST:event_bt_voltarActionPerformed
 
-    private void backButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton2ActionPerformed
+    private void bt_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_backButton2ActionPerformed
+    }//GEN-LAST:event_bt_confirmarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         
         liberarMesa();
     }//GEN-LAST:event_formWindowClosing
+
+    private void Cat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat1ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "cardapioRefeicoes");
+    }//GEN-LAST:event_Cat1ActionPerformed
+
+    private void Cat3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat3ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "cardapioSobremesas");
+    }//GEN-LAST:event_Cat3ActionPerformed
+
+    private void Cat4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat4ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "cardapioLanches");
+    }//GEN-LAST:event_Cat4ActionPerformed
+
+    private void bt_voltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar1ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
+    }//GEN-LAST:event_bt_voltar1ActionPerformed
+
+    private void bt_confirmar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_confirmar1ActionPerformed
+
+    private void bt_voltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar2ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
+    }//GEN-LAST:event_bt_voltar2ActionPerformed
+
+    private void bt_confirmar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_confirmar2ActionPerformed
+
+    private void bt_voltar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar3ActionPerformed
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
+    }//GEN-LAST:event_bt_voltar3ActionPerformed
+
+    private void bt_confirmar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_confirmar3ActionPerformed
+
+    private void showCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showCPFActionPerformed
+
+    private void cpfEraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfEraseActionPerformed
+        cpf = null;
+        showCPF.setText(cpf);
+    }//GEN-LAST:event_cpfEraseActionPerformed
+
+    private void cpfFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfFinishActionPerformed
+        if(cpf == null || cpf.length()>11 || cpf.length()<11){
+            CardLayout card = (CardLayout)CPF.getLayout();
+            card.show(CPF, "invalidCPF");
+        }else{
+            showCard("FinalMessage");
+        }
+    }//GEN-LAST:event_cpfFinishActionPerformed
     
     private String getData(){
         Date d = Calendar.getInstance().getTime();
@@ -1702,11 +2115,11 @@ public class Mesa extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+  /*      java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Mesa().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1722,10 +2135,23 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel SelectMesa;
     private javax.swing.JPanel SelectMesaProvavel;
     private javax.swing.JButton backButton;
-    private javax.swing.JButton backButton1;
-    private javax.swing.JButton backButton2;
+    private javax.swing.JButton bt_confirmar;
+    private javax.swing.JButton bt_confirmar1;
+    private javax.swing.JButton bt_confirmar2;
+    private javax.swing.JButton bt_confirmar3;
+    private javax.swing.JButton bt_voltar;
+    private javax.swing.JButton bt_voltar1;
+    private javax.swing.JButton bt_voltar2;
+    private javax.swing.JButton bt_voltar3;
     private javax.swing.JButton cancelClose;
+    private javax.swing.JPanel cardapioBebidas;
+    private javax.swing.JPanel cardapioLanches;
+    private javax.swing.JPanel cardapioRefeicoes;
+    private javax.swing.JPanel cardapioSobremesas;
     private javax.swing.JToggleButton check_item;
+    private javax.swing.JToggleButton check_item1;
+    private javax.swing.JToggleButton check_item2;
+    private javax.swing.JToggleButton check_item3;
     private javax.swing.JComboBox<String> comboBoxSelectMesa;
     private javax.swing.JButton confirmClose;
     private javax.swing.JButton cpf0;
@@ -1742,12 +2168,18 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton cpfFinish;
     private javax.swing.JButton cpfTryAgain;
     private javax.swing.JLabel desc_item;
+    private javax.swing.JLabel desc_item1;
+    private javax.swing.JLabel desc_item2;
+    private javax.swing.JLabel desc_item3;
     private javax.swing.JButton fecharConta;
     private javax.swing.JLabel footerCPF;
     private javax.swing.JLabel footerCPF1;
     private javax.swing.JLabel footerCPF2;
     private javax.swing.JLabel footerCategories;
-    private javax.swing.JLabel footerCategories1;
+    private javax.swing.JLabel footerCategories_lista;
+    private javax.swing.JLabel footerCategories_lista1;
+    private javax.swing.JLabel footerCategories_lista2;
+    private javax.swing.JLabel footerCategories_lista3;
     private javax.swing.JLabel footerClose;
     private javax.swing.JLabel footerFinalMessage;
     private javax.swing.JLabel footerHome;
@@ -1759,7 +2191,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerCPF1;
     private javax.swing.JLabel headerCPF2;
     private javax.swing.JLabel headerCategories;
-    private javax.swing.JLabel headerCategories1;
+    private javax.swing.JLabel headerCategories_lista;
+    private javax.swing.JLabel headerCategories_lista1;
+    private javax.swing.JLabel headerCategories_lista2;
+    private javax.swing.JLabel headerCategories_lista3;
     private javax.swing.JLabel headerClose;
     private javax.swing.JLabel headerFinalMessage;
     private javax.swing.JLabel headerHome;
@@ -1770,7 +2205,22 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel invalidCPF;
     private javax.swing.JLabel invalidCPFText;
     private javax.swing.JPanel item;
+    private javax.swing.JPanel item1;
+    private javax.swing.JPanel item2;
+    private javax.swing.JPanel item3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1779,8 +2229,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel listaCardapio;
-    private javax.swing.JPanel lista_itens;
+    private javax.swing.JScrollPane lista_itens;
+    private javax.swing.JScrollPane lista_itens1;
+    private javax.swing.JScrollPane lista_itens2;
+    private javax.swing.JScrollPane lista_itens3;
     private javax.swing.JPanel menuCardapio;
     private javax.swing.JButton mesa1;
     private javax.swing.JButton mesa10;
@@ -1808,15 +2260,25 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton mesa9;
     private javax.swing.JButton noCPF;
     private javax.swing.JLabel nome_item;
+    private javax.swing.JLabel nome_item1;
+    private javax.swing.JLabel nome_item2;
+    private javax.swing.JLabel nome_item3;
     private javax.swing.JButton novoPedido;
     protected javax.swing.JPanel panelPrincipal;
     private javax.swing.JLabel preco_item;
+    private javax.swing.JLabel preco_item1;
+    private javax.swing.JLabel preco_item2;
+    private javax.swing.JLabel preco_item3;
     private javax.swing.JSpinner qtd_item;
+    private javax.swing.JSpinner qtd_item1;
+    private javax.swing.JSpinner qtd_item2;
+    private javax.swing.JSpinner qtd_item3;
     private javax.swing.JPanel questCPF;
     private javax.swing.JLabel questCPFText;
     private javax.swing.JButton selectMesaButton;
     private javax.swing.JTextField showCPF;
     private javax.swing.JTextArea showResumo;
+    private javax.swing.JPanel teclas;
     private javax.swing.JLabel textoConfirmaFecha;
     private javax.swing.JLabel textoSelectMesa;
     private javax.swing.JButton yesCPF;
