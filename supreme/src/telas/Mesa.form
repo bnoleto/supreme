@@ -174,6 +174,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="24" style="0"/>
                 </Property>
+                <Property name="maximumRowCount" type="int" value="6"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
@@ -1569,328 +1570,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="SelectMesa">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="20" style="0"/>
-            </Property>
-            <Property name="inheritsPopupMenu" type="boolean" value="true"/>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[720, 480]"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="card7"/>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="headerHome1" alignment="0" pref="720" max="32767" attributes="0"/>
-                  <Component id="footerHome1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="mesa1" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa2" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa3" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="mesa4" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa5" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa6" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="mesa7" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa8" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa9" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="mesa10" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa11" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa12" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="mesa22" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa23" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa24" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="mesa19" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa20" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa21" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="mesa16" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa17" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa18" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="mesa13" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa14" min="-2" pref="48" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="mesa15" min="-2" pref="48" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="headerHome1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="48" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mesa1" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa2" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa3" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa13" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa14" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa15" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mesa4" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa5" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa6" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa16" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa17" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa18" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mesa7" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa8" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa9" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa19" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa20" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa21" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="mesa10" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa11" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa12" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa22" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa23" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="mesa24" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" pref="37" max="32767" attributes="0"/>
-                      <Component id="footerHome1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="headerHome1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="7f" green="0" red="0" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="24" style="3"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Selecione a sua mesa"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="opaque" type="boolean" value="true"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="footerHome1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="7f" green="0" red="0" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="18" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-                <Property name="text" type="java.lang.String" value=" "/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="opaque" type="boolean" value="true"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa1">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="1"/>
-              </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="mesa01"/>
-              </AccessibilityProperties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="2"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesa2ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="3"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="4"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="5"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="6"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="7"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa8">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="8"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="9"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="10"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa11">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="11"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa12">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="12"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa13">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="13"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa14">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="14"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa15">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="15"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa16">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="16"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa17">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="17"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa18">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="18"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa19">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="19"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa20">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="20"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa21">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="21"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa22">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="22"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa23">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="23"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="mesa24">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="24"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="66" red="66" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Balc&#xe3;o"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="focusable" type="boolean" value="false"/>
-                <Property name="opaque" type="boolean" value="true"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JPanel" name="Categories">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -2179,8 +1858,8 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="footerCategories_lista" alignment="0" max="32767" attributes="0"/>
-                      <Component id="headerCategories_lista" alignment="1" max="32767" attributes="0"/>
+                      <Component id="footerBebidas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="headerBebidas" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2195,9 +1874,9 @@
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="bt_voltar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bt_voltar_bebidas" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="bt_confirmar" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="bt_confirmar_bebidas" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2208,7 +1887,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCategories_lista" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="headerBebidas" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2220,18 +1899,18 @@
                           <Component id="lista_itens" pref="341" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bt_voltar" alignment="3" max="32767" attributes="0"/>
-                              <Component id="bt_confirmar" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_voltar_bebidas" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_confirmar_bebidas" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="footerCategories_lista" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="footerBebidas" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="headerCategories_lista">
+                <Component class="javax.swing.JLabel" name="headerBebidas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2251,7 +1930,7 @@
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Mesa_headerCategories_lista"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="footerCategories_lista">
+                <Component class="javax.swing.JLabel" name="footerBebidas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2268,7 +1947,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_voltar">
+                <Component class="javax.swing.JButton" name="bt_voltar_bebidas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2295,10 +1974,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltarActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar_bebidasActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_confirmar">
+                <Component class="javax.swing.JButton" name="bt_confirmar_bebidas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2325,7 +2004,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmarActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar_bebidasActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
@@ -2404,8 +2083,8 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="footerCategories_lista1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="headerCategories_lista1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="footerRefeicoes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="headerRefeicoes" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2420,9 +2099,9 @@
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="bt_voltar1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bt_voltar_refeicoes" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="bt_confirmar1" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="bt_confirmar_refeicoes" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2433,7 +2112,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCategories_lista1" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="headerRefeicoes" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2445,18 +2124,18 @@
                           <Component id="lista_itens1" pref="341" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bt_voltar1" alignment="3" max="32767" attributes="0"/>
-                              <Component id="bt_confirmar1" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_voltar_refeicoes" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_confirmar_refeicoes" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="footerCategories_lista1" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="footerRefeicoes" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="headerCategories_lista1">
+                <Component class="javax.swing.JLabel" name="headerRefeicoes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2476,7 +2155,7 @@
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Mesa_headerCategories_lista"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="footerCategories_lista1">
+                <Component class="javax.swing.JLabel" name="footerRefeicoes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2493,7 +2172,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_voltar1">
+                <Component class="javax.swing.JButton" name="bt_voltar_refeicoes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2520,10 +2199,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar_refeicoesActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_confirmar1">
+                <Component class="javax.swing.JButton" name="bt_confirmar_refeicoes">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2550,7 +2229,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar_refeicoesActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
@@ -2629,8 +2308,8 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="footerCategories_lista2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="headerCategories_lista2" alignment="1" max="32767" attributes="0"/>
+                      <Component id="footerSobremesas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="headerSobremesas" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2645,9 +2324,9 @@
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="bt_voltar2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bt_voltar_sobremesas" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="bt_confirmar2" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="bt_confirmar_sobremesas" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2658,7 +2337,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCategories_lista2" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="headerSobremesas" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2670,18 +2349,18 @@
                           <Component id="lista_itens2" pref="341" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bt_voltar2" alignment="3" max="32767" attributes="0"/>
-                              <Component id="bt_confirmar2" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_voltar_sobremesas" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_confirmar_sobremesas" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="footerCategories_lista2" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="footerSobremesas" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="headerCategories_lista2">
+                <Component class="javax.swing.JLabel" name="headerSobremesas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2701,7 +2380,7 @@
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Mesa_headerCategories_lista"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="footerCategories_lista2">
+                <Component class="javax.swing.JLabel" name="footerSobremesas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2718,7 +2397,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_voltar2">
+                <Component class="javax.swing.JButton" name="bt_voltar_sobremesas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2745,10 +2424,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar_sobremesasActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_confirmar2">
+                <Component class="javax.swing.JButton" name="bt_confirmar_sobremesas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2775,7 +2454,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar_sobremesasActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel14">
@@ -2854,8 +2533,8 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="footerCategories_lista3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="headerCategories_lista3" alignment="1" max="32767" attributes="0"/>
+                      <Component id="footerLanches" alignment="0" max="32767" attributes="0"/>
+                      <Component id="headerLanches" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -2870,9 +2549,9 @@
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="bt_voltar3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bt_voltar_lanches" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="bt_confirmar3" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="bt_confirmar_lanches" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2883,7 +2562,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="headerCategories_lista3" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="headerLanches" min="-2" pref="38" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2895,18 +2574,18 @@
                           <Component id="lista_itens3" pref="341" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="bt_voltar3" alignment="3" max="32767" attributes="0"/>
-                              <Component id="bt_confirmar3" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_voltar_lanches" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_confirmar_lanches" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="footerCategories_lista3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="footerLanches" min="-2" pref="22" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="headerCategories_lista3">
+                <Component class="javax.swing.JLabel" name="headerLanches">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2926,7 +2605,7 @@
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Mesa_headerCategories_lista"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="footerCategories_lista3">
+                <Component class="javax.swing.JLabel" name="footerLanches">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7f" green="0" red="0" type="rgb"/>
@@ -2943,7 +2622,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_voltar3">
+                <Component class="javax.swing.JButton" name="bt_voltar_lanches">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -2970,10 +2649,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_voltar_lanchesActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="bt_confirmar3">
+                <Component class="javax.swing.JButton" name="bt_confirmar_lanches">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4c" green="0" red="0" type="rgb"/>
@@ -3000,7 +2679,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar_lanchesActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel18">
@@ -3054,6 +2733,207 @@
                   </AuxValues>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="confirmacaoPedido">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="20" style="0"/>
+                </Property>
+                <Property name="inheritsPopupMenu" type="boolean" value="true"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[720, 480]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="Categories.confirmacaoPedido"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="footerConfirmacao" alignment="0" max="32767" attributes="0"/>
+                      <Component id="headerConfirmacao" alignment="1" pref="720" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="pane_tabela_itens" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="backButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="bt_confirmar4" min="-2" pref="170" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="headerConfirmacao" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="pane_tabela_itens" min="-2" pref="200" max="-2" attributes="0"/>
+                          <EmptySpace pref="168" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="backButton1" alignment="3" max="32767" attributes="0"/>
+                              <Component id="bt_confirmar4" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Component id="footerConfirmacao" min="-2" pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="headerConfirmacao">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="7f" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="24" style="3"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Confira mais uma vez o seu pedido..."/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="footerConfirmacao">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="7f" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="18" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="11"/>
+                    <Property name="text" type="java.lang.String" value=" "/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="backButton1">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="4c" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Voltar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[2050, 4500]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[110, 35]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[110, 35]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButton1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="bt_confirmar4">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="18" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Realizar pedido!"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Clique aqui para fazer um novo pedido!"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[2050, 4500]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[110, 35]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[110, 35]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_confirmar4ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Container class="javax.swing.JScrollPane" name="pane_tabela_itens">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tabela_itens">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="f4" red="f4" type="rgb"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="18" style="0"/>
+                        </Property>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="new javax.swing.table.DefaultTableModel(retornarSelecionados(),&#xd;&#xa;    new String [] {&#xd;&#xa;        &quot;Tipo&quot;, &quot;Produto&quot;, &quot;Valor Unit&#xe1;rio&quot;, &quot;Quantidade&quot;, &quot;Valor Total&quot;&#xd;&#xa;    })" type="code"/>
+                        </Property>
+                        <Property name="autoResizeMode" type="int" value="0"/>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0"/>
+                        </Property>
+                        <Property name="rowHeight" type="int" value="32"/>
+                        <Property name="rowSelectionAllowed" type="boolean" value="false"/>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tabela_itens.setFillsViewportHeight(true);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tabela_itens.getColumnModel().getColumn(0).setPreferredWidth(125);&#xd;&#xa;tabela_itens.getColumnModel().getColumn(1).setPreferredWidth(300);&#xd;&#xa;tabela_itens.getColumnModel().getColumn(2).setPreferredWidth(100);&#xd;&#xa;tabela_itens.getColumnModel().getColumn(3).setPreferredWidth(83);&#xd;&#xa;tabela_itens.getColumnModel().getColumn(4).setPreferredWidth(100);&#xd;&#xa;"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tabela_itens.getTableHeader().setBackground(new java.awt.Color(244, 244, 255));"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
                 </Container>
               </SubComponents>
             </Container>

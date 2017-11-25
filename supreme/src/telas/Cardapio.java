@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Cardapio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Classe CARDÁPIO">                          
     private ArrayList<ArrayList<String>> tabela = new ArrayList();
+    
     private int quantidade = 1;
     
     private codigo.Conexao conn = new codigo.Conexao();
@@ -30,6 +31,20 @@ public class Cardapio extends javax.swing.JPanel {
     javax.swing.JScrollPane getPanel(){
         return this.scroll;
     }
+    
+    public ArrayList<ArrayList<String>> getSelecionados(){
+        ArrayList<ArrayList<String>> selecionados = new ArrayList();
+        for(int i = 0; i<quantidade;i++){
+            if(check_item.get(i).isSelected()){
+                ArrayList colunas = new ArrayList();
+                colunas.add(check_item.get(i).getName());
+                colunas.add(qtd_item.get(i).getValue().toString());
+                selecionados.add(colunas);
+                System.out.println("sel: "+check_item.get(i).getName()+" / "+qtd_item.get(i).getValue().toString());
+            }
+        }
+        return selecionados;
+    }
                   
     private void initComponents() {
 		
@@ -37,7 +52,8 @@ public class Cardapio extends javax.swing.JPanel {
         
         scroll.setBackground(new java.awt.Color(244, 244, 255));
         scroll.setBorder(null);
-        //scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setViewportBorder(null);
         scroll.setOpaque(true);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
@@ -66,6 +82,7 @@ public class Cardapio extends javax.swing.JPanel {
 
             check_item.get(i).setPreferredSize(new java.awt.Dimension(48, 48));
             check_item.get(i).setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
+            check_item.get(i).setName(tabela.get(i).get(0));
 			
             double valor = Double.parseDouble(tabela.get(i).get(4));
 			
@@ -102,7 +119,7 @@ public class Cardapio extends javax.swing.JPanel {
                     .addComponent(preco_item.get(i))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(qtd_item.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(15, 15, 15))
+                    .addContainerGap())
             );
             itemLayout.get(i).setVerticalGroup(
                 itemLayout.get(i).createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
