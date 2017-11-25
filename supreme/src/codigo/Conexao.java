@@ -28,7 +28,12 @@ public class Conexao {
                     
                     return 1;
 		} catch(SQLException e) {
-                    this.status = "Erro na autenticação!";
+                    if(e.getErrorCode() == 1045){
+                        this.status = "Usuário e/ou senha incorretos!";
+                    }
+                    else{
+                        this.status = "Não foi possível conectar-se ao servidor.";
+                    }
 		} catch(Exception e) {
                     this.status = e.getMessage();
 		}

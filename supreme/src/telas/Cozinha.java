@@ -1,9 +1,12 @@
 package telas;
 
 import codigo.Conexao;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -150,9 +153,14 @@ public class Cozinha extends javax.swing.JFrame {
 
         Dialog.setLocationRelativeTo(TelaCozinha);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(780, 510));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         TelaCozinha.setBackground(new java.awt.Color(255, 255, 255));
         TelaCozinha.setMinimumSize(new java.awt.Dimension(780, 510));
@@ -342,6 +350,16 @@ public class Cozinha extends javax.swing.JFrame {
     private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
         Dialog.dispose();
     }//GEN-LAST:event_dialogButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Login login = new Login();
+        login.setVisible(true);
+        try {
+            conn.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

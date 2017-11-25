@@ -20,10 +20,8 @@ import javax.swing.JTextField;
  */
 public class Login extends javax.swing.JFrame {
     private final Conexao conn = new Conexao();
+    private String tipo_login = "INICIAR";
     
-    /**
-     * Creates new form Login1
-     */
     public Login() {
         initComponents();
     }
@@ -45,9 +43,12 @@ public class Login extends javax.swing.JFrame {
         }
     }
     
-    public void verificarUsuario(){
-        novaConexao(campo_usuario, campo_senha);
-            if(conn.conectado){
+    public void setTipo(String tipo){
+        this.tipo_login = tipo;
+    }
+    
+    public void iniciarTela(){
+        if(conn.conectado){
                 ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+campo_usuario.getText()+"';");
                 String categoria_usuario = query.get(0).get(5);
                 if(categoria_usuario.compareTo("CAIXA") == 0){
@@ -66,6 +67,30 @@ public class Login extends javax.swing.JFrame {
                 }
                 
             }
+    }
+    
+    public boolean verificarUsuario(){
+        setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        
+        bt_cancelar.setEnabled(false);
+        bt_login.setEnabled(false);
+        campo_senha.setEnabled(false);
+        campo_usuario.setEnabled(false);
+        
+        novaConexao(campo_usuario, campo_senha);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        return conn.conectado;
+    }
+    
+    public void realizarAcao(){
+        if(tipo_login.toUpperCase().compareTo("INICIAR") == 0){
+            iniciarTela();
+        }
+        else if(tipo_login.toUpperCase().compareTo("ENCERRAMENTO") == 0){
+            bt_login.setText("OK");
+            caixa_status.setForeground(Color.blue);
+            caixa_status.setText("Autentique-se para poder encerrar o programa.");
+        }
     }
 
     /**
@@ -100,6 +125,7 @@ public class Login extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 0, 153));
         setBounds((largura-tamanhoX)/2,(altura-tamanhoY)/2 , tamanhoX, tamanhoY);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         setSize(new java.awt.Dimension(311, 235));
         setType(java.awt.Window.Type.POPUP);
@@ -227,18 +253,42 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
-        verificarUsuario();
+        if(verificarUsuario()){
+            realizarAcao();
+        }
+        else{
+                bt_cancelar.setEnabled(true);
+                bt_login.setEnabled(true);
+                campo_senha.setEnabled(true);
+                campo_usuario.setEnabled(true);
+            }
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void campo_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_usuarioKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            verificarUsuario();
+            if(verificarUsuario()){
+                realizarAcao();
+            }
+            else{
+                bt_cancelar.setEnabled(true);
+                bt_login.setEnabled(true);
+                campo_senha.setEnabled(true);
+                campo_usuario.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_campo_usuarioKeyPressed
 
     private void campo_senhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_senhaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            verificarUsuario();
+            if(verificarUsuario()){
+                realizarAcao();
+            }
+            else{
+                bt_cancelar.setEnabled(true);
+                bt_login.setEnabled(true);
+                campo_senha.setEnabled(true);
+                campo_usuario.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_campo_senhaKeyPressed
 

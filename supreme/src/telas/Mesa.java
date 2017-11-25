@@ -2,11 +2,14 @@ package telas;
 
 import codigo.Conexao;
 import java.awt.CardLayout;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -14,7 +17,7 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.4.0-alpha";
+    public static String versao_supreme = "v0.4.1-alpha";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
@@ -193,7 +196,7 @@ public class Mesa extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         lista_itens3 = new javax.swing.JScrollPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME "+Mesa.versao_supreme);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -201,6 +204,7 @@ public class Mesa extends javax.swing.JFrame {
         setForeground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName(""); // NOI18N
+        setResizable(false);
         setSize(new java.awt.Dimension(720, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -388,17 +392,16 @@ public class Mesa extends javax.swing.JFrame {
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(headerResumo)
                     .addComponent(headerOptions))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addGap(0, 59, Short.MAX_VALUE)
                         .addComponent(novoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(fecharConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE))
-                    .addGroup(HomeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(0, 74, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(footerHome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -600,6 +603,7 @@ public class Mesa extends javax.swing.JFrame {
 
         showCPF.setEditable(false);
         showCPF.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
+        showCPF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         showCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         showCPF.setPreferredSize(new java.awt.Dimension(400, 50));
         showCPF.addActionListener(new java.awt.event.ActionListener() {
@@ -859,12 +863,13 @@ public class Mesa extends javax.swing.JFrame {
             .addComponent(getCPFText, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(getCPFLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(teclas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(teclas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(showCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, getCPFLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(showCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         getCPFLayout.setVerticalGroup(
             getCPFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1940,8 +1945,14 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_confirmarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
         liberarMesa();
+        Login login = new Login();
+        login.setVisible(true);
+        try {
+            conn.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void Cat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cat1ActionPerformed
@@ -2148,10 +2159,6 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel cardapioLanches;
     private javax.swing.JPanel cardapioRefeicoes;
     private javax.swing.JPanel cardapioSobremesas;
-    private javax.swing.JToggleButton check_item;
-    private javax.swing.JToggleButton check_item1;
-    private javax.swing.JToggleButton check_item2;
-    private javax.swing.JToggleButton check_item3;
     private javax.swing.JComboBox<String> comboBoxSelectMesa;
     private javax.swing.JButton confirmClose;
     private javax.swing.JButton cpf0;
@@ -2167,10 +2174,6 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton cpfErase;
     private javax.swing.JButton cpfFinish;
     private javax.swing.JButton cpfTryAgain;
-    private javax.swing.JLabel desc_item;
-    private javax.swing.JLabel desc_item1;
-    private javax.swing.JLabel desc_item2;
-    private javax.swing.JLabel desc_item3;
     private javax.swing.JButton fecharConta;
     private javax.swing.JLabel footerCPF;
     private javax.swing.JLabel footerCPF1;
@@ -2204,10 +2207,6 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerResumo;
     private javax.swing.JPanel invalidCPF;
     private javax.swing.JLabel invalidCPFText;
-    private javax.swing.JPanel item;
-    private javax.swing.JPanel item1;
-    private javax.swing.JPanel item2;
-    private javax.swing.JPanel item3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2259,20 +2258,8 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton mesa8;
     private javax.swing.JButton mesa9;
     private javax.swing.JButton noCPF;
-    private javax.swing.JLabel nome_item;
-    private javax.swing.JLabel nome_item1;
-    private javax.swing.JLabel nome_item2;
-    private javax.swing.JLabel nome_item3;
     private javax.swing.JButton novoPedido;
     protected javax.swing.JPanel panelPrincipal;
-    private javax.swing.JLabel preco_item;
-    private javax.swing.JLabel preco_item1;
-    private javax.swing.JLabel preco_item2;
-    private javax.swing.JLabel preco_item3;
-    private javax.swing.JSpinner qtd_item;
-    private javax.swing.JSpinner qtd_item1;
-    private javax.swing.JSpinner qtd_item2;
-    private javax.swing.JSpinner qtd_item3;
     private javax.swing.JPanel questCPF;
     private javax.swing.JLabel questCPFText;
     private javax.swing.JButton selectMesaButton;

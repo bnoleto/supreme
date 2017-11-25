@@ -1,6 +1,7 @@
 package telas;
 
 import codigo.Conexao;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -141,9 +144,14 @@ public class Caixa extends javax.swing.JFrame{
 
         Dialog.setLocationRelativeTo(Principal);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(800, 587));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         Principal.setBackground(new java.awt.Color(255, 255, 255));
         Principal.setMinimumSize(new java.awt.Dimension(800, 587));
@@ -430,6 +438,16 @@ public class Caixa extends javax.swing.JFrame{
     private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
         Dialog.dispose();
     }//GEN-LAST:event_dialogButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Login login = new Login();
+        login.setVisible(true);
+        try {
+            conn.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
     
     //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
     private void setContaInfo(){
