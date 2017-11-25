@@ -17,12 +17,13 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.4.2-alpha";
+    public static String versao_supreme = "v0.5.1-alpha";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
     public static int numMesa, codConta;
-    private double valorConta = 0.0;
+    private double valorConta = 0;
+    private double valorPedido = 0;
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultComboBoxModel defaultComboBox;
@@ -46,7 +47,7 @@ public class Mesa extends javax.swing.JFrame {
     public void initConexao(){
         System.out.println("***/: "+conn.getStatus());
         fillComboSelectMesa();
-        createConta();
+        
         dataHoraAbertura = getData()+" "+getHora();
         getContaInfo();
         fillComboSelectMesa();
@@ -58,16 +59,20 @@ public class Mesa extends javax.swing.JFrame {
     }
     
     public Object[][] retornarSelecionados(){
-        System.out.print("TA AQUI PORRA");
         
         int linhas = bebidas.getSelecionados().size()+ lanches.getSelecionados().size() + refeicoes.getSelecionados().size() + sobremesas.getSelecionados().size() ;
         
+        
         Object[][] tabela = new Object[linhas][5];
         int i = 0;
+        
+        valorPedido = 0;
+        
         for(int j = 0; j<bebidas.getSelecionados().size();j++){
             int cod = Integer.parseInt(bebidas.getSelecionados().get(j).get(0));
             double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
             int qtd = Integer.parseInt(bebidas.getSelecionados().get(j).get(1));
+            valorPedido+=(valor*qtd);
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -83,6 +88,7 @@ public class Mesa extends javax.swing.JFrame {
             int cod = Integer.parseInt(lanches.getSelecionados().get(j).get(0));
             double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
             int qtd = Integer.parseInt(lanches.getSelecionados().get(j).get(1));
+            valorPedido+=(valor*qtd);
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -98,6 +104,7 @@ public class Mesa extends javax.swing.JFrame {
             int cod = Integer.parseInt(refeicoes.getSelecionados().get(j).get(0));
             double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
             int qtd = Integer.parseInt(refeicoes.getSelecionados().get(j).get(1));
+            valorPedido+=(valor*qtd);
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -113,6 +120,7 @@ public class Mesa extends javax.swing.JFrame {
             int cod = Integer.parseInt(sobremesas.getSelecionados().get(j).get(0));
             double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
             int qtd = Integer.parseInt(sobremesas.getSelecionados().get(j).get(1));
+            valorPedido+=(valor*qtd);
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -148,6 +156,10 @@ public class Mesa extends javax.swing.JFrame {
         tabela_itens.getColumnModel().getColumn(2).setPreferredWidth(100);
         tabela_itens.getColumnModel().getColumn(3).setPreferredWidth(83);
         tabela_itens.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        jLabel1.setText("Total deste pedido: R$ " + formatter.format(valorPedido));
         
  
     }
@@ -271,6 +283,7 @@ public class Mesa extends javax.swing.JFrame {
         pane_tabela_itens = new javax.swing.JScrollPane();
         tabela_itens = new javax.swing.JTable();
         tabela_itens.setFillsViewportHeight(true);
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME "+Mesa.versao_supreme);
@@ -1788,6 +1801,10 @@ public class Mesa extends javax.swing.JFrame {
             tabela_itens.getColumnModel().getColumn(4).setPreferredWidth(100);
             pane_tabela_itens.setViewportView(tabela_itens);
 
+            jLabel1.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel1.setText("Total deste pedido: R$" + valorPedido);
+
             javax.swing.GroupLayout confirmacaoPedidoLayout = new javax.swing.GroupLayout(confirmacaoPedido);
             confirmacaoPedido.setLayout(confirmacaoPedidoLayout);
             confirmacaoPedidoLayout.setHorizontalGroup(
@@ -1804,14 +1821,20 @@ public class Mesa extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bt_confirmar4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(15, 15, 15))
+                .addGroup(confirmacaoPedidoLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             confirmacaoPedidoLayout.setVerticalGroup(
                 confirmacaoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(confirmacaoPedidoLayout.createSequentialGroup()
                     .addComponent(headerConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pane_tabela_itens, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                    .addComponent(pane_tabela_itens, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                     .addGroup(confirmacaoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(backButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_confirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1896,7 +1919,7 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_yesCPFActionPerformed
 
     private void noCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noCPFActionPerformed
-        showCard("FinalMessage");
+        finalizarConta();
     }//GEN-LAST:event_noCPFActionPerformed
 
     private void cpfTryAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTryAgainActionPerformed
@@ -1910,8 +1933,18 @@ public class Mesa extends javax.swing.JFrame {
         numMesa = Integer.parseInt(comboBoxSelectMesa.getSelectedItem().toString());
         //Faz o update do status da mesa no banco
         conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_codigo = "+numMesa+";");
+        
+        createConta();
+        
+        try {
+            codConta = Integer.parseInt(conn.retornar_ultima_celula("t_contas", "conta_codigo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
+        }
         //Altera o header da tela Home adicionando o número da mesa
-        headerHome.setText("Mesa: "+numMesa);
+        headerHome.setText("Mesa: "+numMesa + " / Conta: " + codConta);
+        
         showCard("Home");
     }//GEN-LAST:event_selectMesaButtonActionPerformed
 
@@ -2013,7 +2046,8 @@ public class Mesa extends javax.swing.JFrame {
             CardLayout card = (CardLayout)CPF.getLayout();
             card.show(CPF, "invalidCPF");
         }else{
-            showCard("FinalMessage");
+            conn.comando_sql("UPDATE t_contas SET conta_cpf="+cpf+" WHERE conta_codigo="+codConta+";");
+            finalizarConta();
         }
     }//GEN-LAST:event_cpfFinishActionPerformed
 
@@ -2022,23 +2056,80 @@ public class Mesa extends javax.swing.JFrame {
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_backButton1ActionPerformed
 
-    private void bt_confirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar4ActionPerformed
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
-        
-    }//GEN-LAST:event_bt_confirmar4ActionPerformed
-    
-    private String getData(){
+    public String getData(){
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy");
         return sdfD.format(d); //data formatada em string
     }
     
-    private String getHora(){
+    public String getHora(){
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm:ss");
         return sdfH.format(d); //hora formatada em string
     }
+    
+    private void bt_confirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar4ActionPerformed
+        conn.comando_sql("INSERT INTO t_pedidos (`ped_valor`, `ped_mesa`, `ped_data`, `ped_hora`) VALUES ('"
+                + valorPedido +"', '"
+                + numMesa +"', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        
+        int codPedido = 0;
+        
+        try {
+            codPedido = Integer.parseInt(conn.retornar_ultima_celula("t_pedidos", "ped_codigo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i<bebidas.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + bebidas.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + bebidas.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        for(int i = 0; i<lanches.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + lanches.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + lanches.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        for(int i = 0; i<sobremesas.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + sobremesas.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + sobremesas.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        for(int i = 0; i<refeicoes.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + refeicoes.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + refeicoes.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        
+        conn.comando_sql("INSERT INTO t_pedidos_contas (`ped_codigo`, `conta_codigo`) VALUES ('"
+                + codPedido + "', '"
+                + codConta + "');");
+        
+        conn.comando_sql("UPDATE t_contas SET conta_valor=conta_valor+"+valorPedido+" WHERE `conta_codigo`='"+codConta+"';");
+        
+        showCard("Home");
+        
+    }//GEN-LAST:event_bt_confirmar4ActionPerformed
+    
     
     //-------------BEGIN SQL--------------//
     
@@ -2064,8 +2155,8 @@ public class Mesa extends javax.swing.JFrame {
         ArrayList<ArrayList<String>> Itens;  //Armazena os codigos dos itens de cada pedido 
 
         //SELECTS necessários para obtenção dos dados
-        codPedidosConta = conn.retornar_query("SELECT t_pedidos_ped_codigo FROM t_pedidos_contas "
-                                            + "WHERE t_contas_conta_codigo LIKE '"+codConta+"';");
+        codPedidosConta = conn.retornar_query("SELECT ped_codigo FROM t_pedidos_contas "
+                                            + "WHERE conta_codigo LIKE '"+codConta+"';");
         for(ArrayList<String> cods: codPedidosConta){
             codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
                                                 + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
@@ -2222,6 +2313,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerSobremesas;
     private javax.swing.JPanel invalidCPF;
     private javax.swing.JLabel invalidCPFText;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2262,5 +2354,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel textoSelectMesa;
     private javax.swing.JButton yesCPF;
     // End of variables declaration//GEN-END:variables
+
+    private void finalizarConta() {
+        conn.comando_sql("UPDATE t_contas SET conta_status='FECHADO' WHERE conta_codigo="+codConta+";");
+        showCard("FinalMessage");
+    }
 // </editor-fold> 
 }
