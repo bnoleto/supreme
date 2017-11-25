@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.3.0-alpha";
+    public static String versao_supreme = "v0.4.0-alpha";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
