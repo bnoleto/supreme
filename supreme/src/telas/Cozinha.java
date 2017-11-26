@@ -156,16 +156,17 @@ public class Cozinha extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(780, 510));
+        setSize(new java.awt.Dimension(720, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        TelaCozinha.setBackground(new java.awt.Color(255, 255, 255));
+        TelaCozinha.setBackground(new java.awt.Color(255, 244, 244));
         TelaCozinha.setMinimumSize(new java.awt.Dimension(780, 510));
 
-        titulo.setBackground(new java.awt.Color(0, 153, 153));
+        titulo.setBackground(new java.awt.Color(153, 0, 0));
         titulo.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -198,7 +199,7 @@ public class Cozinha extends javax.swing.JFrame {
             }
         });
 
-        tablePedidos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        tablePedidos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -218,7 +219,7 @@ public class Cozinha extends javax.swing.JFrame {
         tablePedidos.setToolTipText("Tabela de pedidos.");
         tablePedidos.setFillsViewportHeight(true);
         tablePedidos.setRowHeight(22);
-        tablePedidos.setSelectionBackground(new java.awt.Color(0, 153, 0));
+        tablePedidos.setSelectionBackground(new java.awt.Color(153, 0, 0));
         tablePedidos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablePedidos);
         if (tablePedidos.getColumnModel().getColumnCount() > 0) {
@@ -233,7 +234,7 @@ public class Cozinha extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Opções:");
 
-        rodape.setBackground(new java.awt.Color(0, 153, 153));
+        rodape.setBackground(new java.awt.Color(153, 0, 0));
         rodape.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rodape.setForeground(new java.awt.Color(255, 255, 255));
         rodape.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -270,7 +271,7 @@ public class Cozinha extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TelaCozinhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                     .addGroup(TelaCozinhaLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(finalizaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)

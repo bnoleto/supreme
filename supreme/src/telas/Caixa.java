@@ -153,7 +153,7 @@ public class Caixa extends javax.swing.JFrame{
             }
         });
 
-        Principal.setBackground(new java.awt.Color(255, 255, 255));
+        Principal.setBackground(new java.awt.Color(243, 255, 251));
         Principal.setMinimumSize(new java.awt.Dimension(800, 587));
 
         tableContas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -208,7 +208,7 @@ public class Caixa extends javax.swing.JFrame{
         valorConta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         valorConta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        finaliza.setBackground(new java.awt.Color(0, 153, 153));
+        finaliza.setBackground(new java.awt.Color(0, 102, 102));
         finaliza.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         finaliza.setForeground(new java.awt.Color(255, 255, 255));
         finaliza.setText("Finalizar");
@@ -219,9 +219,10 @@ public class Caixa extends javax.swing.JFrame{
             }
         });
 
-        fechaConta.setBackground(new java.awt.Color(255, 255, 255));
+        fechaConta.setBackground(new java.awt.Color(0, 102, 102));
         fechaConta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fechaConta.setText("Fechar Conta");
+        fechaConta.setForeground(new java.awt.Color(255, 255, 255));
+        fechaConta.setText("Ir para finalização");
         fechaConta.setEnabled(false);
         fechaConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +232,7 @@ public class Caixa extends javax.swing.JFrame{
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Contas Finalizadas:");
+        jLabel4.setText("Contas fechadas:");
 
         mostraConta.setEditable(false);
         mostraConta.setBackground(new java.awt.Color(255, 253, 219));
@@ -289,11 +290,11 @@ public class Caixa extends javax.swing.JFrame{
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PrincipalLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(65, 65, 65)))
                 .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addGap(36, 36, 36)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

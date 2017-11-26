@@ -11,12 +11,12 @@ import com.mysql.jdbc.Statement;
 public class Conexao {
         
         // variáveis para execução local
-        //private final String endereco_ip = "localhost:3306";
-        //private String schema = "bdsupreme2";
+        private final String endereco_ip = "localhost:3306";
+        private String schema = "bdsupreme2";
         
         // variáveis para execução online
-        private final String endereco_ip = "sql10.freemysqlhosting.net:3306";
-        private String schema = "sql10207255";
+        //private final String endereco_ip = "sql10.freemysqlhosting.net:3306";
+        //private String schema = "sql10207255";
         
 	private Connection conn = null;
 	private String status = "";
