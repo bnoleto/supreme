@@ -45,6 +45,12 @@ public class Cardapio extends javax.swing.JPanel {
         }
         return selecionados;
     }
+    
+    public void resetSelecionados(){
+        for(int i = 0; i<quantidade;i++){
+            check_item.get(i).setSelected(false);
+        }
+    }
                   
     private void initComponents() {
 		

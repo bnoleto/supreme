@@ -17,7 +17,7 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.5.1-alpha";
+    public static String versao_supreme = "v0.6.0-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
@@ -56,6 +56,65 @@ public class Mesa extends javax.swing.JFrame {
     // Irá liberar a mesa no banco de dados
     public void liberarMesa(){
         conn.comando_sql("UPDATE t_mesas SET mesa_status = 0 WHERE mesa_codigo = "+numMesa+";");
+    }
+    
+    public void atualizarResumo(){
+        
+        StringBuilder sb = new StringBuilder();
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        sb.append("Item\t\tValor Un.\tQtde.\tSubtotal\n");
+        sb.append("---------------------------------------------------------------\n");
+        
+        for(int i = 0; i< bebidas.getSelecionados().size(); i++){
+ 
+            int codItem = Integer.parseInt(bebidas.getSelecionados().get(i).get(0));
+            int qtdItem = Integer.parseInt(bebidas.getSelecionados().get(i).get(1));
+            
+            double valorUnit = Double.parseDouble(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(nomeItem + " / R$ " + formatter.format(valorUnit) + " / " + qtdItem + " / R$ " + formatter.format(valorUnit*qtdItem)+"\n"); 
+        }
+        for(int i = 0; i< lanches.getSelecionados().size(); i++){
+ 
+            int codItem = Integer.parseInt(lanches.getSelecionados().get(i).get(0));
+            int qtdItem = Integer.parseInt(lanches.getSelecionados().get(i).get(1));
+            
+            double valorUnit = Double.parseDouble(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(nomeItem + " / R$ " + formatter.format(valorUnit) + " / " + qtdItem + " / R$ " + formatter.format(valorUnit*qtdItem)+"\n"); 
+        }
+        for(int i = 0; i< refeicoes.getSelecionados().size(); i++){
+ 
+            int codItem = Integer.parseInt(refeicoes.getSelecionados().get(i).get(0));
+            int qtdItem = Integer.parseInt(refeicoes.getSelecionados().get(i).get(1));
+            
+            double valorUnit = Double.parseDouble(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(nomeItem + " / R$ " + formatter.format(valorUnit) + " / " + qtdItem + " / R$ " + formatter.format(valorUnit*qtdItem)+"\n"); 
+        }
+        for(int i = 0; i< sobremesas.getSelecionados().size(); i++){
+ 
+            int codItem = Integer.parseInt(sobremesas.getSelecionados().get(i).get(0));
+            int qtdItem = Integer.parseInt(sobremesas.getSelecionados().get(i).get(1));
+            
+            double valorUnit = Double.parseDouble(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(nomeItem + " / R$ " + formatter.format(valorUnit) + " / " + qtdItem + " / R$ " + formatter.format(valorUnit*qtdItem)+"\n"); 
+        }
+        sb.append("---------------------------------------------------------------\n");
+        sb.append("Valor Total: R$" + formatter.format(valorConta) + "\n\n");
+        sb.append("Bom apetite!\n");
+        
+        
+        
+        //sb.append(sb)
+/*
+        resumo = "Item\t\tQtde.\tValor"
+                +"\n---------------------------------------------------------------"+stringItens 
+                + "\n---------------------------------------------------------------"+"\nValor Total: "+valorConta
+                +"\n\nBom apetite!\n";*/
+        showResumo.setText(sb.toString());
     }
     
     public Object[][] retornarSelecionados(){
@@ -1877,6 +1936,8 @@ public class Mesa extends javax.swing.JFrame {
     
     private void novoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoPedidoActionPerformed
         showCard("Categories");
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_novoPedidoActionPerformed
 
     //Método que age como ActionListener de TODOS os botões do teclado do CPF
@@ -2082,6 +2143,8 @@ public class Mesa extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
         }
+        valorConta+=valorPedido;
+        atualizarResumo();
         
         for(int i = 0; i<bebidas.getSelecionados().size();i++){
             conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
@@ -2092,6 +2155,7 @@ public class Mesa extends javax.swing.JFrame {
                 + getData() + "', '"
                 + getHora() + "');");
         }
+        bebidas.resetSelecionados();
         for(int i = 0; i<lanches.getSelecionados().size();i++){
             conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
                 + lanches.getSelecionados().get(i).get(0) + "', '"
@@ -2101,6 +2165,7 @@ public class Mesa extends javax.swing.JFrame {
                 + getData() + "', '"
                 + getHora() + "');");
         }
+        lanches.resetSelecionados();
         for(int i = 0; i<sobremesas.getSelecionados().size();i++){
             conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
                 + sobremesas.getSelecionados().get(i).get(0) + "', '"
@@ -2110,6 +2175,7 @@ public class Mesa extends javax.swing.JFrame {
                 + getData() + "', '"
                 + getHora() + "');");
         }
+        sobremesas.resetSelecionados();
         for(int i = 0; i<refeicoes.getSelecionados().size();i++){
             conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
                 + refeicoes.getSelecionados().get(i).get(0) + "', '"
@@ -2119,6 +2185,7 @@ public class Mesa extends javax.swing.JFrame {
                 + getData() + "', '"
                 + getHora() + "');");
         }
+        refeicoes.resetSelecionados();
         
         conn.comando_sql("INSERT INTO t_pedidos_contas (`ped_codigo`, `conta_codigo`) VALUES ('"
                 + codPedido + "', '"
@@ -2126,7 +2193,9 @@ public class Mesa extends javax.swing.JFrame {
         
         conn.comando_sql("UPDATE t_contas SET conta_valor=conta_valor+"+valorPedido+" WHERE `conta_codigo`='"+codConta+"';");
         
+        
         showCard("Home");
+        
         
     }//GEN-LAST:event_bt_confirmar4ActionPerformed
     
