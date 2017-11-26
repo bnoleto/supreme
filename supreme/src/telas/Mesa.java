@@ -17,7 +17,7 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.6.1-beta";
+    public static String versao_supreme = "v0.6.2-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
@@ -32,6 +32,7 @@ public class Mesa extends javax.swing.JFrame {
     Cardapio lanches = null;
     Cardapio sobremesas = null;
     private Object[][] tabela_selecionados = null;
+    String telaAnterior = "";
     
     javax.swing.JScrollPane cardapioAtual = new javax.swing.JScrollPane();
     
@@ -51,6 +52,33 @@ public class Mesa extends javax.swing.JFrame {
         dataHoraAbertura = getData()+" "+getHora();
         getContaInfo();
         fillComboSelectMesa();
+    }
+    
+    // retornará a quantidade de itens que estão selecionados.
+    public int qtdSelecionados(){
+        
+        int quantidade = 0;
+        
+        for(int i = 0; i< bebidas.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< lanches.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< refeicoes.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< sobremesas.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        return quantidade;
+    }
+    
+    public void limparFooters(){
+        footerBebidas.setText("");
+        footerSobremesas.setText("");
+        footerLanches.setText("");
+        footerRefeicoes.setText("");
     }
     
     // Irá liberar a mesa no banco de dados
@@ -503,6 +531,7 @@ public class Mesa extends javax.swing.JFrame {
         fecharConta.setText("Fechar Conta");
         fecharConta.setToolTipText("");
         fecharConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fecharConta.setEnabled(false);
         fecharConta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         fecharConta.setMinimumSize(new java.awt.Dimension(250, 100));
         fecharConta.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -1324,10 +1353,9 @@ public class Mesa extends javax.swing.JFrame {
         headerBebidas.setOpaque(true);
 
         footerBebidas.setBackground(new java.awt.Color(0, 0, 127));
-        footerBebidas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerBebidas.setForeground(new java.awt.Color(255, 255, 255));
-        footerBebidas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerBebidas.setText(" ");
+        footerBebidas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerBebidas.setForeground(new java.awt.Color(255, 0, 0));
+        footerBebidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerBebidas.setToolTipText("");
         footerBebidas.setOpaque(true);
 
@@ -1443,10 +1471,9 @@ public class Mesa extends javax.swing.JFrame {
         headerRefeicoes.setOpaque(true);
 
         footerRefeicoes.setBackground(new java.awt.Color(0, 0, 127));
-        footerRefeicoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerRefeicoes.setForeground(new java.awt.Color(255, 255, 255));
-        footerRefeicoes.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerRefeicoes.setText(" ");
+        footerRefeicoes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerRefeicoes.setForeground(new java.awt.Color(255, 0, 0));
+        footerRefeicoes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerRefeicoes.setToolTipText("");
         footerRefeicoes.setOpaque(true);
 
@@ -1562,10 +1589,9 @@ public class Mesa extends javax.swing.JFrame {
         headerSobremesas.setOpaque(true);
 
         footerSobremesas.setBackground(new java.awt.Color(0, 0, 127));
-        footerSobremesas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerSobremesas.setForeground(new java.awt.Color(255, 255, 255));
-        footerSobremesas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerSobremesas.setText(" ");
+        footerSobremesas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerSobremesas.setForeground(new java.awt.Color(255, 0, 0));
+        footerSobremesas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerSobremesas.setToolTipText("");
         footerSobremesas.setOpaque(true);
 
@@ -1681,10 +1707,9 @@ public class Mesa extends javax.swing.JFrame {
         headerLanches.setOpaque(true);
 
         footerLanches.setBackground(new java.awt.Color(0, 0, 127));
-        footerLanches.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerLanches.setForeground(new java.awt.Color(255, 255, 255));
-        footerLanches.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerLanches.setText(" ");
+        footerLanches.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerLanches.setForeground(new java.awt.Color(255, 0, 0));
+        footerLanches.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerLanches.setToolTipText("");
         footerLanches.setOpaque(true);
 
@@ -2021,15 +2046,25 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_Cat2ActionPerformed
 
     private void bt_voltar_bebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_bebidasActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_bebidasActionPerformed
 
     private void bt_confirmar_bebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_bebidasActionPerformed
-        reconstruirTabela();
+        if(qtdSelecionados() > 0){
+            reconstruirTabela();
 
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+            telaAnterior = "cardapioBebidas";
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerBebidas.setText("Por favor selecione pelo menos 1 produto!");
+        }
+        
+        
     }//GEN-LAST:event_bt_confirmar_bebidasActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -2059,39 +2094,63 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_Cat4ActionPerformed
 
     private void bt_voltar_refeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_refeicoesActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_refeicoesActionPerformed
 
     private void bt_confirmar_refeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_refeicoesActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioRefeicoes";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerRefeicoes.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_refeicoesActionPerformed
 
     private void bt_voltar_sobremesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_sobremesasActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_sobremesasActionPerformed
 
     private void bt_confirmar_sobremesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_sobremesasActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioSobremesas";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerSobremesas.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_sobremesasActionPerformed
 
     private void bt_voltar_lanchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_lanchesActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_lanchesActionPerformed
 
     private void bt_confirmar_lanchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_lanchesActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioLanches";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerLanches.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_lanchesActionPerformed
 
     private void showCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCPFActionPerformed
@@ -2115,7 +2174,7 @@ public class Mesa extends javax.swing.JFrame {
 
     private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
         CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.menuCardapio");
+        card.show(Categories, telaAnterior);
     }//GEN-LAST:event_backButton1ActionPerformed
 
     public String getData(){
@@ -2193,7 +2252,7 @@ public class Mesa extends javax.swing.JFrame {
                 + codConta + "');");
         
         conn.comando_sql("UPDATE t_contas SET conta_valor=conta_valor+"+valorPedido+" WHERE `conta_codigo`='"+codConta+"';");
-        
+        fecharConta.setEnabled(true);
         
         showCard("Home");
         

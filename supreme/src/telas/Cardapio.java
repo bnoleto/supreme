@@ -1,5 +1,6 @@
 package telas;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Cardapio extends javax.swing.JPanel {
@@ -22,7 +23,7 @@ public class Cardapio extends javax.swing.JPanel {
     public Cardapio(codigo.Conexao conex, String tipo) {
         this.conn = conex;
         this.tabela = conn.retornar_query(
-            "SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor FROM t_itens WHERE itm_tipo='"+tipo.toUpperCase()+"' ORDER BY itm_nome;"
+            "SELECT itm_codigo,itm_nome,itm_descricao,itm_tipo,itm_valor,itm_status FROM t_itens WHERE itm_tipo='"+tipo.toUpperCase()+"' ORDER BY itm_nome;"
         );
 		
         initComponents();
@@ -104,6 +105,16 @@ public class Cardapio extends javax.swing.JPanel {
 
             desc_item.get(i).setFont(new java.awt.Font("Caladea", 2, 12)); // NOI18N
             desc_item.get(i).setText(tabela.get(i).get(2));
+            
+            if(tabela.get(i).get(5).compareTo("0") == 0){
+                check_item.get(i).setEnabled(false);
+                preco_item.get(i).setForeground(Color.gray);
+                qtd_item.get(i).setEnabled(false);
+                nome_item.get(i).setForeground(Color.gray);
+                
+                desc_item.get(i).setForeground(Color.gray);
+                desc_item.get(i).setText("(Item não disponível)");
+            }
         }
 
         java.util.ArrayList<javax.swing.GroupLayout> itemLayout = new java.util.ArrayList();
