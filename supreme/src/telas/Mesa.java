@@ -17,7 +17,7 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.6.0-beta";
+    public static String versao_supreme = "v0.6.1-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "", dataHoraAbertura, resumo;
@@ -383,7 +383,8 @@ public class Mesa extends javax.swing.JFrame {
         footerHome2.setBackground(new java.awt.Color(0, 0, 127));
         footerHome2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         footerHome2.setForeground(new java.awt.Color(255, 255, 255));
-        footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        footerHome2.setText("Conexão ao servidor <"+conn.url+"> realizada com sucesso!");
         footerHome2.setToolTipText("");
         footerHome2.setOpaque(true);
 

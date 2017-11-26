@@ -9,12 +9,21 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSetInternalMethods;
 import com.mysql.jdbc.Statement;
 public class Conexao {
-        private final String endereco_ip = "localhost";
+        
+        // variáveis para execução local
+        //private final String endereco_ip = "localhost:3306";
+        //private String schema = "bdsupreme2";
+        
+        // variáveis para execução online
+        private final String endereco_ip = "sql10.freemysqlhosting.net:3306";
+        private String schema = "sql10207255";
+        
 	private Connection conn = null;
 	private String status = "";
 	public boolean conectado = false;
         private String usuario = null;
         private String nome = null;
+        public String url = "http://"+endereco_ip+"/"+schema;
         
 	public int conectar(String usuario, char[] senha) {
 		try {
@@ -22,7 +31,7 @@ public class Conexao {
                     conectado = true;
                     this.status = "Conexão estabelecida como "+usuario+"!";
                     this.usuario = usuario;
-                    comando_sql("USE bdsupreme2;");
+                    comando_sql("USE "+schema+";");
                     ArrayList<ArrayList<String>> query = retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+usuario+"';");
                     this.nome = query.get(0).get(1);
                     
