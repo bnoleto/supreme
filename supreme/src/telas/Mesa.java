@@ -2,6 +2,8 @@ package telas;
 
 import codigo.Conexao;
 import java.awt.CardLayout;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,13 +16,13 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.7.2-beta";
+    public static String versao_supreme = "v0.7.3-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "";
     public static int numMesa, codConta;
-    private double valorConta = 0;
-    private double valorPedido = 0;
+    private BigDecimal valorConta = new BigDecimal("0.00");
+    private BigDecimal valorPedido = new BigDecimal("0.00");
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private DefaultComboBoxModel defaultComboBox;
     Cardapio bebidas = null;
@@ -78,8 +80,8 @@ public class Mesa extends javax.swing.JFrame {
     
     void resetarMesa(){
         
-        valorConta = 0;
-        valorPedido = 0;
+        valorConta = BigDecimal.ZERO;
+        valorPedido = BigDecimal.ZERO;
         telaAnterior = "";
         limparFooters();
         liberarMesa();
@@ -119,14 +121,14 @@ public class Mesa extends javax.swing.JFrame {
             int codItem = Integer.parseInt(conta.get(i).get(0));
             int qtdItem = Integer.parseInt(conta.get(i).get(1));
             
-            double valorUnit = Double.parseDouble(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            float valorUnit = Float.parseFloat(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
             String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
-            sb.append(String.format("%-25s", nomeItem.toUpperCase()) + String.format("%9s", "R$ " + formatter.format(valorUnit)) +String.format("%6s", qtdItem)+"\n");
-            sb.append(String.format("%40s", "R$ " + formatter.format(valorUnit*qtdItem))+"\n");
+            sb.append(String.format("%-25s", nomeItem.toUpperCase()) + String.format("%9s", "" + formatter.format(valorUnit)) +String.format("%6s", qtdItem)+"\n");
+            sb.append(String.format("%40s", "" + formatter.format(valorUnit*qtdItem))+"\n");
         }
         
         sb.append("----------------------------------------\n");
-        sb.append(String.format("%40s", "Valor Total: R$ " + formatter.format(valorConta)) + "\n\n");
+        sb.append(String.format("%-20s", "Cód. Conta: " + String.format("%06d", codConta)) + String.format("%20s", "Valor Total: " + formatter.format(valorConta)) + "\n\n");
         sb.append("              BOM APETITE!              \n");
         
 
@@ -137,17 +139,19 @@ public class Mesa extends javax.swing.JFrame {
         
         int linhas = bebidas.getSelecionados().size()+ lanches.getSelecionados().size() + refeicoes.getSelecionados().size() + sobremesas.getSelecionados().size() ;
         
-        
         Object[][] tabela = new Object[linhas][5];
         int i = 0;
         
-        valorPedido = 0;
+        valorPedido = BigDecimal.ZERO;
         
         for(int j = 0; j<bebidas.getSelecionados().size();j++){
             int cod = Integer.parseInt(bebidas.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(bebidas.getSelecionados().get(j).get(1));
-            valorPedido+=(valor*qtd);
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(bebidas.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -155,15 +159,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = bebidas.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<lanches.getSelecionados().size();j++){
             int cod = Integer.parseInt(lanches.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(lanches.getSelecionados().get(j).get(1));
-            valorPedido+=(valor*qtd);
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(lanches.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -171,15 +178,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = lanches.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<refeicoes.getSelecionados().size();j++){
             int cod = Integer.parseInt(refeicoes.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(refeicoes.getSelecionados().get(j).get(1));
-            valorPedido+=(valor*qtd);
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(refeicoes.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -187,15 +197,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = refeicoes.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<sobremesas.getSelecionados().size();j++){
             int cod = Integer.parseInt(sobremesas.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(sobremesas.getSelecionados().get(j).get(1));
-            valorPedido+=(valor*qtd);
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(sobremesas.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -203,7 +216,7 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = sobremesas.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
@@ -2276,7 +2289,9 @@ public class Mesa extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        valorConta+=valorPedido;
+        //valorConta+=valorPedido;
+        BigDecimal soma = valorConta.add(valorPedido).setScale(2, RoundingMode.HALF_EVEN);
+        valorConta = soma;
         
         for(int i = 0; i<bebidas.getSelecionados().size();i++){
             conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
@@ -2345,7 +2360,7 @@ public class Mesa extends javax.swing.JFrame {
             ex.getMessage();
         }
         //Altera o header da tela Home adicionando o número da mesa
-        headerHome.setText("Mesa: "+numMesa + " / Conta: " + codConta);
+        headerHome.setText("Mesa "+numMesa);
         atualizarResumo();
         showCard("Home");
     }//GEN-LAST:event_IniciarActionPerformed

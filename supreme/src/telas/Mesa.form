@@ -2224,10 +2224,6 @@
                       <Border info="null"/>
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="lista_itens = bebidas.getPanel();"/>
@@ -2448,10 +2444,6 @@
                       <Border info="null"/>
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="lista_itens1 = refeicoes.getPanel();"/>
@@ -2672,10 +2664,6 @@
                       <Border info="null"/>
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="lista_itens2 = sobremesas.getPanel();"/>
@@ -2896,10 +2884,6 @@
                       <Border info="null"/>
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-                    <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="lista_itens3 = lanches.getPanel();"/>
@@ -3075,7 +3059,6 @@
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
-                    <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -3087,9 +3070,6 @@
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="f4" red="f4" type="rgb"/>
-                        </Property>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="null"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="18" style="0"/>
