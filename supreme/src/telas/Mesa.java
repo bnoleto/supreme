@@ -12,8 +12,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
-
-
 public class Mesa extends javax.swing.JFrame {
     
     public static String versao_supreme = "v0.7.2-beta";
