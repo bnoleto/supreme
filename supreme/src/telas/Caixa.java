@@ -26,6 +26,8 @@ public class Caixa extends javax.swing.JFrame{
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultTableModel model;
+    public int selecionado = -1;
+    public float valorSelecionado = 0;
     
     public Caixa(Conexao conex) {
         this.conn = conex;
@@ -42,8 +44,7 @@ public class Caixa extends javax.swing.JFrame{
     public void fillTable(){
         //Loga no banco
         tabelaContas = conn.retornar_query(
-            "SELECT conta_codigo, conta_mesa, conta_valor, conta_data, conta_hora, conta_cpf "
-            + "FROM t_contas WHERE conta_status LIKE 'FECHADO';"
+            "SELECT conta_codigo,conta_mesa,conta_valor,conta_cpf,conta_abertura,conta_fechamento FROM t_contas WHERE conta_status LIKE 'FECHADO';"
         );
         //model e rowsorter da tabela
         model = (DefaultTableModel) tableContas.getModel();
@@ -84,6 +85,8 @@ public class Caixa extends javax.swing.JFrame{
         rodape = new javax.swing.JLabel();
         valorInsuficiente = new javax.swing.JLabel();
         valorRecebido = new javax.swing.JTextField();
+        bt_gerarNF = new javax.swing.JButton();
+        bt_cancelar = new javax.swing.JButton();
 
         Dialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         Dialog.setTitle("S.U.P.R.E.M.E Dialog");
@@ -93,14 +96,14 @@ public class Caixa extends javax.swing.JFrame{
         Dialog.setResizable(false);
         Dialog.setType(java.awt.Window.Type.POPUP);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(243, 255, 251));
         jPanel1.setToolTipText("Clique em OK para fechar.");
 
-        textoDialogo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        textoDialogo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         textoDialogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoDialogo.setText("Texto Dialogo");
 
-        dialogButton.setBackground(new java.awt.Color(0, 153, 153));
+        dialogButton.setBackground(new java.awt.Color(0, 102, 102));
         dialogButton.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         dialogButton.setForeground(new java.awt.Color(255, 255, 255));
         dialogButton.setText("OK");
@@ -115,20 +118,20 @@ public class Caixa extends javax.swing.JFrame{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textoDialogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(textoDialogo, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(textoDialogo)
-                .addGap(26, 26, 26)
-                .addComponent(dialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(dialogButton)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DialogLayout = new javax.swing.GroupLayout(Dialog.getContentPane());
@@ -188,28 +191,34 @@ public class Caixa extends javax.swing.JFrame{
         });
         jScrollPane3.setViewportView(tableContas);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Valor Recebido:");
 
         troco.setEditable(false);
-        troco.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        troco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        troco.setBackground(new java.awt.Color(243, 255, 251));
+        troco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        troco.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        troco.setBorder(null);
+        troco.setFocusable(false);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Troco:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Valor da Conta:");
 
         valorConta.setEditable(false);
-        valorConta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        valorConta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        valorConta.setBackground(new java.awt.Color(243, 255, 251));
+        valorConta.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        valorConta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        valorConta.setBorder(null);
+        valorConta.setFocusable(false);
 
         finaliza.setBackground(new java.awt.Color(0, 102, 102));
-        finaliza.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        finaliza.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         finaliza.setForeground(new java.awt.Color(255, 255, 255));
         finaliza.setText("Finalizar");
         finaliza.setEnabled(false);
@@ -220,7 +229,7 @@ public class Caixa extends javax.swing.JFrame{
         });
 
         fechaConta.setBackground(new java.awt.Color(0, 102, 102));
-        fechaConta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        fechaConta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         fechaConta.setForeground(new java.awt.Color(255, 255, 255));
         fechaConta.setText("Ir para finalização");
         fechaConta.setEnabled(false);
@@ -230,20 +239,21 @@ public class Caixa extends javax.swing.JFrame{
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Contas fechadas:");
 
         mostraConta.setEditable(false);
         mostraConta.setBackground(new java.awt.Color(255, 253, 219));
         mostraConta.setColumns(20);
-        mostraConta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        mostraConta.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         mostraConta.setRows(5);
         mostraConta.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         mostraConta.setEnabled(false);
+        mostraConta.setFocusable(false);
         jScrollPane2.setViewportView(mostraConta);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Resumo da conta:");
 
@@ -263,19 +273,44 @@ public class Caixa extends javax.swing.JFrame{
         rodape.setBorder(null);
         rodape.setOpaque(true);
 
-        valorInsuficiente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        valorInsuficiente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         valorInsuficiente.setForeground(new java.awt.Color(255, 0, 0));
         valorInsuficiente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        valorInsuficiente.setText("Valor Recebido é insuficiente!");
+        valorInsuficiente.setText("Valor insuficiente!");
 
         valorRecebido.setEditable(false);
         valorRecebido.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        valorRecebido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        valorRecebido.setText("0");
+        valorRecebido.setEnabled(false);
         valorRecebido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                valorRecebidoKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 valorRecebidoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                valorRecebidoKeyTyped(evt);
+            }
+        });
+
+        bt_gerarNF.setBackground(new java.awt.Color(0, 102, 102));
+        bt_gerarNF.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_gerarNF.setForeground(new java.awt.Color(255, 255, 255));
+        bt_gerarNF.setText("Gerar Nota Fiscal");
+        bt_gerarNF.setEnabled(false);
+        bt_gerarNF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_gerarNFActionPerformed(evt);
+            }
+        });
+
+        bt_cancelar.setBackground(new java.awt.Color(0, 102, 102));
+        bt_cancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        bt_cancelar.setText("Cancelar");
+        bt_cancelar.setEnabled(false);
+        bt_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cancelarActionPerformed(evt);
             }
         });
 
@@ -284,29 +319,28 @@ public class Caixa extends javax.swing.JFrame{
         PrincipalLayout.setHorizontalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PrincipalLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(65, 65, 65)))
-                .addGap(36, 36, 36)
+                    .addComponent(fechaConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(bt_gerarNF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(36, 36, 36)
-                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(valorInsuficiente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(valorConta, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(troco, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(valorRecebido, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(valorConta)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(troco)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(valorRecebido)
+                    .addComponent(finaliza, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
             .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(rodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -328,34 +362,37 @@ public class Caixa extends javax.swing.JFrame{
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(valorRecebido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(valorInsuficiente, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(troco)
-                        .addGap(45, 45, 45)
-                        .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(15, 15, 15)
-                .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addGap(15, 15, 15)
+                        .addGap(81, 81, 81)
+                        .addComponent(bt_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fechaConta, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(bt_gerarNF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(finaliza, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(rodape, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
-        valorInsuficiente.setVisible(false);
+        valorInsuficiente.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -365,9 +402,11 @@ public class Caixa extends javax.swing.JFrame{
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
         //Se alguma conta estiver selecionada
         if(tableContas.getSelectedRow()!= -1){
+            selecionado = tableContas.getSelectedRow();
+            valorSelecionado = Float.parseFloat(tabelaContas.get(selecionado).get(2).toString());
             tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
             fechaConta.setEnabled(false); //Impede que o botão seja clicado novamente
-            setContaInfo(); //Inicializa variáveis com informações da conta 
+            atualizarNF(); //Inicializa variáveis com informações da conta 
 
             //libera e preenche os campos à direita
             mostraConta.setEnabled(true);
@@ -380,7 +419,7 @@ public class Caixa extends javax.swing.JFrame{
 
     private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
         //Muda status da conta no BD
-        conn.comando_sql("UPDATE t_contas SET conta_status = 'FINALIZADO' WHERE conta_codigo = "+codigo+";");
+        conn.comando_sql("UPDATE t_contas SET conta_status='FINALIZADO',conta_finalizacao=CURRENT_TIMESTAMP WHERE conta_codigo = "+codigo+";");
         //Remove Linha da conta da tabela de contas
         ((DefaultTableModel)tableContas.getModel()).removeRow(tableContas.getSelectedRow());
         //Abre dialogo
@@ -401,39 +440,49 @@ public class Caixa extends javax.swing.JFrame{
 
     private void tableContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContasMouseClicked
         if(tableContas.getSelectedRow() != -1){
-            setContaInfo(); //Inicializa variáveis com informações da conta selecionada
-            mostraConta.setText(formataContaFinal());
+            atualizarNF(); //Inicializa variáveis com informações da conta selecionada
+            //mostraConta.setText(atualizarNF());
             if(!mostraConta.isEnabled()){
                 fechaConta.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tableContasMouseClicked
 
-    private void valorRecebidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyPressed
-        
-    }//GEN-LAST:event_valorRecebidoKeyPressed
-
     private void valorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyReleased
         int indice = tableContas.getSelectedRow();
-
+        
+        
+        if(Character.isDigit(evt.getKeyChar()) && valorRecebido.getText().compareTo("0"+evt.getKeyChar()) == 0){
+            valorRecebido.setText(String.valueOf(evt.getKeyChar()));
+        }
+        
+        String numero = valorRecebido.getText();
+        numero = numero.replace(',', '.');
+        
+        
         double vConta = Double.parseDouble(tabelaContas.get(indice).get(2));
-        double vr = Double.parseDouble(valorRecebido.getText());
+        double vr = Double.parseDouble(numero);
         double tAux = vr-vConta;
         //Se valor recebido for maior que o valor da conta
         if(vr>=vConta){
             //Caso ja tenha sido mudado para true, volta a ser false
-            valorInsuficiente.setVisible(false);
+            //valorInsuficiente.setVisible(false);
+            valorInsuficiente.setText(" ");
             //Printa o valor recebido formatado no campo
-            valorRecebido.setText(nf.format(vr));
+            //valorRecebido.setText(nf.format(vr));
             //Impede a edição do valor após o mesmo ser maior ou igual ao valor da conta
-            valorRecebido.setEditable(false);
+            //valorRecebido.setEditable(false);
             //Printa o valor do troco formatado no campo
             troco.setText(nf.format(tAux));
             //Libera o botão Finalizar
             finaliza.setEnabled(true);
         }else{ //Se não
             valorInsuficiente.setVisible(true);
+            valorInsuficiente.setText("Valor Insuficiente!");
+            troco.setText(" ");
+            
         }   
+        
     }//GEN-LAST:event_valorRecebidoKeyReleased
 
     private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
@@ -449,7 +498,40 @@ public class Caixa extends javax.swing.JFrame{
             Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
-    
+
+    private void bt_gerarNFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_gerarNFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_gerarNFActionPerformed
+
+    private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_cancelarActionPerformed
+
+    private void valorRecebidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyTyped
+        String campo = valorRecebido.getText()+evt.getKeyChar();
+        int quantidade = 0;
+        
+        
+        if(valorRecebido.getText().length() == 0){
+            valorRecebido.setText("0");
+        }
+        
+        if(!(String.valueOf(evt.getKeyChar()).matches("[0-9]") || String.valueOf(evt.getKeyChar()).compareTo(",") == 0 )){
+            evt.consume();
+        }
+        else{
+            for(int i = 0; i<campo.length();i++){
+                if(campo.charAt(i) == ','){
+                    quantidade++;
+                }
+            }
+            if(quantidade > 1){
+                evt.consume();
+            }
+        }
+
+    }//GEN-LAST:event_valorRecebidoKeyTyped
+    /*
     //Inicializa as variáveis da conta selecionada com os valores recebidos do banco
     private void setContaInfo(){
         int indice = tableContas.getSelectedRow();
@@ -493,7 +575,7 @@ public class Caixa extends javax.swing.JFrame{
                 stringItens+="\n"+ar.get(0)+"\t"+ar.get(1)+"\t"+nf.format(Double.parseDouble(ar.get(2)));
             }
         }
-    }
+    }*/
     
     private void getDataEHora(){
         //Adquire data e hora do sistema
@@ -505,6 +587,47 @@ public class Caixa extends javax.swing.JFrame{
         //Fim data e hora
     }
     
+    public void atualizarNF(){
+        
+        StringBuilder sb = new StringBuilder();
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        int codConta = Integer.valueOf(tableContas.getValueAt(tableContas.getSelectedRow(), 0).toString());
+
+        sb.append("----------------------------------------\n");
+        //sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
+        sb.append(String.format("%-25s", "ITEM")+"VALOR UN. "+"QTDE.\n");
+        sb.append(String.format("%40s", "SUBTOTAL")+"\n");
+        sb.append("========================================\n");
+        
+        ArrayList<ArrayList<String>> conta = conn.retornar_query(
+                "SELECT t_pedido_itens.itm_codigo,t_pedido_itens.itm_qtde,t_pedidos.ped_codigo, t_pedidos_contas.conta_codigo FROM t_pedido_itens\n" +
+                "INNER JOIN t_pedidos ON t_pedido_itens.ped_codigo=t_pedidos.ped_codigo\n" +
+                "INNER JOIN t_pedidos_contas ON t_pedidos.ped_codigo = t_pedidos_contas.ped_codigo\n" +
+                "WHERE conta_codigo = "+codConta+";"
+        );
+        
+        for(int i = 0; i< conta.size(); i++){
+ 
+            int codItem = Integer.parseInt(conta.get(i).get(0));
+            int qtdItem = Integer.parseInt(conta.get(i).get(1));
+            
+            float valorUnit = Float.parseFloat(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(String.format("%-25s", nomeItem.toUpperCase()) + String.format("%9s", "" + formatter.format(valorUnit)) +String.format("%6s", qtdItem)+"\n");
+            sb.append(String.format("%40s", "" + formatter.format(valorUnit*qtdItem))+"\n");
+        }
+        float totalConta = Float.parseFloat(tabelaContas.get(tableContas.getSelectedRow()).get(2));
+        
+        sb.append("========================================\n");
+        sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(totalConta)) + "\n\n");
+        sb.append("              BOM APETITE!              \n");
+        
+        valor = "R$ "+formatter.format(totalConta);
+
+        mostraConta.setText(sb.toString());
+    }
+    /*
     private String formataContaFinal(){
         String ContaFinal = "";
         String CF = "Item\t\tQtde.\tValor"
@@ -523,7 +646,7 @@ public class Caixa extends javax.swing.JFrame{
                     + "\nCPF do contribuinte: "+cpf+"\n\n"+CF;
         }  
         return ContaFinal;
-    }
+    }*/
     
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -567,6 +690,8 @@ public class Caixa extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Dialog;
     private javax.swing.JPanel Principal;
+    private javax.swing.JButton bt_cancelar;
+    private javax.swing.JButton bt_gerarNF;
     private javax.swing.JButton dialogButton;
     private javax.swing.JButton fechaConta;
     private javax.swing.JButton finaliza;

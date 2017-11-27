@@ -583,7 +583,7 @@ public class Mesa extends javax.swing.JFrame {
 
         showResumo.setEditable(false);
         showResumo.setColumns(1);
-        showResumo.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        showResumo.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         showResumo.setRows(5);
         showResumo.setAutoscrolls(false);
         showResumo.setFocusable(false);
@@ -1282,7 +1282,6 @@ public class Mesa extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(FinalMessageLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_concluido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
