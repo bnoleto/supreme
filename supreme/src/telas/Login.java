@@ -62,7 +62,6 @@ public class Login extends javax.swing.JFrame {
                 }
                 else{
                     Mesa telaMesa= new Mesa(conn);
-                    telaMesa.initConexao();
                     telaMesa.setVisible(true);
                 }
                 

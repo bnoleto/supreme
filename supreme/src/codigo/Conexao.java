@@ -23,7 +23,7 @@ public class Conexao {
 	public boolean conectado = false;
         private String usuario = null;
         private String nome = null;
-        public String url = "http://"+endereco_ip+"/"+schema;
+        public String url = endereco_ip+"/"+schema;
         
 	public int conectar(String usuario, char[] senha) {
 		try {
