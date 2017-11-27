@@ -44,6 +44,8 @@ public class Conexao {
                     comando_sql("USE "+schema+";");
                     if(remoto){
                         this.nome = this.usuario;
+                        // correção da timezone do servidor
+                        comando_sql("SET time_zone = '-1:51';");
                     }
                     else{
                         ArrayList<ArrayList<String>> query = retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+usuario+"';");

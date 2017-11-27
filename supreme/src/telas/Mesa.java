@@ -5,10 +5,12 @@ import java.awt.CardLayout;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -16,13 +18,14 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.7.3-beta";
+    public static String versao_supreme = "v0.7.4-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "";
     public static int numMesa, codConta;
     private BigDecimal valorConta = new BigDecimal("0.00");
     private BigDecimal valorPedido = new BigDecimal("0.00");
+    private String dataHoraAbertura = null;
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
     private DefaultComboBoxModel defaultComboBox;
     Cardapio bebidas = null;
@@ -72,7 +75,7 @@ public class Mesa extends javax.swing.JFrame {
     }
     
     private void finalizarConta() {
-        conn.comando_sql("UPDATE t_contas SET conta_status='FECHADO' WHERE conta_codigo="+codConta+";");
+        conn.comando_sql("UPDATE t_contas SET conta_status='FECHADO',conta_fechamento=CURRENT_TIMESTAMP WHERE conta_codigo="+codConta+";");
         showCard("FinalMessage");
         resetarMesa();
         
@@ -105,9 +108,12 @@ public class Mesa extends javax.swing.JFrame {
         StringBuilder sb = new StringBuilder();
         java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
         
-        sb.append(String.format("%-25s", "Item")+"Valor Un. "+"Qtde.\n");
-        sb.append(String.format("%40s", "Subtotal")+"\n");
-        sb.append("----------------------------------------\n");
+        
+        
+        sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
+        sb.append(String.format("%-25s", "ITEM")+"VALOR UN. "+"QTDE.\n");
+        sb.append(String.format("%40s", "SUBTOTAL")+"\n");
+        sb.append("========================================\n");
         
         ArrayList<ArrayList<String>> conta = conn.retornar_query(
                 "SELECT t_pedido_itens.itm_codigo,t_pedido_itens.itm_qtde,t_pedidos.ped_codigo, t_pedidos_contas.conta_codigo FROM t_pedido_itens\n" +
@@ -127,8 +133,8 @@ public class Mesa extends javax.swing.JFrame {
             sb.append(String.format("%40s", "" + formatter.format(valorUnit*qtdItem))+"\n");
         }
         
-        sb.append("----------------------------------------\n");
-        sb.append(String.format("%-20s", "Cód. Conta: " + String.format("%06d", codConta)) + String.format("%20s", "Valor Total: " + formatter.format(valorConta)) + "\n\n");
+        sb.append("========================================\n");
+        sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(valorConta)) + "\n\n");
         sb.append("              BOM APETITE!              \n");
         
 
@@ -579,9 +585,10 @@ public class Mesa extends javax.swing.JFrame {
 
         showResumo.setEditable(false);
         showResumo.setColumns(1);
-        showResumo.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
+        showResumo.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         showResumo.setRows(5);
         showResumo.setAutoscrolls(false);
+        showResumo.setFocusable(false);
         showResumo.setRequestFocusEnabled(false);
         showResumo.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(showResumo);
@@ -1506,8 +1513,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens.setBorder(null);
         lista_itens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens.setViewportBorder(null);
-        lista_itens.setOpaque(true);
 
         lista_itens = bebidas.getPanel();
 
@@ -1624,8 +1629,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens1.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens1.setBorder(null);
         lista_itens1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens1.setViewportBorder(null);
-        lista_itens1.setOpaque(true);
 
         lista_itens1 = refeicoes.getPanel();
 
@@ -1742,8 +1745,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens2.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens2.setBorder(null);
         lista_itens2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens2.setViewportBorder(null);
-        lista_itens2.setOpaque(true);
 
         lista_itens2 = sobremesas.getPanel();
 
@@ -1860,8 +1861,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens3.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens3.setBorder(null);
         lista_itens3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens3.setViewportBorder(null);
-        lista_itens3.setOpaque(true);
 
         lista_itens3 = lanches.getPanel();
 
@@ -1966,11 +1965,9 @@ public class Mesa extends javax.swing.JFrame {
 
         pane_tabela_itens.setBackground(new java.awt.Color(244, 244, 255));
         pane_tabela_itens.setBorder(null);
-        pane_tabela_itens.setOpaque(true);
 
         tabela_itens.getTableHeader().setBackground(new java.awt.Color(244, 244, 255));
         tabela_itens.setBackground(new java.awt.Color(244, 244, 255));
-        tabela_itens.setBorder(null);
         tabela_itens.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tabela_itens.setModel(new javax.swing.table.DefaultTableModel(retornarSelecionados(),
             new String [] {
@@ -2353,12 +2350,6 @@ public class Mesa extends javax.swing.JFrame {
         
         createConta();
         
-        try {
-            codConta = Integer.parseInt(conn.retornar_ultima_celula("t_contas", "conta_codigo"));
-        } catch (SQLException ex) {
-            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
-            ex.getMessage();
-        }
         //Altera o header da tela Home adicionando o número da mesa
         headerHome.setText("Mesa "+numMesa);
         atualizarResumo();
@@ -2381,10 +2372,23 @@ public class Mesa extends javax.swing.JFrame {
         //Cria uma nova conta na tabela t_contas
         conn.comando_sql("INSERT INTO t_contas(conta_valor, conta_mesa, conta_status, conta_data, conta_hora)" 
                        + "VALUES ("+valorConta+","+numMesa+",'ABERTO','"+getData()+"','"+getHora()+"');");
+        /*
         //Pega o código gerado pelo banco para esta conta
         ArrayList<ArrayList<String>> codigo = conn.retornar_query("SELECT conta_codigo FROM t_contas "
                           + "WHERE conta_mesa LIKE "+numMesa+" AND conta_status LIKE 'ABERTO';");
-        codConta = Integer.parseInt(codigo.get(0).get(0));
+        codConta = Integer.parseInt(codigo.get(0).get(0));*/
+        
+        try {
+            codConta = Integer.parseInt(conn.retornar_ultima_celula("t_contas", "conta_codigo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
+        }
+        
+        dataHoraAbertura = conn.retornar_valor(codConta, 
+                "DATE_FORMAT( `conta_abertura` , '%d/%c/%Y %H:%i:%s' )",
+                "conta_codigo",
+                "t_contas");
     }
     
     //Função que preenche a comboBox do SelectMesa
