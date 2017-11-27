@@ -11,7 +11,7 @@ import com.mysql.jdbc.Statement;
 public class Conexao {
         
         // variáveis para execução local
-        private final String endereco_ip = "localhost:3306";
+        private String endereco_ip = "localhost:3306";
         private String schema = "bdsupreme2";
         
         // variáveis para execução online
@@ -23,10 +23,19 @@ public class Conexao {
 	public boolean conectado = false;
         private String usuario = null;
         private String nome = null;
-        public String url = endereco_ip+"/"+schema;
+        public String url = null;
         
 	public int conectar(String usuario, char[] senha) {
 		try {
+                    // condição para fazer o acesso ao servidor remoto
+                    if(usuario.compareTo("servidor") == 0){
+                        endereco_ip = "sql10.freemysqlhosting.net:3306";
+                        schema = "sql10207255";
+                        usuario = "sql10207255";
+                        senha = "ABng9m6EuM".toCharArray();
+                    }
+                    url = endereco_ip+"/"+schema;
+                    
                     this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://"+endereco_ip+"/?user="+usuario+"&password="+String.valueOf(senha)+"&useSSL=false");
                     conectado = true;
                     this.status = "Conexão estabelecida como "+usuario+"!";

@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -50,7 +51,17 @@ public class Login extends javax.swing.JFrame {
     public void iniciarTela(){
         if(conn.conectado){
                 ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+campo_usuario.getText()+"';");
-                String categoria_usuario = query.get(0).get(5);
+                
+                String categoria_usuario;
+                // condição para conectar ao servidor remoto
+                if(campo_usuario.getText().compareTo("servidor") == 0){
+                    categoria_usuario = String.valueOf(campo_senha.getPassword()).toUpperCase();
+                }
+                else{
+                    categoria_usuario = query.get(0).get(5);    
+                }
+                System.out.println(categoria_usuario);
+                
                 if(categoria_usuario.compareTo("CAIXA") == 0){
                     Caixa telaCaixa= new Caixa(conn);
                     telaCaixa.setVisible(true);
@@ -313,13 +324,13 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
