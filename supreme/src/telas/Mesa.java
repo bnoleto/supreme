@@ -2,8 +2,9 @@ package telas;
 
 import codigo.Conexao;
 import java.awt.CardLayout;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,24 +14,24 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
-
-
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.4.2-alpha";
+    public static String versao_supreme = "v0.7.4-beta";
     
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
-    private String cpf = "", dataHoraAbertura, resumo;
+    private String cpf = "";
     public static int numMesa, codConta;
-    private double valorConta = 0.0;
+    private BigDecimal valorConta = new BigDecimal("0.00");
+    private BigDecimal valorPedido = new BigDecimal("0.00");
+    private String dataHoraAbertura = null;
     private codigo.Conexao conn = new codigo.Conexao(); //conexao com o banco de dados
-    private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultComboBoxModel defaultComboBox;
     Cardapio bebidas = null;
     Cardapio refeicoes = null;
     Cardapio lanches = null;
     Cardapio sobremesas = null;
     private Object[][] tabela_selecionados = null;
+    String telaAnterior = "";
     
     javax.swing.JScrollPane cardapioAtual = new javax.swing.JScrollPane();
     
@@ -41,15 +42,58 @@ public class Mesa extends javax.swing.JFrame {
         lanches = new Cardapio(conn,"LANCHES");
         sobremesas = new Cardapio(conn,"SOBREMESAS");
         initComponents();
+        fillComboSelectMesa();
+    }
+
+    // retornará a quantidade de itens que estão selecionados.
+    public int qtdSelecionados(){
+        
+        int quantidade = 0;
+        
+        for(int i = 0; i< bebidas.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< lanches.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< refeicoes.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        for(int i = 0; i< sobremesas.getSelecionados().size(); i++){
+            quantidade++;
+        }
+        return quantidade;
     }
     
-    public void initConexao(){
-        System.out.println("***/: "+conn.getStatus());
-        fillComboSelectMesa();
-        createConta();
-        dataHoraAbertura = getData()+" "+getHora();
-        getContaInfo();
-        fillComboSelectMesa();
+    public void limparFooters(){
+        footerBebidas.setText("");
+        footerSobremesas.setText("");
+        footerLanches.setText("");
+        footerRefeicoes.setText("");
+    }
+    
+    private void finalizarConta() {
+        conn.comando_sql("UPDATE t_contas SET conta_status='FECHADO',conta_fechamento=CURRENT_TIMESTAMP WHERE conta_codigo="+codConta+";");
+        showCard("FinalMessage");
+        resetarMesa();
+        
+    }
+    
+    void resetarMesa(){
+        
+        valorConta = BigDecimal.ZERO;
+        valorPedido = BigDecimal.ZERO;
+        telaAnterior = "";
+        limparFooters();
+        liberarMesa();
+        
+        fecharConta.setEnabled(false);
+        
+        bebidas.resetSelecionados();
+        refeicoes.resetSelecionados();
+        lanches.resetSelecionados();
+        sobremesas.resetSelecionados();
+        
     }
     
     // Irá liberar a mesa no banco de dados
@@ -57,17 +101,61 @@ public class Mesa extends javax.swing.JFrame {
         conn.comando_sql("UPDATE t_mesas SET mesa_status = 0 WHERE mesa_codigo = "+numMesa+";");
     }
     
+    public void atualizarResumo(){
+        
+        StringBuilder sb = new StringBuilder();
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        
+        
+        sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
+        sb.append(String.format("%-25s", "ITEM")+"VALOR UN. "+"QTDE.\n");
+        sb.append(String.format("%40s", "SUBTOTAL")+"\n");
+        sb.append("========================================\n");
+        
+        ArrayList<ArrayList<String>> conta = conn.retornar_query(
+                "SELECT t_pedido_itens.itm_codigo,t_pedido_itens.itm_qtde,t_pedidos.ped_codigo, t_pedidos_contas.conta_codigo FROM t_pedido_itens\n" +
+                "INNER JOIN t_pedidos ON t_pedido_itens.ped_codigo=t_pedidos.ped_codigo\n" +
+                "INNER JOIN t_pedidos_contas ON t_pedidos.ped_codigo = t_pedidos_contas.ped_codigo\n" +
+                "WHERE conta_codigo = "+codConta+";"
+        );
+        
+        for(int i = 0; i< conta.size(); i++){
+ 
+            int codItem = Integer.parseInt(conta.get(i).get(0));
+            int qtdItem = Integer.parseInt(conta.get(i).get(1));
+            
+            float valorUnit = Float.parseFloat(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(String.format("%-25s", nomeItem.toUpperCase()) + String.format("%9s", "" + formatter.format(valorUnit)) +String.format("%6s", qtdItem)+"\n");
+            sb.append(String.format("%40s", "" + formatter.format(valorUnit*qtdItem))+"\n");
+        }
+        
+        sb.append("========================================\n");
+        sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(valorConta)) + "\n\n");
+        sb.append("              BOM APETITE!              \n");
+        
+
+        showResumo.setText(sb.toString());
+    }
+    
     public Object[][] retornarSelecionados(){
-        System.out.print("TA AQUI PORRA");
         
         int linhas = bebidas.getSelecionados().size()+ lanches.getSelecionados().size() + refeicoes.getSelecionados().size() + sobremesas.getSelecionados().size() ;
         
         Object[][] tabela = new Object[linhas][5];
         int i = 0;
+        
+        valorPedido = BigDecimal.ZERO;
+        
         for(int j = 0; j<bebidas.getSelecionados().size();j++){
             int cod = Integer.parseInt(bebidas.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(bebidas.getSelecionados().get(j).get(1));
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(bebidas.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -75,14 +163,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = bebidas.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<lanches.getSelecionados().size();j++){
             int cod = Integer.parseInt(lanches.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(lanches.getSelecionados().get(j).get(1));
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(lanches.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -90,14 +182,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = lanches.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<refeicoes.getSelecionados().size();j++){
             int cod = Integer.parseInt(refeicoes.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(refeicoes.getSelecionados().get(j).get(1));
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(refeicoes.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -105,14 +201,18 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = refeicoes.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
         for(int j = 0; j<sobremesas.getSelecionados().size();j++){
             int cod = Integer.parseInt(sobremesas.getSelecionados().get(j).get(0));
-            double valor = Double.parseDouble(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
-            int qtd = Integer.parseInt(sobremesas.getSelecionados().get(j).get(1));
+            BigDecimal valor = new BigDecimal(conn.retornar_valor(cod, "itm_valor","itm_codigo", "t_itens"));
+            BigDecimal qtd = new BigDecimal(sobremesas.getSelecionados().get(j).get(1));
+            
+            BigDecimal subtotal = valor.multiply(qtd).setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal bd = valorPedido.add(subtotal).setScale(2, RoundingMode.HALF_EVEN);
+            valorPedido = bd;
             
             java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
             
@@ -120,7 +220,7 @@ public class Mesa extends javax.swing.JFrame {
             tabela[i][1] = conn.retornar_valor(cod, "itm_nome","itm_codigo", "t_itens");
             tabela[i][2] = "R$ "+formatter.format(valor);
             tabela[i][3] = sobremesas.getSelecionados().get(j).get(1);
-            tabela[i][4] = "R$ "+formatter.format(valor*qtd);
+            tabela[i][4] = "R$ "+formatter.format(subtotal.floatValue());
             
             i++;
         }
@@ -149,6 +249,10 @@ public class Mesa extends javax.swing.JFrame {
         tabela_itens.getColumnModel().getColumn(3).setPreferredWidth(83);
         tabela_itens.getColumnModel().getColumn(4).setPreferredWidth(100);
         
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        jLabel1.setText("Total deste pedido: R$ " + formatter.format(valorPedido));
+        
  
     }
     
@@ -158,11 +262,16 @@ public class Mesa extends javax.swing.JFrame {
 
         panelPrincipal = new javax.swing.JPanel();
         SelectMesaProvavel = new javax.swing.JPanel();
-        headerHome2 = new javax.swing.JLabel();
-        footerHome2 = new javax.swing.JLabel();
+        headerSelectMesa = new javax.swing.JLabel();
+        footerSelectMesa = new javax.swing.JLabel();
         comboBoxSelectMesa = new javax.swing.JComboBox<>();
         textoSelectMesa = new javax.swing.JLabel();
         selectMesaButton = new javax.swing.JButton();
+        TelaInicial = new javax.swing.JPanel();
+        headerTelaInicial = new javax.swing.JLabel();
+        footerTelaInicial = new javax.swing.JLabel();
+        Iniciar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         Home = new javax.swing.JPanel();
         headerHome = new javax.swing.JLabel();
         footerHome = new javax.swing.JLabel();
@@ -214,6 +323,7 @@ public class Mesa extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        bt_concluido = new javax.swing.JButton();
         Categories = new javax.swing.JPanel();
         menuCardapio = new javax.swing.JPanel();
         headerCategories = new javax.swing.JLabel();
@@ -271,6 +381,7 @@ public class Mesa extends javax.swing.JFrame {
         pane_tabela_itens = new javax.swing.JScrollPane();
         tabela_itens = new javax.swing.JTable();
         tabela_itens.setFillsViewportHeight(true);
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME "+Mesa.versao_supreme);
@@ -300,20 +411,21 @@ public class Mesa extends javax.swing.JFrame {
         SelectMesaProvavel.setInheritsPopupMenu(true);
         SelectMesaProvavel.setMinimumSize(new java.awt.Dimension(720, 480));
 
-        headerHome2.setBackground(new java.awt.Color(0, 0, 127));
-        headerHome2.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
-        headerHome2.setForeground(new java.awt.Color(255, 255, 255));
-        headerHome2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        headerHome2.setText("Selecione a sua mesa");
-        headerHome2.setToolTipText("");
-        headerHome2.setOpaque(true);
+        headerSelectMesa.setBackground(new java.awt.Color(0, 0, 127));
+        headerSelectMesa.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerSelectMesa.setForeground(new java.awt.Color(255, 255, 255));
+        headerSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerSelectMesa.setText("Selecione a sua mesa");
+        headerSelectMesa.setToolTipText("");
+        headerSelectMesa.setOpaque(true);
 
-        footerHome2.setBackground(new java.awt.Color(0, 0, 127));
-        footerHome2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        footerHome2.setForeground(new java.awt.Color(255, 255, 255));
-        footerHome2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerHome2.setToolTipText("");
-        footerHome2.setOpaque(true);
+        footerSelectMesa.setBackground(new java.awt.Color(0, 0, 127));
+        footerSelectMesa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        footerSelectMesa.setForeground(new java.awt.Color(255, 255, 255));
+        footerSelectMesa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        footerSelectMesa.setText("Conectado ao servidor "+conn.url+" com sucesso!");
+        footerSelectMesa.setToolTipText("");
+        footerSelectMesa.setOpaque(true);
 
         comboBoxSelectMesa.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         comboBoxSelectMesa.setMaximumRowCount(6);
@@ -344,8 +456,8 @@ public class Mesa extends javax.swing.JFrame {
         SelectMesaProvavel.setLayout(SelectMesaProvavelLayout);
         SelectMesaProvavelLayout.setHorizontalGroup(
             SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(headerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(footerHome2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(headerSelectMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(footerSelectMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SelectMesaProvavelLayout.createSequentialGroup()
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -359,7 +471,7 @@ public class Mesa extends javax.swing.JFrame {
         SelectMesaProvavelLayout.setVerticalGroup(
             SelectMesaProvavelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SelectMesaProvavelLayout.createSequentialGroup()
-                .addComponent(headerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(headerSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93)
                 .addComponent(textoSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -367,10 +479,82 @@ public class Mesa extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(selectMesaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(footerHome2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(footerSelectMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPrincipal.add(SelectMesaProvavel, "SelectMesa");
+
+        TelaInicial.setBackground(new java.awt.Color(244, 244, 255));
+        TelaInicial.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        TelaInicial.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        TelaInicial.setInheritsPopupMenu(true);
+        TelaInicial.setMinimumSize(new java.awt.Dimension(720, 480));
+
+        headerTelaInicial.setBackground(new java.awt.Color(0, 0, 127));
+        headerTelaInicial.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        headerTelaInicial.setForeground(new java.awt.Color(255, 255, 255));
+        headerTelaInicial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerTelaInicial.setText("Mesa " + numMesa);
+        headerTelaInicial.setToolTipText("");
+        headerTelaInicial.setOpaque(true);
+
+        footerTelaInicial.setBackground(new java.awt.Color(0, 0, 127));
+        footerTelaInicial.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        footerTelaInicial.setForeground(new java.awt.Color(255, 255, 255));
+        footerTelaInicial.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        footerTelaInicial.setText(" ");
+        footerTelaInicial.setToolTipText("");
+        footerTelaInicial.setOpaque(true);
+
+        Iniciar.setBackground(new java.awt.Color(0, 0, 76));
+        Iniciar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        Iniciar.setForeground(new java.awt.Color(244, 244, 255));
+        Iniciar.setText("Iniciar");
+        Iniciar.setToolTipText("");
+        Iniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Iniciar.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        Iniciar.setMinimumSize(new java.awt.Dimension(250, 100));
+        Iniciar.setPreferredSize(new java.awt.Dimension(250, 100));
+        Iniciar.setSelected(true);
+        Iniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IniciarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Caladea", 3, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Seja bem-vindo ao nosso restaurante!");
+
+        javax.swing.GroupLayout TelaInicialLayout = new javax.swing.GroupLayout(TelaInicial);
+        TelaInicial.setLayout(TelaInicialLayout);
+        TelaInicialLayout.setHorizontalGroup(
+            TelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(headerTelaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(footerTelaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(TelaInicialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TelaInicialLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        TelaInicialLayout.setVerticalGroup(
+            TelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TelaInicialLayout.createSequentialGroup()
+                .addComponent(headerTelaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109)
+                .addComponent(jLabel2)
+                .addGap(42, 42, 42)
+                .addComponent(Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(footerTelaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panelPrincipal.add(TelaInicial, "TelaInicial");
 
         Home.setBackground(new java.awt.Color(244, 244, 255));
         Home.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -395,11 +579,14 @@ public class Mesa extends javax.swing.JFrame {
         footerHome.setToolTipText("");
         footerHome.setOpaque(true);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         showResumo.setEditable(false);
         showResumo.setColumns(1);
-        showResumo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        showResumo.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         showResumo.setRows(5);
         showResumo.setAutoscrolls(false);
+        showResumo.setFocusable(false);
         showResumo.setRequestFocusEnabled(false);
         showResumo.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(showResumo);
@@ -430,6 +617,7 @@ public class Mesa extends javax.swing.JFrame {
         fecharConta.setText("Fechar Conta");
         fecharConta.setToolTipText("");
         fecharConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fecharConta.setEnabled(false);
         fecharConta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         fecharConta.setMinimumSize(new java.awt.Dimension(250, 100));
         fecharConta.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -458,8 +646,8 @@ public class Mesa extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(headerResumo, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
-                .addGap(29, 29, 29))
+                    .addComponent(headerResumo, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         HomeLayout.setVerticalGroup(
             HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1066,6 +1254,21 @@ public class Mesa extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Quase lá...");
 
+        bt_concluido.setBackground(new java.awt.Color(0, 0, 76));
+        bt_concluido.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        bt_concluido.setForeground(new java.awt.Color(244, 244, 255));
+        bt_concluido.setText("Concluído");
+        bt_concluido.setToolTipText("Clique aqui para fazer um novo pedido!");
+        bt_concluido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bt_concluido.setMaximumSize(new java.awt.Dimension(2050, 4500));
+        bt_concluido.setMinimumSize(new java.awt.Dimension(110, 35));
+        bt_concluido.setPreferredSize(new java.awt.Dimension(110, 35));
+        bt_concluido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_concluidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FinalMessageLayout = new javax.swing.GroupLayout(FinalMessage);
         FinalMessage.setLayout(FinalMessageLayout);
         FinalMessageLayout.setHorizontalGroup(
@@ -1077,20 +1280,26 @@ public class Mesa extends javax.swing.JFrame {
                 .addGroup(FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(FinalMessageLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_concluido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         FinalMessageLayout.setVerticalGroup(
             FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FinalMessageLayout.createSequentialGroup()
                 .addComponent(headerFinalMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(bt_concluido, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(footerFinalMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1202,15 +1411,15 @@ public class Mesa extends javax.swing.JFrame {
             .addComponent(footerCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(headerCategories, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuCardapioLayout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(menuCardapioLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1220,15 +1429,15 @@ public class Mesa extends javax.swing.JFrame {
             menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuCardapioLayout.createSequentialGroup()
                 .addComponent(headerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Cat1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(menuCardapioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cat3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Cat4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(11, 11, 11)
                 .addComponent(footerCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1251,10 +1460,9 @@ public class Mesa extends javax.swing.JFrame {
         headerBebidas.setOpaque(true);
 
         footerBebidas.setBackground(new java.awt.Color(0, 0, 127));
-        footerBebidas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerBebidas.setForeground(new java.awt.Color(255, 255, 255));
-        footerBebidas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerBebidas.setText(" ");
+        footerBebidas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerBebidas.setForeground(new java.awt.Color(255, 0, 0));
+        footerBebidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerBebidas.setToolTipText("");
         footerBebidas.setOpaque(true);
 
@@ -1303,8 +1511,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens.setBorder(null);
         lista_itens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens.setViewportBorder(null);
-        lista_itens.setOpaque(true);
 
         lista_itens = bebidas.getPanel();
 
@@ -1370,10 +1576,9 @@ public class Mesa extends javax.swing.JFrame {
         headerRefeicoes.setOpaque(true);
 
         footerRefeicoes.setBackground(new java.awt.Color(0, 0, 127));
-        footerRefeicoes.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerRefeicoes.setForeground(new java.awt.Color(255, 255, 255));
-        footerRefeicoes.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerRefeicoes.setText(" ");
+        footerRefeicoes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerRefeicoes.setForeground(new java.awt.Color(255, 0, 0));
+        footerRefeicoes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerRefeicoes.setToolTipText("");
         footerRefeicoes.setOpaque(true);
 
@@ -1422,8 +1627,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens1.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens1.setBorder(null);
         lista_itens1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens1.setViewportBorder(null);
-        lista_itens1.setOpaque(true);
 
         lista_itens1 = refeicoes.getPanel();
 
@@ -1489,10 +1692,9 @@ public class Mesa extends javax.swing.JFrame {
         headerSobremesas.setOpaque(true);
 
         footerSobremesas.setBackground(new java.awt.Color(0, 0, 127));
-        footerSobremesas.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerSobremesas.setForeground(new java.awt.Color(255, 255, 255));
-        footerSobremesas.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerSobremesas.setText(" ");
+        footerSobremesas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerSobremesas.setForeground(new java.awt.Color(255, 0, 0));
+        footerSobremesas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerSobremesas.setToolTipText("");
         footerSobremesas.setOpaque(true);
 
@@ -1541,8 +1743,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens2.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens2.setBorder(null);
         lista_itens2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens2.setViewportBorder(null);
-        lista_itens2.setOpaque(true);
 
         lista_itens2 = sobremesas.getPanel();
 
@@ -1608,10 +1808,9 @@ public class Mesa extends javax.swing.JFrame {
         headerLanches.setOpaque(true);
 
         footerLanches.setBackground(new java.awt.Color(0, 0, 127));
-        footerLanches.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        footerLanches.setForeground(new java.awt.Color(255, 255, 255));
-        footerLanches.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        footerLanches.setText(" ");
+        footerLanches.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        footerLanches.setForeground(new java.awt.Color(255, 0, 0));
+        footerLanches.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         footerLanches.setToolTipText("");
         footerLanches.setOpaque(true);
 
@@ -1660,8 +1859,6 @@ public class Mesa extends javax.swing.JFrame {
         lista_itens3.setBackground(new java.awt.Color(244, 244, 255));
         lista_itens3.setBorder(null);
         lista_itens3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        lista_itens3.setViewportBorder(null);
-        lista_itens3.setOpaque(true);
 
         lista_itens3 = lanches.getPanel();
 
@@ -1766,11 +1963,9 @@ public class Mesa extends javax.swing.JFrame {
 
         pane_tabela_itens.setBackground(new java.awt.Color(244, 244, 255));
         pane_tabela_itens.setBorder(null);
-        pane_tabela_itens.setOpaque(true);
 
         tabela_itens.getTableHeader().setBackground(new java.awt.Color(244, 244, 255));
         tabela_itens.setBackground(new java.awt.Color(244, 244, 255));
-        tabela_itens.setBorder(null);
         tabela_itens.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tabela_itens.setModel(new javax.swing.table.DefaultTableModel(retornarSelecionados(),
             new String [] {
@@ -1788,6 +1983,10 @@ public class Mesa extends javax.swing.JFrame {
             tabela_itens.getColumnModel().getColumn(4).setPreferredWidth(100);
             pane_tabela_itens.setViewportView(tabela_itens);
 
+            jLabel1.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel1.setText("Total deste pedido: R$" + valorPedido);
+
             javax.swing.GroupLayout confirmacaoPedidoLayout = new javax.swing.GroupLayout(confirmacaoPedido);
             confirmacaoPedido.setLayout(confirmacaoPedidoLayout);
             confirmacaoPedidoLayout.setHorizontalGroup(
@@ -1804,14 +2003,20 @@ public class Mesa extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bt_confirmar4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(15, 15, 15))
+                .addGroup(confirmacaoPedidoLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             confirmacaoPedidoLayout.setVerticalGroup(
                 confirmacaoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(confirmacaoPedidoLayout.createSequentialGroup()
                     .addComponent(headerConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pane_tabela_itens, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                    .addComponent(pane_tabela_itens, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                     .addGroup(confirmacaoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(backButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_confirmar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1854,6 +2059,8 @@ public class Mesa extends javax.swing.JFrame {
     
     private void novoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoPedidoActionPerformed
         showCard("Categories");
+        CardLayout card = (CardLayout)Categories.getLayout();
+        card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_novoPedidoActionPerformed
 
     //Método que age como ActionListener de TODOS os botões do teclado do CPF
@@ -1873,16 +2080,12 @@ public class Mesa extends javax.swing.JFrame {
     }   
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        getContaInfo();
+        
         showCard("Home");
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void fecharContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharContaActionPerformed
-        showCard("Close");
-    }//GEN-LAST:event_fecharContaActionPerformed
-
     private void cancelCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelCloseActionPerformed
-        getContaInfo();
+
         showCard("Home");
     }//GEN-LAST:event_cancelCloseActionPerformed
 
@@ -1896,7 +2099,7 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_yesCPFActionPerformed
 
     private void noCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noCPFActionPerformed
-        showCard("FinalMessage");
+        finalizarConta();
     }//GEN-LAST:event_noCPFActionPerformed
 
     private void cpfTryAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTryAgainActionPerformed
@@ -1908,11 +2111,9 @@ public class Mesa extends javax.swing.JFrame {
     private void selectMesaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMesaButtonActionPerformed
         //Recebe o número selecionado na comboBox
         numMesa = Integer.parseInt(comboBoxSelectMesa.getSelectedItem().toString());
-        //Faz o update do status da mesa no banco
-        conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_codigo = "+numMesa+";");
-        //Altera o header da tela Home adicionando o número da mesa
-        headerHome.setText("Mesa: "+numMesa);
-        showCard("Home");
+        headerTelaInicial.setText("Mesa "+ numMesa);
+        showCard("TelaInicial");
+        
     }//GEN-LAST:event_selectMesaButtonActionPerformed
 
     private void comboBoxSelectMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSelectMesaActionPerformed
@@ -1926,15 +2127,25 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_Cat2ActionPerformed
 
     private void bt_voltar_bebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_bebidasActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_bebidasActionPerformed
 
     private void bt_confirmar_bebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_bebidasActionPerformed
-        reconstruirTabela();
+        if(qtdSelecionados() > 0){
+            reconstruirTabela();
 
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+            telaAnterior = "cardapioBebidas";
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerBebidas.setText("Por favor selecione pelo menos 1 produto!");
+        }
+        
+        
     }//GEN-LAST:event_bt_confirmar_bebidasActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -1964,39 +2175,63 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_Cat4ActionPerformed
 
     private void bt_voltar_refeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_refeicoesActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_refeicoesActionPerformed
 
     private void bt_confirmar_refeicoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_refeicoesActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioRefeicoes";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerRefeicoes.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_refeicoesActionPerformed
 
     private void bt_voltar_sobremesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_sobremesasActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_sobremesasActionPerformed
 
     private void bt_confirmar_sobremesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_sobremesasActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioSobremesas";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerSobremesas.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_sobremesasActionPerformed
 
     private void bt_voltar_lanchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltar_lanchesActionPerformed
+        limparFooters();
         CardLayout card = (CardLayout)Categories.getLayout();
         card.show(Categories, "Categories.menuCardapio");
     }//GEN-LAST:event_bt_voltar_lanchesActionPerformed
 
     private void bt_confirmar_lanchesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar_lanchesActionPerformed
-        reconstruirTabela();
-        
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
+        if(qtdSelecionados() > 0){
+            telaAnterior = "cardapioLanches";
+            reconstruirTabela();
+
+            CardLayout card = (CardLayout)Categories.getLayout();
+            card.show(Categories, "Categories.confirmacaoPedido");
+            limparFooters();
+        }
+        else{
+            footerLanches.setText("Por favor selecione pelo menos 1 produto!");
+        }
     }//GEN-LAST:event_bt_confirmar_lanchesActionPerformed
 
     private void showCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCPFActionPerformed
@@ -2013,32 +2248,120 @@ public class Mesa extends javax.swing.JFrame {
             CardLayout card = (CardLayout)CPF.getLayout();
             card.show(CPF, "invalidCPF");
         }else{
-            showCard("FinalMessage");
+            conn.comando_sql("UPDATE t_contas SET conta_cpf="+cpf+" WHERE conta_codigo="+codConta+";");
+            finalizarConta();
         }
     }//GEN-LAST:event_cpfFinishActionPerformed
 
     private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
         CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.menuCardapio");
+        card.show(Categories, telaAnterior);
     }//GEN-LAST:event_backButton1ActionPerformed
 
-    private void bt_confirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar4ActionPerformed
-        CardLayout card = (CardLayout)Categories.getLayout();
-        card.show(Categories, "Categories.confirmacaoPedido");
-        
-    }//GEN-LAST:event_bt_confirmar4ActionPerformed
-    
-    private String getData(){
+    public String getData(){
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy");
         return sdfD.format(d); //data formatada em string
     }
     
-    private String getHora(){
+    public String getHora(){
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm:ss");
         return sdfH.format(d); //hora formatada em string
     }
+    
+    private void bt_confirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmar4ActionPerformed
+        conn.comando_sql("INSERT INTO t_pedidos (`ped_valor`, `ped_mesa`, `ped_data`, `ped_hora`) VALUES ('"
+                + valorPedido +"', '"
+                + numMesa +"', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        
+        int codPedido = 0;
+        
+        try {
+            codPedido = Integer.parseInt(conn.retornar_ultima_celula("t_pedidos", "ped_codigo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //valorConta+=valorPedido;
+        BigDecimal soma = valorConta.add(valorPedido).setScale(2, RoundingMode.HALF_EVEN);
+        valorConta = soma;
+        
+        for(int i = 0; i<bebidas.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + bebidas.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + bebidas.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        bebidas.resetSelecionados();
+        for(int i = 0; i<lanches.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + lanches.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + lanches.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        lanches.resetSelecionados();
+        for(int i = 0; i<sobremesas.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + sobremesas.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + sobremesas.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        sobremesas.resetSelecionados();
+        for(int i = 0; i<refeicoes.getSelecionados().size();i++){
+            conn.comando_sql("INSERT INTO t_pedido_itens (`itm_codigo`, `ped_codigo`, `itm_qtde`, `ped_status`, `ped_data`, `ped_hora`) VALUES ('" 
+                + refeicoes.getSelecionados().get(i).get(0) + "', '"
+                + codPedido +"', '"
+                + refeicoes.getSelecionados().get(i).get(1) + "', '"
+                + "ABERTO" + "', '"
+                + getData() + "', '"
+                + getHora() + "');");
+        }
+        refeicoes.resetSelecionados();
+        
+        conn.comando_sql("INSERT INTO t_pedidos_contas (`ped_codigo`, `conta_codigo`) VALUES ('"
+                + codPedido + "', '"
+                + codConta + "');");
+        
+        conn.comando_sql("UPDATE t_contas SET conta_valor="+valorConta+" WHERE `conta_codigo`='"+codConta+"';");
+        fecharConta.setEnabled(true);
+        atualizarResumo();
+        
+        showCard("Home");
+        
+        
+    }//GEN-LAST:event_bt_confirmar4ActionPerformed
+
+    private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
+        //Faz o update do status da mesa no banco
+        conn.comando_sql("UPDATE t_mesas SET mesa_status = 1 WHERE mesa_codigo = "+numMesa+";");
+        
+        createConta();
+        
+        //Altera o header da tela Home adicionando o número da mesa
+        headerHome.setText("Mesa "+numMesa);
+        atualizarResumo();
+        showCard("Home");
+    }//GEN-LAST:event_IniciarActionPerformed
+
+    private void fecharContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharContaActionPerformed
+        showCard("Close");
+    }//GEN-LAST:event_fecharContaActionPerformed
+
+    private void bt_concluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_concluidoActionPerformed
+        showCard("TelaInicial");
+    }//GEN-LAST:event_bt_concluidoActionPerformed
+    
     
     //-------------BEGIN SQL--------------//
     
@@ -2047,53 +2370,23 @@ public class Mesa extends javax.swing.JFrame {
         //Cria uma nova conta na tabela t_contas
         conn.comando_sql("INSERT INTO t_contas(conta_valor, conta_mesa, conta_status, conta_data, conta_hora)" 
                        + "VALUES ("+valorConta+","+numMesa+",'ABERTO','"+getData()+"','"+getHora()+"');");
+        /*
         //Pega o código gerado pelo banco para esta conta
         ArrayList<ArrayList<String>> codigo = conn.retornar_query("SELECT conta_codigo FROM t_contas "
                           + "WHERE conta_mesa LIKE "+numMesa+" AND conta_status LIKE 'ABERTO';");
-        codConta = Integer.parseInt(codigo.get(0).get(0));
-    }
-    
-    //Função que monta e mostra o resumo na Home
-    private void getContaInfo(){
-        //Inicializa a lista de itens
-        String stringItens; //string final dos itens da conta
-        double vAux = 0;
-        ArrayList<ArrayList<String>> infoItens = new ArrayList(); //guarda as informações de cada item de cada pedido
-        ArrayList<ArrayList<String>> codItensPedido;  //Armazena os codigos dos itens de cada pedido 
-        ArrayList<ArrayList<String>> codPedidosConta; //Armazena os codigos dos pedidos referentes à conta
-        ArrayList<ArrayList<String>> Itens;  //Armazena os codigos dos itens de cada pedido 
-
-        //SELECTS necessários para obtenção dos dados
-        codPedidosConta = conn.retornar_query("SELECT t_pedidos_ped_codigo FROM t_pedidos_contas "
-                                            + "WHERE t_contas_conta_codigo LIKE '"+codConta+"';");
-        for(ArrayList<String> cods: codPedidosConta){
-            codItensPedido = conn.retornar_query("SELECT itm_codigo, itm_qtde FROM t_pedido_itens "
-                                                + "WHERE ped_codigo LIKE '"+cods.get(0)+"';");
-            for(int i = 0; i<codItensPedido.size(); i++){
-                Itens = conn.retornar_query("SELECT itm_nome, itm_valor FROM t_itens "
-                                            + "WHERE itm_codigo LIKE "+codItensPedido.get(i).get(0)+";");
-                for(int j=0; j<Itens.size(); j++){
-                    vAux+= Double.parseDouble(Itens.get(j).get(1));
-                    ArrayList<String> aux = new ArrayList();
-                    aux.add(Itens.get(j).get(0)); //nome do item
-                    aux.add(codItensPedido.get(i).get(1)); // qtde do mesmo item
-                    aux.add(Itens.get(j).get(1)); //valor do item
-                    infoItens.add(aux); //Add to itens
-                }
-            }
-        }
-        valorConta = vAux;
+        codConta = Integer.parseInt(codigo.get(0).get(0));*/
         
-        //Formatação dos itens em String para amostragem
-        stringItens = ""; //reseta e impede de imprimir 'null' no começo
-        for(ArrayList<String> ar: infoItens){
-            stringItens+="\n"+ar.get(0)+"\t"+ar.get(1)+"\t"+nf.format(Double.parseDouble(ar.get(2)));
+        try {
+            codConta = Integer.parseInt(conn.retornar_ultima_celula("t_contas", "conta_codigo"));
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
         }
-        resumo = "Item\t\tQtde.\tValor"
-                +"\n---------------------------------------------------------------"+stringItens 
-                + "\n---------------------------------------------------------------"+"\nValor Total: "+valorConta
-                +"\n\nBom apetite!\n";
-        showResumo.setText(resumo);
+        
+        dataHoraAbertura = conn.retornar_valor(codConta, 
+                "DATE_FORMAT( `conta_abertura` , '%d/%c/%Y %H:%i:%s' )",
+                "conta_codigo",
+                "t_contas");
     }
     
     //Função que preenche a comboBox do SelectMesa
@@ -2128,13 +2421,13 @@ public class Mesa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Mesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -2156,9 +2449,12 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JPanel Close;
     private javax.swing.JPanel FinalMessage;
     private javax.swing.JPanel Home;
+    private javax.swing.JButton Iniciar;
     private javax.swing.JPanel SelectMesaProvavel;
+    private javax.swing.JPanel TelaInicial;
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButton1;
+    private javax.swing.JButton bt_concluido;
     private javax.swing.JButton bt_confirmar4;
     private javax.swing.JButton bt_confirmar_bebidas;
     private javax.swing.JButton bt_confirmar_lanches;
@@ -2199,10 +2495,11 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel footerConfirmacao;
     private javax.swing.JLabel footerFinalMessage;
     private javax.swing.JLabel footerHome;
-    private javax.swing.JLabel footerHome2;
     private javax.swing.JLabel footerLanches;
     private javax.swing.JLabel footerRefeicoes;
+    private javax.swing.JLabel footerSelectMesa;
     private javax.swing.JLabel footerSobremesas;
+    private javax.swing.JLabel footerTelaInicial;
     private javax.swing.JPanel getCPF;
     private javax.swing.JLabel getCPFText;
     private javax.swing.JLabel headerBebidas;
@@ -2214,14 +2511,16 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerConfirmacao;
     private javax.swing.JLabel headerFinalMessage;
     private javax.swing.JLabel headerHome;
-    private javax.swing.JLabel headerHome2;
     private javax.swing.JLabel headerLanches;
     private javax.swing.JLabel headerOptions;
     private javax.swing.JLabel headerRefeicoes;
     private javax.swing.JLabel headerResumo;
+    private javax.swing.JLabel headerSelectMesa;
     private javax.swing.JLabel headerSobremesas;
+    private javax.swing.JLabel headerTelaInicial;
     private javax.swing.JPanel invalidCPF;
     private javax.swing.JLabel invalidCPFText;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2232,6 +2531,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
@@ -2262,5 +2562,6 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel textoSelectMesa;
     private javax.swing.JButton yesCPF;
     // End of variables declaration//GEN-END:variables
+
 // </editor-fold> 
 }
