@@ -28,7 +28,8 @@ public class Conexao {
 	public int conectar(String usuario, char[] senha) {
 		try {
                     // condição para fazer o acesso ao servidor remoto
-                    if(usuario.compareTo("servidor") == 0){
+                    boolean remoto = usuario.compareTo("servidor") == 0;
+                    if(remoto){
                         endereco_ip = "sql10.freemysqlhosting.net:3306";
                         schema = "sql10207255";
                         usuario = "sql10207255";
@@ -38,11 +39,16 @@ public class Conexao {
                     
                     this.conn = (Connection) DriverManager.getConnection("jdbc:mysql://"+endereco_ip+"/?user="+usuario+"&password="+String.valueOf(senha)+"&useSSL=false");
                     conectado = true;
-                    this.status = "Conexão estabelecida como "+usuario+"!";
                     this.usuario = usuario;
+                    this.status = "Conexão estabelecida como "+usuario+"!";
                     comando_sql("USE "+schema+";");
-                    ArrayList<ArrayList<String>> query = retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+usuario+"';");
-                    this.nome = query.get(0).get(1);
+                    if(remoto){
+                        this.nome = this.usuario;
+                    }
+                    else{
+                        ArrayList<ArrayList<String>> query = retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+usuario+"';");
+                        this.nome = query.get(0).get(1);
+                    }
                     
                     return 1;
 		} catch(SQLException e) {
