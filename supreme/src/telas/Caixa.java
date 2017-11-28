@@ -13,17 +13,15 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Caixa extends javax.swing.JFrame{
-    private String codigo, valor, cpf; //Dados da conta selecionada
+    //private String codigo, valor, cpf; //Dados da conta selecionada
     private codigo.Conexao conn = null; //conexao com o banco de dados
+    private int selecionado = 0;
 
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultTableModel model;
-    public int selecionado = 0;
-    public float valorSelecionado = 0;
     
     public Caixa(Conexao conex) {
         this.conn = conex;
@@ -38,21 +36,24 @@ public class Caixa extends javax.swing.JFrame{
 
     //Função que preenche a tabela da tela
     public void fillTable(){
+        //reset da tabela
+        tabelaContas.removeAll(tabelaContas); 
+        model = (DefaultTableModel) tableContas.getModel();
+        model.setRowCount(0);
+        
         //Loga no banco
         tabelaContas = conn.retornar_query(
-            "SELECT conta_codigo,conta_mesa,conta_valor,conta_cpf,conta_abertura,conta_fechamento FROM t_contas WHERE conta_status LIKE 'FECHADO';"
+            "SELECT conta_codigo,conta_mesa,conta_valor,conta_cpf,conta_abertura,conta_fechamento FROM t_contas WHERE conta_status LIKE 'FECHADO'\n" +
+            "ORDER BY conta_fechamento ASC;"
         );
-        //model e rowsorter da tabela
-        model = (DefaultTableModel) tableContas.getModel();
-        //reset da tabela
-        model.setRowCount(0);
-        tableContas.setRowSorter(new TableRowSorter(model));
         
         //Adiciona os dados à tabela, criando uma linha para cada conta
         //com seus respectivos dados em suas respectivas linhas
         for(ArrayList<String> ars: tabelaContas){ 
             model.addRow(new Object[]{ ars.get(0), ars.get(1), nf.format(Double.parseDouble(ars.get(2))) });
         }
+        
+        fechaConta.setEnabled(!tabelaContas.isEmpty());
     }
     
     @SuppressWarnings("unchecked")
@@ -398,70 +399,52 @@ public class Caixa extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
+        selecionado = tableContas.getSelectedRow();
         
         fechaConta.setEnabled(false); //Impede que o botão seja clicado novamente        
         bt_cancelar.setEnabled(true);
         //Se alguma conta estiver selecionada
-        if(tableContas.getSelectedRow()!= -1){
-            selecionado = tableContas.getSelectedRow();
-            valorSelecionado = Float.parseFloat(tabelaContas.get(selecionado).get(2).toString());
-            cpf = tabelaContas.get(selecionado).get(3);
+        if(tableContas.getSelectedRow()!= -1 && !tabelaContas.isEmpty()){
+            float valor = Float.parseFloat(tabelaContas.get(selecionado).get(2));
+            String cpf = tabelaContas.get(selecionado).get(3);
             tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
             fechaConta.setName("fechou");
-            if(tableContas.getModel().getRowCount() > 0){
-                
-                atualizarResumo(); //Inicializa variáveis com informações da conta
-            }
+            
+            //atualizarResumo(); //Inicializa variáveis com informações da conta
+            
             //libera e preenche os campos à direita
-            valorConta.setText(valor);
+            valorConta.setText(nf.format(valor));
             valorRecebido.setEnabled(true);
             valorRecebido.setEditable(true);
-            troco.setEnabled(true);
         }
     }//GEN-LAST:event_fechaContaActionPerformed
 
     private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
         //Muda status da conta no BD
-        codigo=tableContas.getModel().getValueAt(tableContas.getSelectedRow(), 0).toString();
+        int codigo=Integer.parseInt(tabelaContas.get(selecionado).get(0));
         conn.comando_sql("UPDATE t_contas SET conta_status='FINALIZADO',conta_finalizacao=CURRENT_TIMESTAMP WHERE conta_codigo = "+codigo+";");
-        //Remove Linha da conta da tabela de contas
-        ((DefaultTableModel)tableContas.getModel()).removeRow(tableContas.getSelectedRow());
+
         //Abre dialogo
         textoDialogo.setText("Transação finalizada com sucesso!");
         Dialog.setVisible(true);
-        //Volta enabled na tabela
-        tableContas.setEnabled(false);
-        //Limpa campos de texto
-        valorRecebido.setText("");
-        valorConta.setText("");
-        troco.setText("");
+        
         mostraConta.setText("");
         //bloqueia ações impróprias
+        bt_cancelar.setEnabled(false);
         fechaConta.setEnabled(false);
-        mostraConta.setEnabled(false);
         finaliza.setEnabled(false);
         valorRecebido.setEnabled(false);
+        bt_gerarNF.setEnabled(true);
     }//GEN-LAST:event_finalizaActionPerformed
 
     private void tableContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContasMouseClicked
-        if(fechaConta.getName().compareTo("nao fechou") == 0){
-            if(tableContas.getSelectedRow() != -1){
+        if(tableContas.isEnabled()){
+             if(tableContas.getSelectedRow() != -1 && !tabelaContas.isEmpty()){
                 selecionado = tableContas.getSelectedRow();
-            //Inicializa variáveis com informações da conta selecionada{
-            if(tableContas.getModel().getRowCount() > 0){
-                
-                atualizarResumo(); 
-            }
-            else{
-                fechaConta.setEnabled(false);
-            }
-            //mostraConta.setText(atualizarNF());
-            if(!mostraConta.isEnabled()){
                 fechaConta.setEnabled(true);
+                atualizarResumo();
             }
         }
-        }
-        
     }//GEN-LAST:event_tableContasMouseClicked
 
     private void valorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyReleased
@@ -508,9 +491,6 @@ public class Caixa extends javax.swing.JFrame{
     }//GEN-LAST:event_valorRecebidoKeyReleased
 
     private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
-        bt_gerarNF.setEnabled(true);
-        finaliza.setEnabled(false);
-        bt_cancelar.setEnabled(false);
         Dialog.dispose();
     }//GEN-LAST:event_dialogButtonActionPerformed
 
@@ -534,12 +514,8 @@ public class Caixa extends javax.swing.JFrame{
 
         }
         else{
-            jLabel5.setText("NOTA FISCAL:");
-            mostraConta.setEnabled(false);
             bt_gerarNF.setText("Gerar Nota Fiscal");
-            
             resetarCaixa();
-            bt_gerarNF.setEnabled(false);
         }
     }//GEN-LAST:event_bt_gerarNFActionPerformed
 
@@ -631,7 +607,7 @@ public class Caixa extends javax.swing.JFrame{
         StringBuilder sb = new StringBuilder();
         java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
         
-        int codConta = Integer.valueOf(tableContas.getValueAt(selecionado, 0).toString());
+        int codConta = Integer.parseInt(tabelaContas.get(selecionado).get(0));
 
         sb.append("----------------------------------------\n");
         //sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
@@ -656,12 +632,12 @@ public class Caixa extends javax.swing.JFrame{
             sb.append(String.format("%-25s", nomeItem.toUpperCase()) + String.format("%9s", "" + formatter.format(valorUnit)) +String.format("%6s", qtdItem)+"\n");
             sb.append(String.format("%40s", "" + formatter.format(valorUnit*qtdItem))+"\n");
         }
-        float totalConta = Float.parseFloat(tabelaContas.get(tableContas.getSelectedRow()).get(2));
+        float totalConta = Float.parseFloat(tabelaContas.get(selecionado).get(2));
         
         sb.append("========================================\n");
         sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(totalConta)) + "\n\n");
         
-        valor = "R$ "+formatter.format(totalConta);
+        //valor = "R$ "+formatter.format(totalConta);
 
         mostraConta.setText(sb.toString());
     }
@@ -673,7 +649,7 @@ public class Caixa extends javax.swing.JFrame{
         StringBuilder sb = new StringBuilder();
         java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
         
-        int codConta = Integer.parseInt(codigo);
+        int codConta = Integer.parseInt(tabelaContas.get(selecionado).get(0));
         sb.append("  CINCO AMIGOS COMERCIO DE ALIMENTOS E  \n");
         sb.append("BEBIDAS LTDA.  CNPJ: 73.926.503/0001-66 \n");
         sb.append("    AVENIDA DOS DESESPERADOS Nº 404     \n");
@@ -716,7 +692,8 @@ public class Caixa extends javax.swing.JFrame{
             sb.append(String.format("%24s", codItem)+String.format("%16s", formatter.format(valorUnit*qtdItem))+"\n");
             qtdTotal+=qtdItem;
         }
-        float totalConta = Float.parseFloat(tabelaContas.get(tableContas.getSelectedRow()).get(2));
+        float totalConta = Float.parseFloat(tabelaContas.get(selecionado).get(2));
+        String cpf = tabelaContas.get(selecionado).get(3);
         
         sb.append("========================================\n");
         sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(totalConta)) + "\n");
@@ -729,10 +706,9 @@ public class Caixa extends javax.swing.JFrame{
         sb.append(String.format("%40s", "SUPREME "+Login.versao_supreme));
         
         
-        valor = "R$ "+formatter.format(totalConta);
+        //valor = "R$ "+formatter.format(totalConta);
 
         mostraConta.setText(sb.toString());
-        selecionado = 0;
     }
     /*
     private String formataContaFinal(){
@@ -822,30 +798,26 @@ public class Caixa extends javax.swing.JFrame{
     // End of variables declaration//GEN-END:variables
 
     private void resetarCaixa() {
+        
+        selecionado = 0;
         mostraConta.setText("");
-        finaliza.setEnabled(false);
+        mostraConta.setEnabled(false);
         bt_cancelar.setEnabled(false);
-        //Se alguma conta estiver selecionada
-        if(tableContas.getSelectedRow()!= -1){
-            fechaConta.setEnabled(true);
-            tableContas.setEnabled(true);
-            fechaConta.setName("nao fechou");
-            if(tableContas.getModel().getRowCount() > 0){
-                atualizarResumo();
-            }
-            else{
-                fechaConta.setEnabled(false);
-            }
+        
+        tableContas.setEnabled(true);
+        fechaConta.setName("nao fechou");
 
-            //libera e preenche os campos à direita
-            valorConta.setText(" ");
-            valorRecebido.setEnabled(false);
-            valorRecebido.setText("0");
-            valorRecebido.setEditable(false);
-            valorInsuficiente.setText(" ");
-            troco.setText(" ");
-            jLabel5.setText("Resumo da conta:");
-            bt_gerarNF.setEnabled(false);
-        }
+        //libera e preenche os campos à direita
+        valorConta.setText(" ");
+        valorRecebido.setEnabled(false);
+        valorRecebido.setText("0");
+        valorRecebido.setEditable(false);
+        valorInsuficiente.setText(" ");
+        troco.setText(" ");
+        jLabel5.setText("Resumo da conta:");
+        bt_gerarNF.setEnabled(false);
+        
+        fillTable();
+        
     }
 }
