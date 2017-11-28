@@ -299,20 +299,23 @@ public class Cozinha extends javax.swing.JFrame {
     
     //Action do botão que finaliza o pedido
     private void finalizaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaPedidoActionPerformed
-        int indice = tablePedidos.getSelectedRow();
+        int indice[] = tablePedidos.getSelectedRows();
         //Conclui se algo estiver selecionado
         
-        if(indice != -1){
-            String ped_codigo = Pedidos.get(indice).get(1);
-            String itm_codigo = Pedidos.get(indice).get(0);
-            //Atualiza status do pedido para CONCLUIDO
-            conn.comando_sql(
+        if(tablePedidos.getSelectedRows().length > 0){
+            for(int i = 0; i<indice.length; i++){
+                String ped_codigo = Pedidos.get(indice[i]).get(1);
+                String itm_codigo = Pedidos.get(indice[i]).get(0);
+                //Atualiza status do pedido para CONCLUIDO
+                conn.comando_sql(
                 "UPDATE t_pedido_itens SET ped_status = 'CONCLUIDO' "
               + "WHERE ped_codigo LIKE "+ped_codigo+" AND itm_codigo LIKE "+itm_codigo+";"
             );
 
             //Remove Linha da conta da tabela de pedidos
-            ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice);
+            ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice[i]);
+            }
+            
             //Re-preenche a tabela
             fillTable();
             //Abre tela de dialogo
@@ -322,26 +325,31 @@ public class Cozinha extends javax.swing.JFrame {
     }//GEN-LAST:event_finalizaPedidoActionPerformed
 
     private void cancelaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelaPedidoActionPerformed
-        int indice = tablePedidos.getSelectedRow();
+        int indice[] = tablePedidos.getSelectedRows();
         //Cancela se algo estiver selecionado
-        if(indice != -1){
-            String ped_codigo = Pedidos.get(indice).get(1);
-            String itm_codigo = Pedidos.get(indice).get(0);
-            //Atualiza status do pedido para CANCELADO
-            conn.comando_sql(
-                "UPDATE t_pedido_itens SET ped_status = 'CANCELADO' "
-              + "WHERE ped_codigo LIKE "+ped_codigo+" "
-              + "AND itm_codigo LIKE "+itm_codigo+";"
-            );
+        if(tablePedidos.getSelectedRows().length > 0){
+            for(int i = 0; i<indice.length; i++){
+                String ped_codigo = Pedidos.get(indice[i]).get(1);
+                String itm_codigo = Pedidos.get(indice[i]).get(0);
+                //Atualiza status do pedido para CANCELADO
+                conn.comando_sql(
+                    "UPDATE t_pedido_itens SET ped_status = 'CANCELADO' "
+                  + "WHERE ped_codigo LIKE "+ped_codigo+" "
+                  + "AND itm_codigo LIKE "+itm_codigo+";"
+                );
 
-            //Remove Linha da conta da tabela de pedidos
-            ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice);
+                //Remove Linha da conta da tabela de pedidos
+                ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice[i]);
+                Pedidos.remove(indice[i]);
+                tabelaPedidos.remove(indice[i]); 
+
+            }
+            
             //Abre tela de dialogo
             textoDialogo.setText("Pedido cancelado com sucesso!");
             Dialog.setVisible(true);
             //Remove da tabela os indices;
-            Pedidos.remove(indice);
-            tabelaPedidos.remove(indice); 
+            
             //Re-preenche a tabela
             fillTable();
         }   

@@ -31,8 +31,8 @@ public class Gerencia extends javax.swing.JFrame {
     }
 
     public void initConexao(){
-        conn.conectar("test", "12345".toCharArray());
-        conn.comando_sql("USE bdsupreme2;");
+        conn.conectar("servidor", "sql10207255".toCharArray());
+        conn.comando_sql("USE sql10207255;");
         System.out.println(conn.getStatus());
     }
     

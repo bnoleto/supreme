@@ -19,14 +19,13 @@ import javax.swing.table.TableRowSorter;
  * @author Rafael
  */
 public class Caixa extends javax.swing.JFrame{
-    private String codigo, mesa, data, hora, valor, cpf; //Dados da conta selecionada
+    private String codigo, valor, cpf; //Dados da conta selecionada
     private codigo.Conexao conn = null; //conexao com o banco de dados
-    private ArrayList<ArrayList<String>> infoItens = new ArrayList(); //guarda as informações de cada item de cada pedido
-    private String stringItens; //string final dos itens da conta
+
     private ArrayList<ArrayList<String>> tabelaContas = new ArrayList(); //Armazena as informações mostradas na tabela
     private NumberFormat nf = NumberFormat.getCurrencyInstance(); //Formata valor na moeda do sistema
     private DefaultTableModel model;
-    public int selecionado = -1;
+    public int selecionado = 0;
     public float valorSelecionado = 0;
     
     public Caixa(Conexao conex) {
@@ -147,9 +146,10 @@ public class Caixa extends javax.swing.JFrame{
 
         Dialog.setLocationRelativeTo(Principal);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SUPREME " +Mesa.versao_supreme);
         setMinimumSize(new java.awt.Dimension(800, 587));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -233,6 +233,7 @@ public class Caixa extends javax.swing.JFrame{
         fechaConta.setForeground(new java.awt.Color(255, 255, 255));
         fechaConta.setText("Ir para finalização");
         fechaConta.setEnabled(false);
+        fechaConta.setName("nao fechou"); // NOI18N
         fechaConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fechaContaActionPerformed(evt);
@@ -303,7 +304,7 @@ public class Caixa extends javax.swing.JFrame{
             }
         });
 
-        bt_cancelar.setBackground(new java.awt.Color(0, 102, 102));
+        bt_cancelar.setBackground(new java.awt.Color(102, 0, 0));
         bt_cancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         bt_cancelar.setForeground(new java.awt.Color(255, 255, 255));
         bt_cancelar.setText("Cancelar");
@@ -400,16 +401,21 @@ public class Caixa extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void fechaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaContaActionPerformed
+        
+        fechaConta.setEnabled(false); //Impede que o botão seja clicado novamente        
+        bt_cancelar.setEnabled(true);
         //Se alguma conta estiver selecionada
         if(tableContas.getSelectedRow()!= -1){
             selecionado = tableContas.getSelectedRow();
             valorSelecionado = Float.parseFloat(tabelaContas.get(selecionado).get(2).toString());
+            cpf = tabelaContas.get(selecionado).get(3);
             tableContas.setEnabled(false); //Impede a alteração da seleção após o clique
-            fechaConta.setEnabled(false); //Impede que o botão seja clicado novamente
-            atualizarNF(); //Inicializa variáveis com informações da conta 
-
+            fechaConta.setName("fechou");
+            if(tableContas.getModel().getRowCount() > 0){
+                
+                atualizarResumo(); //Inicializa variáveis com informações da conta
+            }
             //libera e preenche os campos à direita
-            mostraConta.setEnabled(true);
             valorConta.setText(valor);
             valorRecebido.setEnabled(true);
             valorRecebido.setEditable(true);
@@ -419,6 +425,7 @@ public class Caixa extends javax.swing.JFrame{
 
     private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
         //Muda status da conta no BD
+        codigo=tableContas.getModel().getValueAt(tableContas.getSelectedRow(), 0).toString();
         conn.comando_sql("UPDATE t_contas SET conta_status='FINALIZADO',conta_finalizacao=CURRENT_TIMESTAMP WHERE conta_codigo = "+codigo+";");
         //Remove Linha da conta da tabela de contas
         ((DefaultTableModel)tableContas.getModel()).removeRow(tableContas.getSelectedRow());
@@ -426,7 +433,7 @@ public class Caixa extends javax.swing.JFrame{
         textoDialogo.setText("Transação finalizada com sucesso!");
         Dialog.setVisible(true);
         //Volta enabled na tabela
-        tableContas.setEnabled(true);
+        tableContas.setEnabled(false);
         //Limpa campos de texto
         valorRecebido.setText("");
         valorConta.setText("");
@@ -436,16 +443,25 @@ public class Caixa extends javax.swing.JFrame{
         fechaConta.setEnabled(false);
         mostraConta.setEnabled(false);
         finaliza.setEnabled(false);
+        valorRecebido.setEnabled(false);
     }//GEN-LAST:event_finalizaActionPerformed
 
     private void tableContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableContasMouseClicked
-        if(tableContas.getSelectedRow() != -1){
-            atualizarNF(); //Inicializa variáveis com informações da conta selecionada
+        if(fechaConta.getName().compareTo("nao fechou") == 0){
+            if(tableContas.getSelectedRow() != -1){
+                selecionado = tableContas.getSelectedRow();
+            //Inicializa variáveis com informações da conta selecionada{
+            if(tableContas.getModel().getRowCount() > 0){
+                
+                atualizarResumo(); 
+            }
             //mostraConta.setText(atualizarNF());
             if(!mostraConta.isEnabled()){
                 fechaConta.setEnabled(true);
             }
         }
+        }
+        
     }//GEN-LAST:event_tableContasMouseClicked
 
     private void valorRecebidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyReleased
@@ -479,6 +495,7 @@ public class Caixa extends javax.swing.JFrame{
         }else{ //Se não
             valorInsuficiente.setVisible(true);
             valorInsuficiente.setText("Valor Insuficiente!");
+            finaliza.setEnabled(false);
             troco.setText(" ");
             
         }   
@@ -486,6 +503,9 @@ public class Caixa extends javax.swing.JFrame{
     }//GEN-LAST:event_valorRecebidoKeyReleased
 
     private void dialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dialogButtonActionPerformed
+        bt_gerarNF.setEnabled(true);
+        finaliza.setEnabled(false);
+        bt_cancelar.setEnabled(false);
         Dialog.dispose();
     }//GEN-LAST:event_dialogButtonActionPerformed
 
@@ -500,11 +520,26 @@ public class Caixa extends javax.swing.JFrame{
     }//GEN-LAST:event_formWindowClosing
 
     private void bt_gerarNFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_gerarNFActionPerformed
-        // TODO add your handling code here:
+        if(bt_gerarNF.getText().compareTo("Gerar Nota Fiscal") == 0){
+            bt_gerarNF.setText("Voltar ao início");
+            jLabel5.setText("Resumo da conta:");            
+            valorConta.setText("");
+
+            gerarNF();
+
+        }
+        else{
+            jLabel5.setText("NOTA FISCAL:");
+            mostraConta.setEnabled(false);
+            bt_gerarNF.setText("Gerar Nota Fiscal");
+            
+            resetarCaixa();
+            bt_gerarNF.setEnabled(false);
+        }
     }//GEN-LAST:event_bt_gerarNFActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
-        // TODO add your handling code here:
+        resetarCaixa();
     }//GEN-LAST:event_bt_cancelarActionPerformed
 
     private void valorRecebidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valorRecebidoKeyTyped
@@ -577,22 +612,21 @@ public class Caixa extends javax.swing.JFrame{
         }
     }*/
     
-    private void getDataEHora(){
+    private String getDataEHora(){
         //Adquire data e hora do sistema
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdfH = new SimpleDateFormat("HH:mm:ss");
-        data = sdfD.format(d);
-        hora = sdfH.format(d);
-        //Fim data e hora
+        
+        return sdfD.format(d) + " " + sdfH.format(d);
     }
     
-    public void atualizarNF(){
+    public void atualizarResumo(){
         
         StringBuilder sb = new StringBuilder();
         java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
         
-        int codConta = Integer.valueOf(tableContas.getValueAt(tableContas.getSelectedRow(), 0).toString());
+        int codConta = Integer.valueOf(tableContas.getValueAt(selecionado, 0).toString());
 
         sb.append("----------------------------------------\n");
         //sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
@@ -621,11 +655,79 @@ public class Caixa extends javax.swing.JFrame{
         
         sb.append("========================================\n");
         sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(totalConta)) + "\n\n");
-        sb.append("              BOM APETITE!              \n");
         
         valor = "R$ "+formatter.format(totalConta);
 
         mostraConta.setText(sb.toString());
+    }
+    
+    public void gerarNF(){
+        
+        mostraConta.setEnabled(true);
+        
+        StringBuilder sb = new StringBuilder();
+        java.text.NumberFormat formatter = new java.text.DecimalFormat("#0.00");
+        
+        int codConta = Integer.parseInt(codigo);
+        sb.append("  CINCO AMIGOS COMERCIO DE ALIMENTOS E  \n");
+        sb.append("BEBIDAS LTDA.  CNPJ: 73.926.503/0001-66 \n");
+        sb.append("    AVENIDA DOS DESESPERADOS Nº 404     \n");
+        sb.append("   APUCARANA-PARANÁ   IE: 9564139912    \n");
+        sb.append("                                        \n");
+        sb.append("----------------------------------------\n");
+        sb.append("                                        \n");
+        sb.append("        NOTA FISCAL DO CONSUMIDOR       \n");
+        sb.append("                                        \n");
+        sb.append("----------------------------------------\n");
+        //sb.append(String.format("%-40s", "ABERTURA: " + dataHoraAbertura)+"\n");
+        sb.append(String.format("%-25s", "ITEM  NOME")+"VALOR UN.  QTD."+"\n");
+        sb.append("                  CÓDIGO        SUBTOTAL\n");
+        sb.append("========================================\n");
+        
+        /*
+        String.format("%-6s", i+".") // i
+        String.format("%-19s", nomeItem.toUpperCase()) // nome do item
+        String.format("%9s", "" + formatter.format(valorUnit)) // valor unitário
+        String.format("%6s", qtdItem) // quantidade do item
+        String.format("%24s", codItem) // código do item
+        String.format("%16s", formatter.format(valorUnit*qtdItem)) // subtotal
+        */
+        ArrayList<ArrayList<String>> conta = conn.retornar_query(
+                "SELECT t_pedido_itens.itm_codigo,t_pedido_itens.itm_qtde,t_pedidos.ped_codigo, t_pedidos_contas.conta_codigo FROM t_pedido_itens\n" +
+                "INNER JOIN t_pedidos ON t_pedido_itens.ped_codigo=t_pedidos.ped_codigo\n" +
+                "INNER JOIN t_pedidos_contas ON t_pedidos.ped_codigo = t_pedidos_contas.ped_codigo\n" +
+                "WHERE conta_codigo = "+codConta+";"
+        );
+        
+        int qtdTotal = 0;
+        for(int i = 0; i< conta.size(); i++){
+ 
+            int codItem = Integer.parseInt(conta.get(i).get(0));
+            int qtdItem = Integer.parseInt(conta.get(i).get(1));
+            
+            float valorUnit = Float.parseFloat(conn.retornar_valor(codItem, "itm_valor", "itm_codigo", "t_itens"));
+            String nomeItem = conn.retornar_valor(codItem, "itm_nome", "itm_codigo", "t_itens");
+            sb.append(String.format("%-6s", i+1+".")+String.format("%-19s", nomeItem.toUpperCase())+String.format("%9s", "" + formatter.format(valorUnit))+String.format("%6s", qtdItem)+"\n");
+            sb.append(String.format("%24s", codItem)+String.format("%16s", formatter.format(valorUnit*qtdItem))+"\n");
+            qtdTotal+=qtdItem;
+        }
+        float totalConta = Float.parseFloat(tabelaContas.get(tableContas.getSelectedRow()).get(2));
+        
+        sb.append("========================================\n");
+        sb.append(String.format("%-20s", "CÓD. CONTA: " + String.format("%06d", codConta)) + String.format("%20s", "VALOR TOTAL: " + formatter.format(totalConta)) + "\n");
+        sb.append("Quantidade total de itens:"+String.format("%14s", qtdTotal)+ "\n");
+        sb.append("Forma de pagamento:             DINHEIRO\n\n");
+        sb.append("CPF DO CONTRIBUINTE: " + cpf+"\n");
+        sb.append("      Este documento foi gerado em:     \n");
+        sb.append("           "+ getDataEHora()+"\n\n");
+        sb.append("        OBRIGADO E VOLTE SEMPRE!\n\n");
+        sb.append(String.format("%40s", "SUPREME "+Mesa.versao_supreme));
+        
+        
+        valor = "R$ "+formatter.format(totalConta);
+
+        mostraConta.setText(sb.toString());
+        selecionado = 0;
     }
     /*
     private String formataContaFinal(){
@@ -713,4 +815,29 @@ public class Caixa extends javax.swing.JFrame{
     private javax.swing.JLabel valorInsuficiente;
     private javax.swing.JTextField valorRecebido;
     // End of variables declaration//GEN-END:variables
+
+    private void resetarCaixa() {
+        mostraConta.setText("");
+        finaliza.setEnabled(false);
+        bt_cancelar.setEnabled(false);
+        //Se alguma conta estiver selecionada
+        if(tableContas.getSelectedRow()!= -1){
+            fechaConta.setEnabled(true);
+            tableContas.setEnabled(true);
+            fechaConta.setName("nao fechou");
+            if(tableContas.getModel().getRowCount() > 0){
+                atualizarResumo();
+            }
+
+            //libera e preenche os campos à direita
+            valorConta.setText(" ");
+            valorRecebido.setEnabled(false);
+            valorRecebido.setText("0");
+            valorRecebido.setEditable(false);
+            valorInsuficiente.setText(" ");
+            troco.setText(" ");
+            jLabel5.setText("Resumo da conta:");
+            bt_gerarNF.setEnabled(false);
+        }
+    }
 }
