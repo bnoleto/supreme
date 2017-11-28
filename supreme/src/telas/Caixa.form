@@ -159,7 +159,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                      <Component id="fechaConta" alignment="1" pref="293" max="32767" attributes="0"/>
+                      <Component id="fechaConta" alignment="1" pref="271" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -171,8 +171,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                       <Component id="valorConta" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" pref="167" max="32767" attributes="0"/>
-                      <Component id="troco" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" pref="189" max="32767" attributes="0"/>
+                      <Component id="troco" alignment="0" pref="189" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                       <Component id="valorRecebido" alignment="0" max="32767" attributes="0"/>
                       <Component id="finaliza" alignment="1" max="32767" attributes="0"/>
@@ -322,7 +322,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Troco:"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

@@ -8,7 +8,6 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Cozinha extends javax.swing.JFrame {
     
@@ -30,7 +29,7 @@ public class Cozinha extends javax.swing.JFrame {
     public void fillTable(){
 
         //Armazena os nomes dos itens
-        ArrayList<ArrayList<String>> nomeItens = new ArrayList();
+        ArrayList<ArrayList<String>> nomeItens = new ArrayList<>();
         
         //Reset das tabelas
         tabelaPedidos.removeAll(tabelaPedidos); 
@@ -39,9 +38,12 @@ public class Cozinha extends javax.swing.JFrame {
         
         //Preenche tabela primitiva
         Pedidos = conn.retornar_query(
-            "SELECT itm_codigo, ped_codigo, itm_qtde, ped_data, ped_hora FROM t_pedido_itens WHERE ped_status LIKE 'ABERTO';"
+            "SELECT t_pedido_itens.itm_codigo,t_itens.itm_nome, t_pedido_itens.ped_codigo, itm_qtde, t_pedidos.ped_mesa, t_pedido_itens.ped_dataHora FROM t_pedido_itens\n" +
+            "INNER JOIN t_itens ON t_pedido_itens.itm_codigo = t_itens.itm_codigo\n" +
+            "INNER JOIN t_pedidos ON t_pedido_itens.ped_codigo = t_pedidos.ped_codigo\n" +
+            "WHERE ped_status LIKE 'ABERTO' ORDER BY ped_codigo ASC"
         );
-        
+        /*
         //Percorre a tabela primitiva obtida do banco de dados
         for(int i=0; i<Pedidos.size(); i++){
             String itm_codigo = Pedidos.get(i).get(0);
@@ -62,13 +64,14 @@ public class Cozinha extends javax.swing.JFrame {
             ).get(0).get(0);
             //Adiciona o numero da mesa às linhas da tabela na ULTIMA posição (6)
             tabelaPedidos.get(i).add(ped_mesa);
-        }
+        }*/
+        
+        cancelaPedido.setEnabled(!Pedidos.isEmpty());
+        finalizaPedido.setEnabled(!Pedidos.isEmpty());
         
         
-        tablePedidos.setRowSorter(new TableRowSorter(model));
-        
-        for(ArrayList<String> ars: tabelaPedidos){ 
-            model.addRow(new Object[]{ ars.get(5), ars.get(2), ars.get(6) });
+        for(ArrayList<String> ars: Pedidos){ 
+            model.addRow(new Object[]{ ars.get(1), ars.get(3), ars.get(4) });
         }
     }
 
@@ -297,58 +300,58 @@ public class Cozinha extends javax.swing.JFrame {
     private void finalizaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaPedidoActionPerformed
         int indice[] = tablePedidos.getSelectedRows();
         //Conclui se algo estiver selecionado
-        
         if(tablePedidos.getSelectedRows().length > 0){
             for(int i = 0; i<indice.length; i++){
-                String ped_codigo = Pedidos.get(indice[i]).get(1);
+                String ped_codigo = Pedidos.get(indice[i]).get(2);
                 String itm_codigo = Pedidos.get(indice[i]).get(0);
                 //Atualiza status do pedido para CONCLUIDO
                 conn.comando_sql(
-                "UPDATE t_pedido_itens SET ped_status = 'CONCLUIDO' "
-              + "WHERE ped_codigo LIKE "+ped_codigo+" AND itm_codigo LIKE "+itm_codigo+";"
-            );
-
+                    "UPDATE t_pedido_itens SET ped_status = 'CONCLUIDO' " + 
+                    "WHERE ped_codigo = "+ped_codigo+" AND itm_codigo = "+itm_codigo+";"
+                );
+             
+                /*
             //Remove Linha da conta da tabela de pedidos
             ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice[i]);
+            */
             }
             
             //Re-preenche a tabela
             fillTable();
             //Abre tela de dialogo
-            textoDialogo.setText("Pedido concluído com sucesso!");
+            textoDialogo.setText("Pedido(s) concluído(s) com sucesso!");
             Dialog.setVisible(true);
+            
         }
     }//GEN-LAST:event_finalizaPedidoActionPerformed
 
     private void cancelaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelaPedidoActionPerformed
         int indice[] = tablePedidos.getSelectedRows();
-        //Cancela se algo estiver selecionado
+        //Conclui se algo estiver selecionado
         if(tablePedidos.getSelectedRows().length > 0){
             for(int i = 0; i<indice.length; i++){
-                String ped_codigo = Pedidos.get(indice[i]).get(1);
+                String ped_codigo = Pedidos.get(indice[i]).get(2);
                 String itm_codigo = Pedidos.get(indice[i]).get(0);
-                //Atualiza status do pedido para CANCELADO
+                //Atualiza status do pedido para CONCLUIDO
                 conn.comando_sql(
-                    "UPDATE t_pedido_itens SET ped_status = 'CANCELADO' "
-                  + "WHERE ped_codigo LIKE "+ped_codigo+" "
-                  + "AND itm_codigo LIKE "+itm_codigo+";"
+                    "UPDATE t_pedido_itens SET ped_status = 'CANCELADO' " + 
+                    "WHERE ped_codigo = "+ped_codigo+" AND itm_codigo = "+itm_codigo+";"
                 );
-
+             
+                /*
                 //Remove Linha da conta da tabela de pedidos
                 ((DefaultTableModel)tablePedidos.getModel()).removeRow(indice[i]);
-                Pedidos.remove(indice[i]);
-                tabelaPedidos.remove(indice[i]); 
-
-            }
+                */
+                }
             
             //Abre tela de dialogo
-            textoDialogo.setText("Pedido cancelado com sucesso!");
+            textoDialogo.setText("Pedido(s) cancelado(s) com sucesso!");
             Dialog.setVisible(true);
             //Remove da tabela os indices;
             
             //Re-preenche a tabela
             fillTable();
-        }   
+        }
     }//GEN-LAST:event_cancelaPedidoActionPerformed
     
     //Fecha a tela de dialogo

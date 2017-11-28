@@ -19,7 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
-    public static String versao_supreme = "v0.7.7-beta";
+    public static String versao_supreme = "v0.8.0-beta";
     
     private final Conexao conn = new Conexao();
     private String tipo_login = "INICIAR";

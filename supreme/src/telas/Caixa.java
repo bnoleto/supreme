@@ -1,6 +1,7 @@
 package telas;
 
 import codigo.Conexao;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -200,7 +201,7 @@ public class Caixa extends javax.swing.JFrame{
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Troco:");
+        jLabel2.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -320,7 +321,7 @@ public class Caixa extends javax.swing.JFrame{
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fechaConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                    .addComponent(fechaConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -330,8 +331,8 @@ public class Caixa extends javax.swing.JFrame{
                 .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(valorConta)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                    .addComponent(troco)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(troco, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(valorRecebido)
                     .addComponent(finaliza, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -451,6 +452,9 @@ public class Caixa extends javax.swing.JFrame{
                 
                 atualizarResumo(); 
             }
+            else{
+                fechaConta.setEnabled(false);
+            }
             //mostraConta.setText(atualizarNF());
             if(!mostraConta.isEnabled()){
                 fechaConta.setEnabled(true);
@@ -485,6 +489,8 @@ public class Caixa extends javax.swing.JFrame{
             //Impede a edição do valor após o mesmo ser maior ou igual ao valor da conta
             //valorRecebido.setEditable(false);
             //Printa o valor do troco formatado no campo
+            jLabel2.setText("Troco:");
+            troco.setForeground(Color.BLACK);
             troco.setText(nf.format(tAux));
             //Libera o botão Finalizar
             finaliza.setEnabled(true);
@@ -492,7 +498,10 @@ public class Caixa extends javax.swing.JFrame{
             valorInsuficiente.setVisible(true);
             valorInsuficiente.setText("Valor Insuficiente!");
             finaliza.setEnabled(false);
-            troco.setText(" ");
+            jLabel2.setText("Faltam:");
+            troco.setForeground(Color.red);
+            tAux=Math.abs(tAux);
+            troco.setText(nf.format(tAux));
             
         }   
         
@@ -823,6 +832,9 @@ public class Caixa extends javax.swing.JFrame{
             fechaConta.setName("nao fechou");
             if(tableContas.getModel().getRowCount() > 0){
                 atualizarResumo();
+            }
+            else{
+                fechaConta.setEnabled(false);
             }
 
             //libera e preenche os campos à direita

@@ -381,6 +381,14 @@ public class Mesa extends javax.swing.JFrame {
         tabela_itens = new javax.swing.JTable();
         tabela_itens.setFillsViewportHeight(true);
         jLabel1 = new javax.swing.JLabel();
+        Aviso_aguardandoPedido = new javax.swing.JPanel();
+        headerFinalMessage1 = new javax.swing.JLabel();
+        footerFinalMessage1 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        bt_voltar = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPREME " +Login.versao_supreme);
@@ -870,11 +878,6 @@ public class Mesa extends javax.swing.JFrame {
         showCPF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         showCPF.setMinimumSize(new java.awt.Dimension(400, 50));
         showCPF.setPreferredSize(new java.awt.Dimension(400, 50));
-        showCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showCPFActionPerformed(evt);
-            }
-        });
 
         teclas.setBackground(new java.awt.Color(244, 244, 255));
 
@@ -1278,11 +1281,10 @@ public class Mesa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(FinalMessageLayout.createSequentialGroup()
-                        .addComponent(bt_concluido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, FinalMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_concluido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         FinalMessageLayout.setVerticalGroup(
@@ -2027,6 +2029,97 @@ public class Mesa extends javax.swing.JFrame {
 
             panelPrincipal.add(Categories, "Categories");
 
+            Aviso_aguardandoPedido.setBackground(new java.awt.Color(244, 244, 255));
+            Aviso_aguardandoPedido.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+            Aviso_aguardandoPedido.setInheritsPopupMenu(true);
+            Aviso_aguardandoPedido.setMinimumSize(new java.awt.Dimension(720, 480));
+
+            headerFinalMessage1.setBackground(new java.awt.Color(0, 0, 127));
+            headerFinalMessage1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+            headerFinalMessage1.setForeground(new java.awt.Color(255, 255, 255));
+            headerFinalMessage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            headerFinalMessage1.setText("Operação não permitida");
+            headerFinalMessage1.setToolTipText("");
+            headerFinalMessage1.setOpaque(true);
+
+            footerFinalMessage1.setBackground(new java.awt.Color(0, 0, 127));
+            footerFinalMessage1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+            footerFinalMessage1.setForeground(new java.awt.Color(255, 255, 255));
+            footerFinalMessage1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+            footerFinalMessage1.setText(" ");
+            footerFinalMessage1.setToolTipText("");
+            footerFinalMessage1.setOpaque(true);
+
+            jLabel22.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel22.setText("Não é possível fechar a conta enquanto");
+
+            jLabel23.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel23.setText("Tente novamente após receber seu(s) pedido(s).");
+
+            jLabel24.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel24.setText("Desculpe...");
+
+            bt_voltar.setBackground(new java.awt.Color(0, 0, 76));
+            bt_voltar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+            bt_voltar.setForeground(new java.awt.Color(244, 244, 255));
+            bt_voltar.setText("Voltar");
+            bt_voltar.setToolTipText("");
+            bt_voltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            bt_voltar.setMaximumSize(new java.awt.Dimension(2050, 4500));
+            bt_voltar.setMinimumSize(new java.awt.Dimension(110, 35));
+            bt_voltar.setPreferredSize(new java.awt.Dimension(110, 35));
+            bt_voltar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    bt_voltarActionPerformed(evt);
+                }
+            });
+
+            jLabel25.setFont(new java.awt.Font("Caladea", 3, 24)); // NOI18N
+            jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            jLabel25.setText("aguarda a entrega dos pedidos.");
+
+            javax.swing.GroupLayout Aviso_aguardandoPedidoLayout = new javax.swing.GroupLayout(Aviso_aguardandoPedido);
+            Aviso_aguardandoPedido.setLayout(Aviso_aguardandoPedidoLayout);
+            Aviso_aguardandoPedidoLayout.setHorizontalGroup(
+                Aviso_aguardandoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(footerFinalMessage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(headerFinalMessage1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                .addGroup(Aviso_aguardandoPedidoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(Aviso_aguardandoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Aviso_aguardandoPedidoLayout.createSequentialGroup()
+                            .addGap(266, 266, 266)
+                            .addComponent(bt_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
+            );
+            Aviso_aguardandoPedidoLayout.setVerticalGroup(
+                Aviso_aguardandoPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Aviso_aguardandoPedidoLayout.createSequentialGroup()
+                    .addComponent(headerFinalMessage1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(59, 59, 59)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(29, 29, 29)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel25)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(75, 75, 75)
+                    .addComponent(bt_voltar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addGap(18, 18, 18)
+                    .addComponent(footerFinalMessage1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+            );
+
+            panelPrincipal.add(Aviso_aguardandoPedido, "Aviso_aguardando");
+
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
@@ -2148,6 +2241,7 @@ public class Mesa extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         liberarMesa();
+        finalizarConta();
         Login login = new Login();
         login.setVisible(true);
         try {
@@ -2231,10 +2325,6 @@ public class Mesa extends javax.swing.JFrame {
             footerLanches.setText("Por favor selecione pelo menos 1 produto!");
         }
     }//GEN-LAST:event_bt_confirmar_lanchesActionPerformed
-
-    private void showCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showCPFActionPerformed
 
     private void cpfEraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfEraseActionPerformed
         cpf = null;
@@ -2353,12 +2443,28 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_IniciarActionPerformed
 
     private void fecharContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharContaActionPerformed
-        showCard("Close");
+        ArrayList<ArrayList<String>> conta = conn.retornar_query(
+                "SELECT t_pedido_itens.itm_codigo,t_pedido_itens.itm_qtde,t_pedidos.ped_codigo, t_pedidos_contas.conta_codigo, ped_status FROM t_pedido_itens " +
+                "INNER JOIN t_pedidos ON t_pedido_itens.ped_codigo=t_pedidos.ped_codigo " +
+                "INNER JOIN t_pedidos_contas ON t_pedidos.ped_codigo = t_pedidos_contas.ped_codigo " +
+                "WHERE conta_codigo = "+codConta+" AND ped_status ='ABERTO';"
+        );
+        if(!conta.isEmpty()){
+            showCard("Aviso_aguardando");
+        }
+        else{
+            showCard("Close");
+        }
+        
     }//GEN-LAST:event_fecharContaActionPerformed
 
     private void bt_concluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_concluidoActionPerformed
         showCard("TelaInicial");
     }//GEN-LAST:event_bt_concluidoActionPerformed
+
+    private void bt_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_voltarActionPerformed
+        showCard("Home");
+    }//GEN-LAST:event_bt_voltarActionPerformed
     
     
     //-------------BEGIN SQL--------------//
@@ -2438,6 +2544,7 @@ public class Mesa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Aviso_aguardandoPedido;
     private javax.swing.JPanel CPF;
     private javax.swing.JButton Cat1;
     private javax.swing.JButton Cat2;
@@ -2458,6 +2565,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JButton bt_confirmar_lanches;
     private javax.swing.JButton bt_confirmar_refeicoes;
     private javax.swing.JButton bt_confirmar_sobremesas;
+    private javax.swing.JButton bt_voltar;
     private javax.swing.JButton bt_voltar_bebidas;
     private javax.swing.JButton bt_voltar_lanches;
     private javax.swing.JButton bt_voltar_refeicoes;
@@ -2492,6 +2600,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel footerClose;
     private javax.swing.JLabel footerConfirmacao;
     private javax.swing.JLabel footerFinalMessage;
+    private javax.swing.JLabel footerFinalMessage1;
     private javax.swing.JLabel footerHome;
     private javax.swing.JLabel footerLanches;
     private javax.swing.JLabel footerRefeicoes;
@@ -2508,6 +2617,7 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel headerClose;
     private javax.swing.JLabel headerConfirmacao;
     private javax.swing.JLabel headerFinalMessage;
+    private javax.swing.JLabel headerFinalMessage1;
     private javax.swing.JLabel headerHome;
     private javax.swing.JLabel headerLanches;
     private javax.swing.JLabel headerOptions;
@@ -2532,6 +2642,10 @@ public class Mesa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
