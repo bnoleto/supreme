@@ -10,10 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author Rafael
- */
 public class Cozinha extends javax.swing.JFrame {
     
     private codigo.Conexao conn = new codigo.Conexao();
@@ -154,7 +150,7 @@ public class Cozinha extends javax.swing.JFrame {
         Dialog.setLocationRelativeTo(TelaCozinha);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("SUPREME " +Mesa.versao_supreme);
+        setTitle("SUPREME " +Login.versao_supreme);
         setMinimumSize(new java.awt.Dimension(780, 510));
         setSize(new java.awt.Dimension(720, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {

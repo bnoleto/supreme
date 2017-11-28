@@ -16,8 +16,6 @@ import javax.swing.JButton;
 
 public class Mesa extends javax.swing.JFrame {
     
-    public static String versao_supreme = "v0.7.5-beta";
-    
     // <editor-fold defaultstate="collapsed" desc="Classe MESA (principal)">                          
     private String cpf = "";
     public static int numMesa, codConta;
@@ -36,6 +34,7 @@ public class Mesa extends javax.swing.JFrame {
     javax.swing.JScrollPane cardapioAtual = new javax.swing.JScrollPane();
     
     public Mesa(Conexao conex) {
+        
         this.conn = conex;
         bebidas = new Cardapio(conn,"BEBIDAS");
         refeicoes = new Cardapio(conn,"REFEIÇÕES");
@@ -384,7 +383,7 @@ public class Mesa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("SUPREME "+Mesa.versao_supreme);
+        setTitle("SUPREME " +Login.versao_supreme);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N

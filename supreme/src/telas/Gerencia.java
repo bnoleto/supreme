@@ -1,6 +1,7 @@
 package telas;
 
-import java.beans.PropertyVetoException;
+import codigo.Conexao;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,12 +28,10 @@ public class Gerencia extends javax.swing.JFrame {
     
     public Gerencia() {
         initComponents();
-        initConexao();
     }
 
-    public void initConexao(){
-        conn.conectar("servidor", "sql10207255".toCharArray());
-        conn.comando_sql("USE sql10207255;");
+    public void initConexao(Conexao conex){
+        this.conn = conex;
         System.out.println(conn.getStatus());
     }
     
@@ -95,11 +94,15 @@ public class Gerencia extends javax.swing.JFrame {
         menuLogout = new javax.swing.JMenuItem();
         menuTrocaUser = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("S.U.P.R.E.M.E - Gerência");
         setBackground(new java.awt.Color(0, 153, 153));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         Desktop.setDragMode(javax.swing.JDesktopPane.OUTLINE_DRAG_MODE);
         Desktop.setMinimumSize(new java.awt.Dimension(720, 480));
@@ -107,9 +110,10 @@ public class Gerencia extends javax.swing.JFrame {
 
         Pessoas.setClosable(true);
         Pessoas.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        Pessoas.setMaximizable(true);
+        Pessoas.setResizable(true);
         Pessoas.setTitle("Gerencia Pessoal");
         Pessoas.setMinimumSize(new java.awt.Dimension(720, 480));
-        Pessoas.setNormalBounds(new java.awt.Rectangle(0, 0, 720, 480));
         Pessoas.setPreferredSize(new java.awt.Dimension(720, 480));
         Pessoas.setVisible(false);
 
@@ -136,6 +140,11 @@ public class Gerencia extends javax.swing.JFrame {
         cadastraPessoa.setFocusable(false);
         cadastraPessoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         cadastraPessoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cadastraPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastraPessoaActionPerformed(evt);
+            }
+        });
         jToolBar2.add(cadastraPessoa);
 
         gap.setText("  ");
@@ -179,7 +188,7 @@ public class Gerencia extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PessoasLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(jToolBar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -195,9 +204,10 @@ public class Gerencia extends javax.swing.JFrame {
 
         Itens.setClosable(true);
         Itens.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        Itens.setMaximizable(true);
+        Itens.setResizable(true);
         Itens.setTitle("Gerenciamento dos Itens");
         Itens.setMinimumSize(new java.awt.Dimension(720, 480));
-        Itens.setNormalBounds(new java.awt.Rectangle(0, 0, 720, 480));
         Itens.setPreferredSize(new java.awt.Dimension(720, 480));
         Itens.setVisible(false);
 
@@ -267,7 +277,7 @@ public class Gerencia extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(ItensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ItensLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(jToolBar3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -283,9 +293,10 @@ public class Gerencia extends javax.swing.JFrame {
 
         Mesas.setClosable(true);
         Mesas.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        Mesas.setMaximizable(true);
+        Mesas.setResizable(true);
         Mesas.setTitle("Gerenciamento das Mesas");
         Mesas.setMinimumSize(new java.awt.Dimension(435, 480));
-        Mesas.setNormalBounds(new java.awt.Rectangle(0, 0, 435, 480));
         Mesas.setPreferredSize(new java.awt.Dimension(435, 480));
         Mesas.setVisible(false);
 
@@ -365,9 +376,10 @@ public class Gerencia extends javax.swing.JFrame {
 
         Pedidos.setClosable(true);
         Pedidos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        Pedidos.setMaximizable(true);
+        Pedidos.setResizable(true);
         Pedidos.setTitle("Gerenciamento de Pedidos");
         Pedidos.setMinimumSize(new java.awt.Dimension(720, 480));
-        Pedidos.setNormalBounds(new java.awt.Rectangle(0, 0, 720, 480));
         Pedidos.setPreferredSize(new java.awt.Dimension(720, 480));
         Pedidos.setVisible(false);
 
@@ -434,7 +446,7 @@ public class Gerencia extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PedidosLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(jToolBar5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -462,10 +474,10 @@ public class Gerencia extends javax.swing.JFrame {
                 .addGroup(DesktopLayout.createSequentialGroup()
                     .addGap(32, 32, 32)
                     .addGroup(DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Pessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(Itens, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(Mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(Pedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(Pessoas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Mesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Pedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap(768, Short.MAX_VALUE)))
         );
         DesktopLayout.setVerticalGroup(
@@ -474,15 +486,36 @@ public class Gerencia extends javax.swing.JFrame {
             .addGroup(DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DesktopLayout.createSequentialGroup()
                     .addGap(26, 26, 26)
-                    .addComponent(Pessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Pessoas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(26, 26, 26)
-                    .addComponent(Pedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Pedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(26, 26, 26)
-                    .addComponent(Mesas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Mesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(26, 26, 26)
-                    .addComponent(Itens, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(Itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap(574, Short.MAX_VALUE)))
         );
+
+        try {
+            Pessoas.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            Itens.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            Mesas.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            Pedidos.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         Menu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Menu.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
@@ -594,13 +627,33 @@ public class Gerencia extends javax.swing.JFrame {
     }//GEN-LAST:event_menuMesaActionPerformed
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_menuLogoutActionPerformed
 
     private void menuTrocaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTrocaUserActionPerformed
-        dispose();
-        new Login().setVisible(true);
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+        try {
+            conn.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuTrocaUserActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Login login = new Login();
+        login.setVisible(true);
+        try {
+            conn.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void cadastraPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraPessoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastraPessoaActionPerformed
         
     private void updateTableItens(){
         for(ArrayList<String> arr: tabelaItens){

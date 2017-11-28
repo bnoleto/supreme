@@ -14,10 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author Rafael
- */
 public class Caixa extends javax.swing.JFrame{
     private String codigo, valor, cpf; //Dados da conta selecionada
     private codigo.Conexao conn = null; //conexao com o banco de dados
@@ -146,8 +142,8 @@ public class Caixa extends javax.swing.JFrame{
 
         Dialog.setLocationRelativeTo(Principal);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SUPREME " +Mesa.versao_supreme);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SUPREME " +Login.versao_supreme);
         setMinimumSize(new java.awt.Dimension(800, 587));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -721,7 +717,7 @@ public class Caixa extends javax.swing.JFrame{
         sb.append("      Este documento foi gerado em:     \n");
         sb.append("           "+ getDataEHora()+"\n\n");
         sb.append("        OBRIGADO E VOLTE SEMPRE!\n\n");
-        sb.append(String.format("%40s", "SUPREME "+Mesa.versao_supreme));
+        sb.append(String.format("%40s", "SUPREME "+Login.versao_supreme));
         
         
         valor = "R$ "+formatter.format(totalConta);

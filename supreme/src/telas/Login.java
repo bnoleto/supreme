@@ -10,19 +10,31 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Bruno Noleto
- */
 public class Login extends javax.swing.JFrame {
+    public static String versao_supreme = "v0.7.7-beta";
+    
     private final Conexao conn = new Conexao();
     private String tipo_login = "INICIAR";
     
     public Login() {
+
+        try {
+            try (java.io.PrintWriter writer = new java.io.PrintWriter("versao", "UTF-8")) {
+                writer.print(versao_supreme);
+            }
+        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
         initComponents();
     }
     
@@ -69,6 +81,11 @@ public class Login extends javax.swing.JFrame {
                     Cozinha telaCozinha= new Cozinha();
                     telaCozinha.initConexao(conn);
                     telaCozinha.setVisible(true);
+                }
+                else if(categoria_usuario.compareTo("GERENCIA") == 0){
+                    Gerencia telaGerencia= new Gerencia();
+                    telaGerencia.initConexao(conn);
+                    telaGerencia.setVisible(true);
                 }
                 else{
                     Mesa telaMesa= new Mesa(conn);
