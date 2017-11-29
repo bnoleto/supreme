@@ -10,22 +10,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
-    public static String versao_supreme = "v0.8.1-beta";
+    public static String versao_supreme = "v0.8.2-beta_unespar";
     
     private final Conexao conn = new Conexao();
     private String tipo_login = "INICIAR";
     
     public Login() {
-
+    /*
         try {
             try (java.io.PrintWriter writer = new java.io.PrintWriter("versao", "UTF-8")) {
                 writer.print(versao_supreme);
@@ -33,7 +29,7 @@ public class Login extends javax.swing.JFrame {
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
         
         initComponents();
     }

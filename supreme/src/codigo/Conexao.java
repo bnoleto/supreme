@@ -11,7 +11,7 @@ import com.mysql.jdbc.Statement;
 public class Conexao {
         
         // variáveis para execução local
-        private String endereco_ip = "localhost:3306";
+        private String endereco_ip = "192.168.43.69:3306";
         private String schema = "bdsupreme2";
         
         // variáveis para execução online
