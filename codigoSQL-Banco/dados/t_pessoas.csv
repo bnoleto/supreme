@@ -1,0 +1,8 @@
+pes_codigo,pes_nome,pes_cpf,pes_login,pes_senha,pes_tipo
+1,BRUNO,0,bnoleto,0,ADMIN
+2,COZINHEIRO,0,cozinha,0,COZINHA
+3,CAIXA,0,caixa,0,CAIXA
+4,FUNCIONARIO,0,mesa,0,CLIENTE
+5,ADMIN,0,root,0,ADMIN
+8,sql10207255,0,servidor,0,ADMIN
+9,GERENTE,0,gerencia,0,GERENCIA

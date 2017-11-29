@@ -313,6 +313,11 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="selectedElement" source="finalizaPedido" sourcePath="${selected}" target="tablePedidos" targetPath="selectedElement" updateStrategy="1" immediately="false">
+                  <BindingParameter name="IGNORE_ADJUSTING" value="N"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
           </SubComponents>
         </Container>

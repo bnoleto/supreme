@@ -78,6 +78,7 @@ public class Cozinha extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         Dialog = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
@@ -220,6 +221,10 @@ public class Cozinha extends javax.swing.JFrame {
         tablePedidos.setRowHeight(22);
         tablePedidos.setSelectionBackground(new java.awt.Color(153, 0, 0));
         tablePedidos.getTableHeader().setReorderingAllowed(false);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, finalizaPedido, org.jdesktop.beansbinding.ELProperty.create("${selected}"), tablePedidos, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
+        bindingGroup.addBinding(binding);
+
         jScrollPane1.setViewportView(tablePedidos);
         if (tablePedidos.getColumnModel().getColumnCount() > 0) {
             tablePedidos.getColumnModel().getColumn(0).setMinWidth(400);
@@ -291,6 +296,8 @@ public class Cozinha extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(TelaCozinha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
         setLocationRelativeTo(null);
@@ -422,5 +429,6 @@ public class Cozinha extends javax.swing.JFrame {
     private javax.swing.JTable tablePedidos;
     private javax.swing.JLabel textoDialogo;
     private javax.swing.JLabel titulo;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
