@@ -175,7 +175,7 @@ public class Caixa extends javax.swing.JFrame{
             }
         });
         tableContas.setAutoscrolls(false);
-        tableContas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tableContas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tableContas.setFillsViewportHeight(true);
         tableContas.setRowHeight(20);
         tableContas.setSelectionBackground(new java.awt.Color(0, 153, 0));
