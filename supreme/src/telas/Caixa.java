@@ -27,7 +27,18 @@ public class Caixa extends javax.swing.JFrame{
         this.conn = conex;
         initComponents();
         fillTable();
-        
+        updateTable();
+    }
+    
+    private void updateTable(){
+        //Atualização dos itens da tabela a cada intervalo de 10 segundos.
+        final long TEMPO = 10000; //10 Segundos
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                fillTable();
+            }
+        },TEMPO, TEMPO);
     }
     
     public void initConexao(Conexao conex){

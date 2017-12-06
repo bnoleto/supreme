@@ -18,7 +18,18 @@ public class Cozinha extends javax.swing.JFrame {
     
     public Cozinha() {
         initComponents();
-        
+        updateTable();
+    }
+    
+    private void updateTable(){
+        //Atualização dos itens da tabela a cada intervalo de 10 segundos.
+        final long TEMPO = 10000; //10 Segundos
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                fillTable();
+            }
+        },TEMPO, TEMPO);
     }
     
     public void initConexao(Conexao conex){
@@ -32,7 +43,7 @@ public class Cozinha extends javax.swing.JFrame {
         ArrayList<ArrayList<String>> nomeItens = new ArrayList<>();
         
         //Reset das tabelas
-        tabelaPedidos.removeAll(tabelaPedidos); 
+        Pedidos.removeAll(Pedidos); 
         model = (DefaultTableModel) tablePedidos.getModel();
         model.setRowCount(0);
         
@@ -403,14 +414,6 @@ public class Cozinha extends javax.swing.JFrame {
             public void run() {
                 Cozinha c = new Cozinha();
                 c.setVisible(true);
-                //Atualização dos itens da tabela a cada intervalo de 10 segundos.
-                final long TEMPO = 20000; //20 Segundos
-                Timer timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    public void run() {
-                        c.fillTable();
-                    }
-                },TEMPO, TEMPO);
             }
         });
     }
