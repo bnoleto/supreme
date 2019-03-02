@@ -13,12 +13,14 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends javax.swing.JFrame {
+    
     public static String versao_supreme = "v0.8.1-beta";
     
     private final Conexao conn = new Conexao();
@@ -43,7 +45,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     public void novaConexao(JTextField campo_usuario, JPasswordField campo_senha){
-        conn.conectar(campo_usuario.getText(), campo_senha.getPassword());
+        conn.conectar(campo_usuario.getText(), Arrays.toString(campo_senha.getPassword()));
         System.out.println(conn.getStatus());
         caixa_status.setText(conn.getStatus());
         if(!conn.conectado){
@@ -64,13 +66,7 @@ public class Login extends javax.swing.JFrame {
                 ArrayList<ArrayList<String>> query = conn.retornar_query("SELECT * FROM t_pessoas WHERE pes_login = '"+campo_usuario.getText()+"';");
                 
                 String categoria_usuario;
-                // condição para conectar ao servidor remoto
-                if(campo_usuario.getText().compareTo("servidor") == 0){
-                    categoria_usuario = String.valueOf(campo_senha.getPassword()).toUpperCase();
-                }
-                else{
-                    categoria_usuario = query.get(0).get(5);    
-                }
+                categoria_usuario = query.get(0).get(5); 
                 System.out.println(categoria_usuario);
                 
                 if(categoria_usuario.compareTo("CAIXA") == 0){
